@@ -5,6 +5,26 @@ import { Region } from 'blueairaws-client/dist/Consts';
 abstract class BlueAirAwsBaseDriver extends Driver {
   protected abstract deviceModelFilter: string;
 
+  // Shared client per credential set — avoids parallel Gigya logins at startup
+  private _clientPromises: Map<string, Promise<BlueAirAwsClient>> = new Map();
+
+  /**
+   * Returns a shared, initialized BlueAirAwsClient for the given credentials.
+   * Multiple devices calling this simultaneously will all await the same Promise,
+   * so only one Gigya authentication is performed.
+   */
+  public getOrCreateClient(username: string, password: string): Promise<BlueAirAwsClient> {
+    if (!this._clientPromises.has(username)) {
+      const promise = (async () => {
+        const client = new BlueAirAwsClient(username, password);
+        await client.initialize();
+        return client;
+      })();
+      this._clientPromises.set(username, promise);
+    }
+    return this._clientPromises.get(username)!;
+  }
+
   /**
    * onInit is called when the driver is initialized.
    */

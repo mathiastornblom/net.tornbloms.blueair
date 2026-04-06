@@ -6,6 +6,7 @@ import {
   BlueAirDeviceSensorData,
 } from 'blueairaws-client/dist/Consts';
 import { conditionScorePm25ToString } from '../BlueAirAwsUtils';
+import BlueAirAwsBaseDriver from '../BlueAirAwsBaseDriver';
 
 /**
  * Represents a setting object.
@@ -53,13 +54,13 @@ function filterSettings(
  * This class is responsible for managing the device's capabilities and settings within the Homey app.
  */
 class BlueAirPureDevice extends Device {
-  private savedfanspeed: Setting | null = null; // Store the last known fan speed
-  private savedPM25: Setting | null = null; // Store the last known PM2.5 value
-  private savedFilterStatus: string | null = null; // Store the last known filter status percentage with % character
+  private savedfanspeed: Setting | null = null;
+  private savedPM25: Setting | null = null;
+  private savedFilterStatus: string | null = null;
+  private client: BlueAirAwsClient | null = null; // Shared client from driver
 
-  // Define interval ID properties to store interval identifiers
-  private intervalId1: ReturnType<typeof setInterval> | null = null; // For the first setInterval
-  private intervalId2: ReturnType<typeof setInterval> | null = null; // For the second setInterval
+  private intervalId1: ReturnType<typeof setInterval> | null = null;
+  private intervalId2: ReturnType<typeof setInterval> | null = null;
 
   /**
    * onInit is called when the device is initialized.
@@ -97,9 +98,10 @@ class BlueAirPureDevice extends Device {
     }
 
     try {
-      // Initialize the BlueAir client with user credentials and region
-      const client = new BlueAirAwsClient(settings.username, settings.password);
-      await client.initialize(); // Initialize the client to authenticate and prepare for API requests
+      // Get or create the shared client from the driver (avoids parallel Gigya logins)
+      const driver = this.driver as BlueAirAwsBaseDriver;
+      this.client = await driver.getOrCreateClient(settings.username, settings.password);
+      const client = this.client;
       this.log('AccountUUID:', data.accountuuid);
 
       // Fetch the initial device attributes for the specific device

@@ -124,5 +124,8 @@
   },
   "3.2.3": {
     "en": "Adding PM2.5 capability to Pure devices"
+  },
+  "3.2.4": {
+    "en": "Minor fix for the Pure"
   }
 }

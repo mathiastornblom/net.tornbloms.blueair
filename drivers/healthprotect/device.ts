@@ -1,5 +1,6 @@
 import { Device } from 'homey';
 import { BlueAirAwsClient } from 'blueairaws-client';
+import BlueAirAwsBaseDriver from '../BlueAirAwsBaseDriver';
 import {
   BlueAirDeviceStatus,
   BlueAirDeviceState,
@@ -58,18 +59,18 @@ function filterSettings(
  * This class is responsible for managing the device's capabilities and settings within the Homey app.
  */
 class BlueAirHealthProtectDevice extends Device {
-  private savedfanspeed: Setting | null = null; // Store the last known fan speed
-  private savedPM1: Setting | null = null; // Store the last known PM1 value
-  private savedPM25: Setting | null = null; // Store the last known PM2.5 value
-  private savedPM10: Setting | null = null; // Store the last known PM10 value
-  private savedtVOC: Setting | null = null; // Store the last known tVOC value
-  private savedHumidity: Setting | null = null; // Store the last known humidity value
-  private savedTemperature: Setting | null = null; // Store the last known temperature value
-  private savedFilterStatus: string | null = null; // Store the last known filter status percentage with % character
+  private savedfanspeed: Setting | null = null;
+  private savedPM1: Setting | null = null;
+  private savedPM25: Setting | null = null;
+  private savedPM10: Setting | null = null;
+  private savedtVOC: Setting | null = null;
+  private savedHumidity: Setting | null = null;
+  private savedTemperature: Setting | null = null;
+  private savedFilterStatus: string | null = null;
+  private client: BlueAirAwsClient | null = null; // Shared client from driver
 
-  // Define interval ID properties to store interval identifiers
-  private intervalId1: ReturnType<typeof setInterval> | null = null; // For the first setInterval
-  private intervalId2: ReturnType<typeof setInterval> | null = null; // For the second setInterval
+  private intervalId1: ReturnType<typeof setInterval> | null = null;
+  private intervalId2: ReturnType<typeof setInterval> | null = null;
 
   /**
    * onInit is called when the device is initialized.
@@ -115,9 +116,10 @@ class BlueAirHealthProtectDevice extends Device {
     }
 
     try {
-      // Initialize the BlueAir client with user credentials and region
-      const client = new BlueAirAwsClient(settings.username, settings.password);
-      await client.initialize(); // Initialize the client to authenticate and prepare for API requests
+      // Get or create the shared client from the driver (avoids parallel Gigya logins)
+      const driver = this.driver as BlueAirAwsBaseDriver;
+      this.client = await driver.getOrCreateClient(settings.username, settings.password);
+      const client = this.client;
       this.log('AccountUUID:', data.accountuuid);
 
       // Fetch the initial device attributes for the specific device

@@ -15,12 +15,15 @@
   },
   "class": "airpurifier",
   "capabilities": [
-    "fan_speed",
-    "brightness",
+    "fanspeed",
+    "brightness2",
     "child_lock",
-    "last_retrival_date",
+    "nightmode",
+    "standby",
+    "automode",
     "wifi_status",
-    "filter_status"
+    "filter_status",
+    "measure_pm25"
   ],
   "platforms": ["local"],
   "connectivity": ["cloud"],

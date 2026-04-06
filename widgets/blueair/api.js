@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = {
-  async getBlueAirDevices({ homey }) {
+  async getBlueAirDevices(homey) {
     // 1) Get all devices from Homey
     const devices = await homey.devices.getDevices();
 
@@ -26,7 +24,7 @@ module.exports = {
    * @param {object} params - The URL parameters, e.g. { deviceId: 'abc123' }
    * @returns {Promise<Array>} - An array of { id, label } for each capability
    */
-  async getBlueAirCapabilities({ homey, params }) {
+  async getBlueAirCapabilities(homey, params) {
     const { deviceId } = params;
 
     // 1) Get the device by ID
@@ -58,7 +56,7 @@ module.exports = {
    * @param {object} params - The URL parameters, e.g. { deviceId: 'abc123', capabilityId: 'measure_pm25' }
    * @returns {Promise<any>} - The current value of the capability
    */
-  async getBlueAirCapabilityValue({ homey, params }) {
+  async getBlueAirCapabilityValue(homey, params) {
     const { deviceId, capabilityId } = params;
 
     // 1) Get the device
