@@ -1,10 +1,12 @@
 {
   "id": "net.tornbloms.blueair",
-  "version": "3.2.5",
+  "version": "3.2.7",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "brandColor": "#0C2F4F",
-  "platforms": ["local"],
+  "platforms": [
+    "local"
+  ],
   "name": {
     "en": "BlueAir",
     "sv": "BlueAir",
@@ -33,20 +35,70 @@
     "ru": "Очистители воздуха BlueAir, потому что тебе нужно глубоко вздохнуть.",
     "ko": "깊은 숨이 필요한 당신을 위해 BlueAir 공기청정기."
   },
-  "category": ["climate"],
+  "category": [
+    "climate"
+  ],
   "tags": {
-    "en": ["purifier", "BlueAir", "air"],
-    "sv": ["luftrenare", "BlueAir", "luft"],
-    "nl": ["luchtreiniger", "BlueAir", "lucht"],
-    "da": ["luftrenser", "BlueAir", "luft"],
-    "de": ["Luftreiniger", "BlueAir", "Luft"],
-    "es": ["purificador", "BlueAir", "aire"],
-    "fr": ["purificateur", "BlueAir", "air"],
-    "it": ["purificatore", "BlueAir", "aria"],
-    "no": ["luftrenser", "BlueAir", "luft"],
-    "pl": ["oczyszczacz", "BlueAir", "powietrze"],
-    "ru": ["очиститель воздуха", "BlueAir", "воздух"],
-    "ko": ["공기청정기", "BlueAir", "공기"]
+    "en": [
+      "purifier",
+      "BlueAir",
+      "air"
+    ],
+    "sv": [
+      "luftrenare",
+      "BlueAir",
+      "luft"
+    ],
+    "nl": [
+      "luchtreiniger",
+      "BlueAir",
+      "lucht"
+    ],
+    "da": [
+      "luftrenser",
+      "BlueAir",
+      "luft"
+    ],
+    "de": [
+      "Luftreiniger",
+      "BlueAir",
+      "Luft"
+    ],
+    "es": [
+      "purificador",
+      "BlueAir",
+      "aire"
+    ],
+    "fr": [
+      "purificateur",
+      "BlueAir",
+      "air"
+    ],
+    "it": [
+      "purificatore",
+      "BlueAir",
+      "aria"
+    ],
+    "no": [
+      "luftrenser",
+      "BlueAir",
+      "luft"
+    ],
+    "pl": [
+      "oczyszczacz",
+      "BlueAir",
+      "powietrze"
+    ],
+    "ru": [
+      "очиститель воздуха",
+      "BlueAir",
+      "воздух"
+    ],
+    "ko": [
+      "공기청정기",
+      "BlueAir",
+      "공기"
+    ]
   },
   "images": {
     "small": "/assets/images/small.png",

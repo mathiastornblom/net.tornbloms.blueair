@@ -12,7 +12,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "blueair-client": "^1.2.14",
+    "blueair-client": "^1.2.15",
     "blueairaws-client": "^1.2.6",
     "homey-log": "^2.1.0"
   }
