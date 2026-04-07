@@ -2682,7 +2682,7 @@
         "fan_speed",
         "brightness",
         "child_lock",
-        "last_retrival_date",
+        "last_retrieval_date",
         "wifi_status",
         "filter_status"
       ],
@@ -3992,9 +3992,9 @@
                 "ru": "Интервал обновления",
                 "ko": "업데이트 간격"
               },
-              "value": 30,
-              "min": 10,
-              "max": 120,
+              "value": 60,
+              "min": 60,
+              "max": 300,
               "units": {
                 "en": "Seconds",
                 "sv": "Sekunder",
@@ -4575,9 +4575,9 @@
                 "ru": "Интервал обновления",
                 "ko": "업데이트 간격"
               },
-              "value": 30,
-              "min": 10,
-              "max": 120,
+              "value": 60,
+              "min": 60,
+              "max": 300,
               "units": {
                 "en": "Seconds",
                 "sv": "Sekunder",
@@ -5393,9 +5393,9 @@
                 "ru": "Интервал обновлений",
                 "ko": "업데이트 간격"
               },
-              "value": 30,
-              "min": 10,
-              "max": 120,
+              "value": 60,
+              "min": 60,
+              "max": 300,
               "units": {
                 "en": "Seconds",
                 "sv": "Sekunder",
@@ -6006,6 +6006,27 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/images/air-filter.svg"
+    },
+    "last_retrieval_date": {
+      "type": "string",
+      "title": {
+        "en": "Latest update date",
+        "sv": "Senast uppdaterad",
+        "nl": "Laatste bijgewerkte datum",
+        "da": "Seneste opdateringsdato",
+        "de": "Letztes Aktualisierungsdatum",
+        "es": "Fecha de la última actualización",
+        "fr": "Date de la dernière mise à jour",
+        "it": "Data dell'ultimo aggiornamento",
+        "no": "Siste oppdateringsdato",
+        "pl": "Data ostatniej aktualizacji",
+        "ru": "Дата последнего обновления",
+        "ko": "최신 업데이트 날짜"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/images/clock.svg"
     },
     "last_retrival_date": {
       "type": "string",

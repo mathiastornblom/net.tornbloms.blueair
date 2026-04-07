@@ -599,9 +599,9 @@
           "ru": "Интервал обновлений",
           "ko": "업데이트 간격"
         },
-        "value": 30,
-        "min": 10,
-        "max": 120,
+        "value": 60,
+        "min": 60,
+        "max": 300,
         "units": {
           "en": "Seconds",
           "sv": "Sekunder",

@@ -18,7 +18,7 @@
     "fan_speed",
     "brightness",
     "child_lock",
-    "last_retrival_date",
+    "last_retrieval_date",
     "wifi_status",
     "filter_status"
   ],

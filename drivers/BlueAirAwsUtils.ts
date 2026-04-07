@@ -1,3 +1,45 @@
+import {
+  BlueAirDeviceStatus,
+  BlueAirDeviceState,
+  BlueAirDeviceSensorData,
+} from 'blueairaws-client/dist/Consts';
+
+export interface DeviceSetting {
+  name: string;
+  value: string;
+}
+
+/**
+ * Searches device status data for a named attribute, checking both state and sensorData.
+ */
+export function filterSettings(
+  devices: BlueAirDeviceStatus[],
+  itemName: string
+): DeviceSetting | null {
+  for (const device of devices) {
+    if (itemName in device.state) {
+      const v = device.state[itemName as keyof BlueAirDeviceState];
+      if (v !== undefined && v !== null) return { name: itemName, value: String(v) };
+    }
+    if (itemName in device.sensorData) {
+      const v = device.sensorData[itemName as keyof BlueAirDeviceSensorData];
+      if (v !== undefined && v !== null) return { name: itemName, value: String(v) };
+    }
+  }
+  return null;
+}
+
+/**
+ * Returns the remaining filter life as a percentage string (e.g. "83 %"), or null.
+ */
+export function calculateRemainingFilterLife(devices: BlueAirDeviceStatus[]): string | null {
+  const usage = filterSettings(devices, 'filterusage');
+  if (usage?.value) {
+    return `${100 - Number(usage.value)} %`;
+  }
+  return null;
+}
+
 /**
  * Enum representing different air quality levels.
  */

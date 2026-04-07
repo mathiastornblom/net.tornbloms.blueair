@@ -1,661 +1,175 @@
-import { Device } from 'homey';
 import { BlueAirAwsClient } from 'blueairaws-client';
+import { BlueAirDeviceStatus } from 'blueairaws-client/dist/Consts';
+import BlueAirAwsBaseDevice from '../BlueAirAwsBaseDevice';
 import {
-  BlueAirDeviceStatus,
-  BlueAirDeviceState,
-  BlueAirDeviceSensorData,
-} from 'blueairaws-client/dist/Consts';
-import { conditionScorePm25ToString } from '../BlueAirAwsUtils';
-import BlueAirAwsBaseDriver from '../BlueAirAwsBaseDriver';
+  filterSettings,
+  calculateRemainingFilterLife,
+  DeviceSetting,
+  conditionScorePm25ToString,
+} from '../BlueAirAwsUtils';
 
-/**
- * Represents a setting object.
- * This interface allows additional properties, accommodating any setting that might be required.
- */
-interface Setting {
-  name: string;
-  [key: string]: any; // This allows for other properties in the setting object.
-}
+class BlueAirPureDevice extends BlueAirAwsBaseDevice {
+  protected readonly deviceCapabilities = [
+    'automode',
+    'brightness2',
+    'child_lock',
+    'fanspeed',
+    'filter_status',
+    'measure_pm25',
+    'nightmode',
+    'standby',
+    'wifi_status',
+  ];
 
-/**
- * Filters the device attributes array to find a specified item value.
- * @param devices - An array of BlueAirDeviceStatus objects to search through.
- * @param itemName - The name of the item to search for (e.g., 'fanspeed', 'childlock').
- * @returns The Setting object of the found item or null if not found.
- */
-function filterSettings(
-  devices: BlueAirDeviceStatus[],
-  itemName: string
-): Setting | null {
-  for (const device of devices) {
-    // Check if itemName exists in the state
-    if (itemName in device.state) {
-      const stateValue = device.state[itemName as keyof BlueAirDeviceState];
-      if (stateValue !== undefined && stateValue !== null) {
-        return { name: itemName, value: String(stateValue) }; // Return a Setting object
-      }
-    }
-
-    // Check if itemName exists in the sensorData
-    if (itemName in device.sensorData) {
-      const sensorDataValue =
-        device.sensorData[itemName as keyof BlueAirDeviceSensorData];
-      if (sensorDataValue !== undefined && sensorDataValue !== null) {
-        return { name: itemName, value: String(sensorDataValue) }; // Return a Setting object
-      }
-    }
-  }
-
-  return null; // Return null if the item is not found in any device
-}
-
-/**
- * Represents the BlueAir Pure device.
- * This class is responsible for managing the device's capabilities and settings within the Homey app.
- */
-class BlueAirPureDevice extends Device {
-  private savedfanspeed: Setting | null = null;
-  private savedPM25: Setting | null = null;
+  // Saved values for flow-card change detection
+  private savedFanspeed: DeviceSetting | null = null;
+  private savedPM25: DeviceSetting | null = null;
   private savedFilterStatus: string | null = null;
-  private client: BlueAirAwsClient | null = null; // Shared client from driver
 
-  private intervalId1: ReturnType<typeof setInterval> | null = null;
-  private intervalId2: ReturnType<typeof setInterval> | null = null;
+  // ── applyStatus ───────────────────────────────────────────────────────────
 
-  /**
-   * onInit is called when the device is initialized.
-   * This method sets up capability listeners and initializes the device's settings.
-   */
-  async onInit(): Promise<void> {
-    const settings = this.getSettings(); // Retrieve settings from Homey
-    const data = this.getData(); // Retrieve data from Homey
+  protected applyStatus(
+    attrs: BlueAirDeviceStatus[],
+    settings: Record<string, any>
+  ): void {
+    const fanspeed   = filterSettings(attrs, 'fanspeed');
+    const pm25       = filterSettings(attrs, 'pm2_5');
+    const brightness = filterSettings(attrs, 'brightness');
+    const childlock  = filterSettings(attrs, 'childlock');
+    const nightmode  = filterSettings(attrs, 'nightmode');
+    const standby    = filterSettings(attrs, 'standby');
+    const online     = filterSettings(attrs, 'online');
+    const automode   = filterSettings(attrs, 'automode');
+    const filterLife = calculateRemainingFilterLife(attrs);
 
-    this.log('Initializing BlueAirPure Device with settings:', settings);
+    this.setCapabilityValue('fanspeed',      Number(fanspeed?.value ?? 0)).catch(this.error);
+    this.setCapabilityValue('measure_pm25',  Number(pm25?.value ?? 0)).catch(this.error);
+    this.setCapabilityValue('brightness2',   Number(brightness?.value ?? 0)).catch(this.error);
+    this.setCapabilityValue('child_lock',    childlock?.value === 'true').catch(this.error);
+    this.setCapabilityValue('nightmode',     nightmode?.value === 'true').catch(this.error);
+    this.setCapabilityValue('standby',       standby?.value === 'false').catch(this.error);
+    this.setCapabilityValue('wifi_status',   online?.value === 'true').catch(this.error);
+    this.setCapabilityValue('filter_status', filterLife).catch(this.error);
+    this.setCapabilityValue('automode',      automode?.value === 'true').catch(this.error);
 
-    if (this.hasCapability('measure_tVOC')) {
-      // You need to check if migration is needed
-      // do not call removeCapability on every init!
-      await this.removeCapability('measure_tVOC');
-    }
+    // Only trigger flow cards after initial load
+    if (this.isInitialized) {
+      const name = String(settings.name ?? 'Unknown Device');
+      const uuid = String(settings.uuid ?? 'Unknown UUID');
 
-    // Add capabilities if they are not already present
-    const capabilities = [
-      'automode',
-      'brightness2',
-      'child_lock',
-      'fanspeed',
-      'filter_status',
-      'measure_pm25',
-      'nightmode',
-      'standby',
-      'wifi_status',
-    ];
+      if (this.savedFanspeed?.value !== fanspeed?.value) {
+        this.homey.flow.getTriggerCard('fan-speed-has-changed')
+          .trigger({ 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(fanspeed?.value ?? 0) })
+          .catch((e) => this.error('Failed to trigger fan-speed-has-changed', e));
+      }
 
-    for (const capability of capabilities) {
-      if (!this.hasCapability(capability)) {
-        await this.addCapability(capability);
+      if (this.savedPM25?.value !== pm25?.value) {
+        this.homey.flow.getTriggerCard('PM25-has-changed')
+          .trigger({ 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
+          .catch((e) => this.error('Failed to trigger PM25-has-changed', e));
+      }
+
+      if (this.savedFilterStatus !== filterLife) {
+        this.homey.flow.getTriggerCard('filter-needs-change')
+          .trigger({ 'device-name': name, 'device-uuid': uuid, 'device-response': String(filterLife ?? 'Unknown') })
+          .catch((e) => this.error('Failed to trigger filter-needs-change', e));
       }
     }
 
-    try {
-      // Get or create the shared client from the driver (avoids parallel Gigya logins)
-      const driver = this.driver as BlueAirAwsBaseDriver;
-      this.client = await driver.getOrCreateClient(settings.username, settings.password);
-      const client = this.client;
-      this.log('AccountUUID:', data.accountuuid);
-
-      // Fetch the initial device attributes for the specific device
-      const DeviceAttributes = await client.getDeviceStatus(data.accountuuid, [
-        data.uuid,
-      ]);
-      this.log('DeviceAttributes:', DeviceAttributes);
-
-      // Retrieve initial device settings and store them in class properties
-      this.savedfanspeed = filterSettings(DeviceAttributes, 'fanspeed');
-      this.savedPM25 = filterSettings(DeviceAttributes, 'pm2_5');
-      this.savedFilterStatus =
-        this.calculateRemainingFilterLife(DeviceAttributes);
-
-      // Register capability listeners to handle user interactions
-
-      // Fan Speed Listener
-      this.registerCapabilityListener('fanspeed', async (value) => {
-        this.log('Changed fan speed:', value);
-        await client.setFanSpeed(data.uuid, value); // Send updated fan speed to the device via API
-
-        // Re-fetch updated device status after setting the new value
-        const updatedDeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-        const result = filterSettings(updatedDeviceAttributes, 'fanspeed');
-
-        // Update the capability with the latest value from the device
-        this.setCapabilityValue('fanspeed', Number(result?.value ?? 0)).catch(
-          this.error
-        );
-
-        // Log and debug the result from the API call
-        this.log('Filtered fan speed settings:', result);
-      });
-
-      // Auto Mode Listener
-      this.registerCapabilityListener('automode', async (value) => {
-        this.log('Changed automode:', value);
-        await client.setFanAuto(data.uuid, value); // Send updated automode to the device via API
-
-        // Re-fetch updated device status after setting the new value
-        const updatedDeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-        const result = filterSettings(updatedDeviceAttributes, 'automode');
-
-        // Update the capability with the latest value from the device
-        this.setCapabilityValue('automode', result?.value === 'true').catch(
-          this.error
-        );
-
-        // Log and debug the result from the API call
-        this.log('Filtered automode settings:', result);
-      });
-
-      // Brightness Listener
-      this.registerCapabilityListener('brightness2', async (value) => {
-        this.log('Changed brightness:', value);
-        await client.setBrightness(data.uuid, value); // Send updated brightness to the device via API
-
-        // Re-fetch updated device status after setting the new value
-        const updatedDeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-        const result = filterSettings(updatedDeviceAttributes, 'brightness');
-
-        // Update the capability with the latest value from the device
-        this.setCapabilityValue(
-          'brightness2',
-          Number(result?.value ?? 0)
-        ).catch(this.error);
-
-        // Log and debug the result from the API call
-        this.log('Filtered brightness settings:', result);
-      });
-
-      // Child Lock Listener
-      this.registerCapabilityListener('child_lock', async (value) => {
-        this.log('Changed child lock:', value);
-        await client.setChildLock(data.uuid, value); // Send updated child lock status to the device via API
-
-        // Re-fetch updated device status after setting the new value
-        const updatedDeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-        const result = filterSettings(updatedDeviceAttributes, 'childlock');
-
-        // Update the capability with the latest value from the device
-        this.setCapabilityValue('child_lock', result?.value === 'true').catch(
-          this.error
-        );
-
-        // Log and debug the result from the API call
-        this.log('Filtered child lock settings:', result);
-      });
-
-      // Night Mode Listener
-      this.registerCapabilityListener('nightmode', async (value) => {
-        this.log('Changed night mode:', value);
-        await client.setNightMode(data.uuid, value); // Send updated night mode status to the device via API
-
-        // Re-fetch updated device status after setting the new value
-        const updatedDeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-        const result = filterSettings(updatedDeviceAttributes, 'nightmode');
-
-        // Update the capability with the latest value from the device
-        this.setCapabilityValue('nightmode', result?.value === 'true').catch(
-          this.error
-        );
-
-        // Log and debug the result from the API call
-        this.log('Filtered night mode settings:', result);
-      });
-
-      // Standby Listener
-      this.registerCapabilityListener('standby', async (value) => {
-        this.log('Changed standby:', value);
-        await client.setStandby(data.uuid, !value); // Send updated standby status to the device via API
-        // Notice the inversion with `!value` to match device expectations
-
-        // Re-fetch updated device status after setting the new value
-        const updatedDeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-        const result = filterSettings(updatedDeviceAttributes, 'standby');
-
-        // Update the capability with the latest value from the device
-        this.setCapabilityValue('standby', result?.value === 'false').catch(
-          this.error
-        );
-        // Use `result?.value === 'false'` to reflect "on" when standby is `false`
-
-        // Log and debug the result from the API call
-        this.log('Filtered standby settings:', result);
-      });
-
-      // Fetch and set initial states for all capabilities
-
-      const resultFanSpeed = filterSettings(DeviceAttributes, 'fanspeed');
-      const resultPM25 = filterSettings(DeviceAttributes, 'pm2_5');
-      const resultBrightness = filterSettings(DeviceAttributes, 'brightness');
-      const resultChildLock = filterSettings(DeviceAttributes, 'childlock');
-      const resultNightMode = filterSettings(DeviceAttributes, 'nightmode');
-      const resultStandby = filterSettings(DeviceAttributes, 'standby');
-      const resultFilterStatus = filterSettings(
-        DeviceAttributes,
-        'filterusage'
-      );
-      const resultWiFiStatus = filterSettings(DeviceAttributes, 'online');
-      const resultAutoMode = filterSettings(DeviceAttributes, 'automode'); // Fetch automode
-
-      // Log initial capability values for debugging
-      this.log('Initial fanspeed:', resultFanSpeed);
-      this.log('Initial PM2.5:', resultPM25);
-      this.log('Initial brightness:', resultBrightness);
-      this.log('Initial child_lock:', resultChildLock);
-      this.log('Initial night mode:', resultNightMode);
-      this.log('Initial standby:', resultStandby);
-      this.log('Initial wifi_status:', resultWiFiStatus);
-      this.log('Initial filter_status:', resultFilterStatus);
-      this.log('Initial automode:', resultAutoMode);
-
-      // Set initial capability values, converting to correct types as needed
-      this.setCapabilityValue(
-        'fanspeed',
-        Number(resultFanSpeed?.value ?? 0) // Parse fan speed as a number
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'measure_pm25',
-        Number(resultPM25?.value ?? 0) // Parse PM2.5 value as a number
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'brightness2',
-        Number(resultBrightness?.value ?? 0) // Parse brightness as a number
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'child_lock',
-        resultChildLock?.value === 'true' // Convert child lock status to a boolean
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'nightmode',
-        resultNightMode?.value === 'true' // Convert night mode status to a boolean
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'standby',
-        resultStandby?.value === 'false' // Invert logic for standby
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'wifi_status',
-        resultWiFiStatus?.value === 'true' // Convert WiFi status to a boolean
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'filter_status',
-        this.calculateRemainingFilterLife(DeviceAttributes) // Calculate and set the remaining filter life
-      ).catch(this.error);
-
-      this.setCapabilityValue(
-        'automode',
-        resultAutoMode?.value === 'true' // Convert automode status to a boolean
-      ).catch(this.error);
-
-      // Store device information in settings
-      this.setSettings({
-        uuid: DeviceAttributes[0].id, // Device UUID
-        name: DeviceAttributes[0].name, // Device name
-        model: DeviceAttributes[0].model, // Device model
-        mac: DeviceAttributes[0].mac, // Device MAC address
-        serial: DeviceAttributes[0].serial, // Device serial number
-        mcuFirmware: DeviceAttributes[0].mcu, // Device MCU firmware version
-        wlanDriver: DeviceAttributes[0].wifi, // Device WLAN driver version
-      });
-
-      // Periodic updates for capabilities to reflect real-time changes
-      this.intervalId1 = setInterval(async () => {
-        this.log(
-          'Executing periodic update at interval:',
-          settings.update * 1000
-        );
-
-        // Fetch updated device attributes
-        const DeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-
-        // Fetch updated states for each capability
-        const resultFanSpeed = filterSettings(DeviceAttributes, 'fanspeed');
-        const resultPM25 = filterSettings(DeviceAttributes, 'pm2_5');
-        const resultBrightness = filterSettings(DeviceAttributes, 'brightness');
-        const resultChildLock = filterSettings(DeviceAttributes, 'childlock');
-        const resultNightMode = filterSettings(DeviceAttributes, 'nightmode');
-        const resultStandby = filterSettings(DeviceAttributes, 'standby');
-        const resultFilterStatus = filterSettings(
-          DeviceAttributes,
-          'filterusage'
-        );
-        const resultWiFiStatus = filterSettings(DeviceAttributes, 'online');
-        const resultAutoMode = filterSettings(DeviceAttributes, 'automode'); // Fetch automode
-
-        // Log updated capability values for debugging
-        this.log('Updated fanspeed:', resultFanSpeed);
-        this.log('Updated PM2.5:', resultPM25);
-        this.log('Updated brightness:', resultBrightness);
-        this.log('Updated child_lock:', resultChildLock);
-        this.log('Updated night mode:', resultNightMode);
-        this.log('Updated standby:', resultStandby);
-        this.log('Updated wifi_status:', resultWiFiStatus);
-        this.log('Updated filter_status:', resultFilterStatus);
-        this.log('Updated automode:', resultAutoMode);
-
-        // Update capabilities with new values
-        this.setCapabilityValue(
-          'fanspeed',
-          Number(resultFanSpeed?.value ?? 0)
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'measure_pm25',
-          Number(resultPM25?.value ?? 0)
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'brightness2',
-          Number(resultBrightness?.value ?? 0)
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'child_lock',
-          resultChildLock?.value === 'true'
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'nightmode',
-          resultNightMode?.value === 'true'
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'standby',
-          resultStandby?.value === 'false' // Invert logic for standby
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'wifi_status',
-          resultWiFiStatus?.value === 'true'
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'filter_status',
-          this.calculateRemainingFilterLife(DeviceAttributes)
-        ).catch(this.error);
-        this.setCapabilityValue(
-          'automode',
-          resultAutoMode?.value === 'true'
-        ).catch(this.error); // Update automode
-
-        // Trigger fan speed change card if there's a change
-        if (this.savedfanspeed?.value !== resultFanSpeed?.value) {
-          const cardTriggerFilter = this.homey.flow.getTriggerCard(
-            'fan-speed-has-changed'
-          );
-          cardTriggerFilter
-            .trigger({
-              'device-name': String(settings.name ?? 'Unknown Device'),
-              'device-uuid': String(settings.uuid ?? 'Unknown UUID'),
-              'fan speed': Number(resultFanSpeed?.value ?? 0),
-            })
-            .catch((err) =>
-              this.error(
-                'Failed to trigger fan-speed-has-changed flow card',
-                err
-              )
-            );
-          this.savedfanspeed = resultFanSpeed; // Update saved fan speed
-        }
-
-        // Trigger PM2.5 change card if there's a change
-        if (this.savedPM25?.value !== resultPM25?.value) {
-          const cardTriggerFilter =
-            this.homey.flow.getTriggerCard('PM25-has-changed');
-          cardTriggerFilter
-            .trigger({
-              'device-name': String(settings.name ?? 'Unknown Device'),
-              'device-uuid': String(settings.uuid ?? 'Unknown UUID'),
-              'PM25 new': Number(resultPM25?.value ?? 0),
-              'PM25 old': Number(this.savedPM25?.value ?? 0),
-            })
-            .catch((err) =>
-              this.error('Failed to trigger PM25-has-changed flow card', err)
-            );
-          this.savedPM25 = resultPM25;
-        }
-
-        // Trigger filter status change card if there's a change
-        const currentFilterStatus =
-          this.calculateRemainingFilterLife(DeviceAttributes);
-        if (this.savedFilterStatus !== currentFilterStatus) {
-          const cardTriggerFilter = this.homey.flow.getTriggerCard(
-            'filter-needs-change'
-          );
-          cardTriggerFilter
-            .trigger({
-              'device-name': String(settings.name ?? 'Unknown Device'),
-              'device-uuid': String(settings.uuid ?? 'Unknown UUID'),
-              'filter life remaining': String(currentFilterStatus ?? 'Unknown'),
-            })
-            .catch((err) =>
-              this.error('Failed to trigger filter-needs-change flow card', err)
-            );
-          this.savedFilterStatus = currentFilterStatus;
-        }
-      }, settings.update * 1000);
-
-      // Periodic check for filter status and trigger notification if needed
-      this.intervalId2 = setInterval(async () => {
-        const DeviceAttributes = await client.getDeviceStatus(
-          data.accountuuid,
-          [data.uuid]
-        );
-
-        // Update device settings for monitoring
-        this.setSettings({
-          uuid: DeviceAttributes[0].id,
-          name: DeviceAttributes[0].name,
-          model: DeviceAttributes[0].model,
-          mac: DeviceAttributes[0].mac,
-          serial: DeviceAttributes[0].serial,
-          mcuFirmware: DeviceAttributes[0].mcu,
-          wlanDriver: DeviceAttributes[0].wifi,
-        });
-
-        // Check filter usage status and trigger alert if it needs changing
-        const resultFilterStatus =
-          this.calculateRemainingFilterLife(DeviceAttributes);
-        if (
-          resultFilterStatus !== null &&
-          resultFilterStatus !== undefined &&
-          parseInt(resultFilterStatus, 10) <= 5 // Check if the remaining filter life is 5% or less
-        ) {
-          const cardTriggerFilter = this.homey.flow.getTriggerCard(
-            'filter-needs-change'
-          );
-          cardTriggerFilter
-            .trigger({
-              'device-name': String(settings.name ?? 'Unknown Device'),
-              'device-uuid': String(settings.uuid ?? 'Unknown UUID'),
-              'device-response': String(resultFilterStatus ?? 'Unknown'),
-            })
-            .catch((err) =>
-              this.error('Failed to trigger filter-needs-change flow card', err)
-            );
-        }
-      }, 60000);
-
-      // Register action card listeners for controlling brightness
-      const brightnesscard = this.homey.flow.getActionCard('set-brightness2');
-      brightnesscard.registerRunListener(async (value) => {
-        this.log(
-          'Want to change the brightness with value: ',
-          value.brightness
-        );
-        await client.setBrightness(data.uuid, value.brightness);
-        this.log('Changed brightness to:', value.brightness);
-      });
-
-      // Register action card listeners for controlling fan speed
-      const fancard = this.homey.flow.getActionCard('set-fan-speed2');
-      fancard.registerRunListener(async (value) => {
-        this.log('Want to change the fan speed with value: ', value.fanspeed);
-        await client.setFanSpeed(data.uuid, value.fanspeed);
-        this.log('Changed fan speed:', value.fanspeed);
-      });
-
-      // Register action card listeners for controlling automatic
-      const autocard = this.homey.flow.getActionCard('set-automatic2');
-      autocard.registerRunListener(async (value) => {
-        this.log('Want to change the automatic with value: ', value.automatic);
-        await client.setFanAuto(data.uuid, value.automatic);
-        this.log('Changed automatic:', value.automatic);
-      });
-
-      // Register action card listeners for controlling night mode
-      const nightmodecard = this.homey.flow.getActionCard('set-nightmode2');
-      nightmodecard.registerRunListener(async (value) => {
-        this.log('Want to change the night mode with value: ', value.nightmode);
-        await client.setNightMode(data.uuid, value.nightmode);
-        this.log('Changed night mode:', value.nightmode);
-      });
-
-      // Register action card listeners for controlling standby
-      const standbycard = this.homey.flow.getActionCard('set-standby2');
-      standbycard.registerRunListener(async (value) => {
-        this.log('Want to change the standby with value: ', value.standby);
-        await client.setStandby(data.uuid, value.standby);
-        this.log('Changed standby:', value.standby);
-      });
-
-      // Register action card listeners for controlling child lock
-      const childlockcard = this.homey.flow.getActionCard('set-childlock2');
-      childlockcard.registerRunListener(async (value) => {
-        this.log('Want to change the child lock with value: ', value.childlock);
-        await client.setChildLock(data.uuid, value.childlock);
-        this.log('Changed child lock:', value.childlock);
-      });
-
-      // Register condition card listeners for PM and tVOC score conditions
-      this.homey.flow
-        .getConditionCard('score_pm25')
-        .registerRunListener(async (args, state) => {
-          const result =
-            conditionScorePm25ToString(
-              this.getCapabilityValue('measure_pm25')
-            ) === args.argument_main;
-          return Promise.resolve(result);
-        });
-
-      this.log('BlueAirPureDevice has been initialized');
-    } catch (e) {
-      this.error('Error during initialization:', e); // Log any initialization errors
-    }
+    this.savedFanspeed    = fanspeed;
+    this.savedPM25        = pm25;
+    this.savedFilterStatus = filterLife;
   }
 
-  /**
-   * Calculate the remaining filter life based on the filter usage percentage.
-   * @param devices - An array of BlueAirDeviceStatus objects.
-   * @returns The percentage of filter life remaining as a string with a % character.
-   */
-  private calculateRemainingFilterLife(
-    devices: BlueAirDeviceStatus[]
-  ): string | null {
-    const filterUsage = filterSettings(devices, 'filterusage'); // Fetch filter usage setting
-    if (filterUsage && filterUsage.value) {
-      const usedPercentage = Number(filterUsage.value); // Convert the filter usage value to a number
-      const remainingPercentage = 100 - usedPercentage; // Calculate the remaining percentage
-      return `${remainingPercentage} %`; // Return the remaining filter life percentage with % character
-    }
-    return null; // Return null if the filter usage information is not available
+  // ── setupListeners ────────────────────────────────────────────────────────
+
+  protected setupListeners(
+    client: BlueAirAwsClient,
+    data: Record<string, any>,
+    _settings: Record<string, any>
+  ): void {
+    // Capability listeners — revert value if API call fails
+    this.registerCapabilityListener('fanspeed', async (value) => {
+      await this.safeSetCommand('fanspeed', () => client.setFanSpeed(data.uuid, value));
+    });
+
+    this.registerCapabilityListener('automode', async (value) => {
+      await this.safeSetCommand('automode', () => client.setFanAuto(data.uuid, value));
+    });
+
+    this.registerCapabilityListener('brightness2', async (value) => {
+      await this.safeSetCommand('brightness2', () => client.setBrightness(data.uuid, value));
+    });
+
+    this.registerCapabilityListener('child_lock', async (value) => {
+      await this.safeSetCommand('child_lock', () => client.setChildLock(data.uuid, value));
+    });
+
+    this.registerCapabilityListener('nightmode', async (value) => {
+      await this.safeSetCommand('nightmode', () => client.setNightMode(data.uuid, value));
+    });
+
+    this.registerCapabilityListener('standby', async (value) => {
+      await this.safeSetCommand('standby', () => client.setStandby(data.uuid, !value));
+    });
+
+    // Action cards
+    this.homey.flow.getActionCard('set-brightness2').registerRunListener(async (args) => {
+      await client.setBrightness(data.uuid, args.brightness);
+    });
+
+    this.homey.flow.getActionCard('set-fan-speed2').registerRunListener(async (args) => {
+      await client.setFanSpeed(data.uuid, args.fanspeed);
+    });
+
+    this.homey.flow.getActionCard('set-automatic2').registerRunListener(async (args) => {
+      await client.setFanAuto(data.uuid, args.automatic);
+    });
+
+    this.homey.flow.getActionCard('set-nightmode2').registerRunListener(async (args) => {
+      await client.setNightMode(data.uuid, args.nightmode);
+    });
+
+    this.homey.flow.getActionCard('set-standby2').registerRunListener(async (args) => {
+      await client.setStandby(data.uuid, args.standby);
+    });
+
+    this.homey.flow.getActionCard('set-childlock2').registerRunListener(async (args) => {
+      await client.setChildLock(data.uuid, args.childlock);
+    });
+
+    // Condition card
+    this.homey.flow.getConditionCard('score_pm25').registerRunListener(async (args) =>
+      conditionScorePm25ToString(this.getCapabilityValue('measure_pm25')) === args.argument_main
+    );
   }
 
-  /**
-   * onAdded is called when the user adds the device, called just after pairing.
-   */
+  // ── Lifecycle ─────────────────────────────────────────────────────────────
+
   async onAdded(): Promise<void> {
     this.log('BlueAirPureDevice has been added');
   }
 
-  /**
-   * onSettings is called when the user updates the device's settings.
-   * This method handles any necessary changes when settings are updated.
-   * @param {object} event the onSettings event data
-   * @param {object} event.oldSettings The old settings object
-   * @param {object} event.newSettings The new settings object
-   * @param {string[]} event.changedKeys An array of keys changed since the previous version
-   * @returns {Promise<string|void>} return a custom message that will be displayed
-   */
   async onSettings({
     oldSettings,
     newSettings,
     changedKeys,
   }: {
-    oldSettings: {
-      [key: string]: boolean | string | number | undefined | null;
-    };
-    newSettings: {
-      [key: string]: boolean | string | number | undefined | null;
-    };
+    oldSettings: { [key: string]: boolean | string | number | undefined | null };
+    newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
     this.log('BlueAirPureDevice settings were changed');
-    this.log('Old Settings:', oldSettings); // Log the old settings for debugging
-    this.log('New Settings:', newSettings); // Log the new settings for debugging
-    this.log('Changed Keys:', changedKeys); // Log the keys that were changed
+    this.log('Changed keys:', changedKeys);
   }
 
-  /**
-   * onRenamed is called when the user updates the device's name.
-   * This method can be used to synchronize the name to the device.
-   * @param name The new name
-   */
   async onRenamed(name: string): Promise<void> {
     this.log('BlueAirPureDevice was renamed to:', name);
   }
 
-  /**
-   * onDeleted is called when the user deletes the device.
-   * This method ensures that any active intervals are cleared to prevent continued operations.
-   */
   async onDeleted(): Promise<void> {
     this.log('BlueAirPureDevice has been deleted');
-
-    // Clear the first interval if it's active
-    if (this.intervalId1) {
-      clearInterval(this.intervalId1); // Clear the first interval
-      this.log('Interval 1 cleared'); // Log clearing of the first interval
-      this.intervalId1 = null; // Reset the interval ID
-    }
-
-    // Clear the second interval if it's active
-    if (this.intervalId2) {
-      clearInterval(this.intervalId2); // Clear the second interval
-      this.log('Interval 2 cleared'); // Log clearing of the second interval
-      this.intervalId2 = null; // Reset the interval ID
-    }
-
-    // Additional cleanup if necessary
-    this.savedfanspeed = null; // Reset saved fan speed
+    await super.onDeleted();
   }
 }
 

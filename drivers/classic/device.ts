@@ -36,7 +36,7 @@ class BlueAirClassicDevice extends Device {
       'fan_speed',
       'brightness',
       'child_lock',
-      'last_retrival_date',
+      'last_retrieval_date',
       'wifi_status',
       'filter_status',
     ];
@@ -45,6 +45,15 @@ class BlueAirClassicDevice extends Device {
       if (!this.hasCapability(capability)) {
         await this.addCapability(capability);
       }
+    }
+
+    // Migrate old misspelled capability to the corrected name
+    if (this.hasCapability('last_retrieval_date')) {
+      const oldValue = this.getCapabilityValue('last_retrieval_date');
+      if (oldValue) {
+        await this.setCapabilityValue('last_retrieval_date', oldValue).catch(this.error);
+      }
+      await this.removeCapability('last_retrieval_date');
     }
 
     try {
@@ -147,7 +156,7 @@ class BlueAirClassicDevice extends Device {
 
       // Set capability values for last retrieval date, Wi-Fi status, and filter status
       this.setCapabilityValue(
-        'last_retrival_date',
+        'last_retrieval_date',
         this.timeConverter(DeviceInfo.lastSyncDate)
       ).catch(this.error);
 
@@ -225,7 +234,7 @@ class BlueAirClassicDevice extends Device {
           }
 
           this.setCapabilityValue(
-            'last_retrival_date',
+            'last_retrieval_date',
             this.timeConverter(DeviceInfo.lastSyncDate)
           ).catch(this.error);
 
