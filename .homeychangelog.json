@@ -130,5 +130,8 @@
   },
   "3.2.7": {
     "en": "Dependencies has been updated"
+  },
+  "3.2.8": {
+    "en": "Fix for craches when BlueAir stops responding."
   }
 }
