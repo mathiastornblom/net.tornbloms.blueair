@@ -133,5 +133,8 @@
   },
   "3.2.8": {
     "en": "Fix for craches when BlueAir stops responding."
+  },
+  "3.2.10": {
+    "en": "Added action card for Pure devices"
   }
 }
