@@ -8,7 +8,7 @@ module.exports = {
    * GET /devices
    * Returns all BlueAir devices known to this app.
    */
-  async getDevices(homey) {
+  async getDevices({ homey }) {
     const all = await homey.devices.getDevices();
     return Object.values(all)
       .filter((d) => (d.driverUri || '').includes('net.tornbloms.blueair'))
@@ -23,7 +23,7 @@ module.exports = {
    * GET /device/:deviceId/state
    * Returns the current value of every controllable capability the device has.
    */
-  async getDeviceState(homey, params) {
+  async getDeviceState({ homey, params }) {
     const { deviceId } = params;
     const device = await homey.devices.getDevice({ id: deviceId });
     if (!device) throw new Error(`Device ${deviceId} not found`);
@@ -41,7 +41,7 @@ module.exports = {
    * POST /device/:deviceId/capability/:capabilityId
    * Sets a controllable capability value. Body: { value: <boolean|number> }
    */
-  async setCapability(homey, params, body) {
+  async setCapability({ homey, params, body }) {
     const { deviceId, capabilityId } = params;
 
     if (!CONTROL_CAPS.includes(capabilityId)) {

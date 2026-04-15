@@ -18,7 +18,7 @@ module.exports = {
    * GET /devices
    * Returns all BlueAir devices known to this app.
    */
-  async getDevices(homey) {
+  async getDevices({ homey }) {
     const all = await homey.devices.getDevices();
     return Object.values(all)
       .filter((d) => (d.driverUri || '').includes('net.tornbloms.blueair'))
@@ -34,7 +34,7 @@ module.exports = {
    * GET /device/:deviceId/values
    * Returns the current value for every air-quality capability the device has.
    */
-  async getDeviceValues(homey, params) {
+  async getDeviceValues({ homey, params }) {
     const { deviceId } = params;
     const device = await homey.devices.getDevice({ id: deviceId });
     if (!device) throw new Error(`Device ${deviceId} not found`);
