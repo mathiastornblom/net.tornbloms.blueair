@@ -136,5 +136,11 @@
   },
   "3.2.10": {
     "en": "Added action card for Pure devices"
+  },
+  "3.2.11": {
+    "en": "Fixes for the \"then\" cards"
+  },
+  "3.2.12": {
+    "en": "Improved widgets: air quality display with color-coded PM2.5 and new device control widget"
   }
 }
