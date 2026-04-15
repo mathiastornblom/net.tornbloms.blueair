@@ -113,29 +113,30 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
       await this.safeSetCommand('standby', () => client.setStandby(data.uuid, !value));
     });
 
-    // Action cards
+    // Action cards — use args.device so the correct device is always targeted,
+    // regardless of which device instance last called setupListeners.
     this.homey.flow.getActionCard('set-brightness2').registerRunListener(async (args) => {
-      await client.setBrightness(data.uuid, args.brightness);
+      await (args.device as BlueAirPureDevice).performSetBrightness(args.brightness);
     });
 
     this.homey.flow.getActionCard('set-fan-speed2').registerRunListener(async (args) => {
-      await client.setFanSpeed(data.uuid, args.fanspeed);
+      await (args.device as BlueAirPureDevice).performSetFanSpeed(args.fanspeed);
     });
 
     this.homey.flow.getActionCard('set-automatic2').registerRunListener(async (args) => {
-      await client.setFanAuto(data.uuid, args.automatic);
+      await (args.device as BlueAirPureDevice).performSetAutomatic(args.automatic === 'true');
     });
 
     this.homey.flow.getActionCard('set-nightmode2').registerRunListener(async (args) => {
-      await client.setNightMode(data.uuid, args.nightmode);
+      await (args.device as BlueAirPureDevice).performSetNightMode(args.nightmode === 'true');
     });
 
     this.homey.flow.getActionCard('set-standby2').registerRunListener(async (args) => {
-      await client.setStandby(data.uuid, args.standby);
+      await (args.device as BlueAirPureDevice).performSetStandby(args.standby === 'true');
     });
 
     this.homey.flow.getActionCard('set-childlock2').registerRunListener(async (args) => {
-      await client.setChildLock(data.uuid, args.childlock);
+      await (args.device as BlueAirPureDevice).performSetChildLock(args.childlock === 'true');
     });
 
     // Condition card

@@ -190,6 +190,39 @@ abstract class BlueAirAwsBaseDevice extends Device {
       throw error;
     }
   }
+
+  // ── Public action methods (called from flow action card listeners) ──────────
+
+  public async performSetFanSpeed(value: number): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    await this.client.setFanSpeed(this.getData().uuid, value);
+  }
+
+  public async performSetBrightness(value: number): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    await this.client.setBrightness(this.getData().uuid, value);
+  }
+
+  public async performSetAutomatic(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    await this.client.setFanAuto(this.getData().uuid, value);
+  }
+
+  public async performSetNightMode(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    await this.client.setNightMode(this.getData().uuid, value);
+  }
+
+  public async performSetStandby(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    // Action card "On" = standby ON; no capability inversion needed here
+    await this.client.setStandby(this.getData().uuid, value);
+  }
+
+  public async performSetChildLock(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    await this.client.setChildLock(this.getData().uuid, value);
+  }
 }
 
 export default BlueAirAwsBaseDevice;
