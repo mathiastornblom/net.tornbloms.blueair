@@ -1,74 +1,50 @@
+'use strict';
+
+// Capabilities surfaced by the air quality widget
+const AIR_CAPS = [
+  'measure_pm25',
+  'measure_pm1',
+  'measure_pm10',
+  'measure_tvoc',
+  'measure_humidity',
+  'measure_temperature',
+  'fanspeed',
+  'filter_status',
+  'wifi_status',
+];
+
 module.exports = {
-  async getBlueAirDevices(homey) {
-    // 1) Get all devices from Homey
-    const devices = await homey.devices.getDevices();
-
-    // 2) Filter only the ones we consider "BlueAir devices"
-    //    (for example, by driverId or something else)
-    const blueAirDevices = Object.values(devices).filter((device) => {
-      return device.driverUri === 'homey:net.tornbloms.blueair';
-    });
-
-    // 3) Return an array of simplified device info (id + name)
-    return blueAirDevices.map((d) => ({
-      id: d.id,
-      name: d.name || 'Unnamed BlueAir Device',
-    }));
+  /**
+   * GET /devices
+   * Returns all BlueAir devices known to this app.
+   */
+  async getDevices(homey) {
+    const all = await homey.devices.getDevices();
+    return Object.values(all)
+      .filter((d) => (d.driverUri || '').includes('net.tornbloms.blueair'))
+      .map((d) => ({
+        id: d.id,
+        name: d.name || 'Unnamed Device',
+        driverId: d.driverId,
+        capabilities: d.capabilities || [],
+      }));
   },
 
   /**
-   * GET /devices/:deviceId/capabilities
-   * Returns a list of capabilities for a specific device.
-   *
-   * @param {object} homey - The Homey object provided by the SDK
-   * @param {object} params - The URL parameters, e.g. { deviceId: 'abc123' }
-   * @returns {Promise<Array>} - An array of { id, label } for each capability
+   * GET /device/:deviceId/values
+   * Returns the current value for every air-quality capability the device has.
    */
-  async getBlueAirCapabilities(homey, params) {
+  async getDeviceValues(homey, params) {
     const { deviceId } = params;
-
-    // 1) Get the device by ID
     const device = await homey.devices.getDevice({ id: deviceId });
-    if (!device) {
-      throw new Error(`Device ${deviceId} not found`);
+    if (!device) throw new Error(`Device ${deviceId} not found`);
+
+    const result = {};
+    for (const cap of AIR_CAPS) {
+      if (device.capabilities?.includes(cap)) {
+        result[cap] = device.capabilitiesObj?.[cap]?.value ?? null;
+      }
     }
-
-    // 2) Capabilities might be found in "device.capabilities" (array)
-    //    or "device.capabilitiesObj" (detailed object)
-    if (!device.capabilities) {
-      return [];
-    }
-
-    // 3) Map to a simple { id, label } structure
-    return device.capabilities.map((cap) => ({
-      id: cap,
-      // For demo: just use capability ID as label
-      // Optionally you could do a dictionary or check device.capabilitiesObj for a better name
-      label: cap,
-    }));
-  },
-
-  /**
-   * GET /devices/:deviceId/capabilities/:capabilityId
-   * Returns the current value for a given capability on a specific device.
-   *
-   * @param {object} homey - The Homey object provided by the SDK
-   * @param {object} params - The URL parameters, e.g. { deviceId: 'abc123', capabilityId: 'measure_pm25' }
-   * @returns {Promise<any>} - The current value of the capability
-   */
-  async getBlueAirCapabilityValue(homey, params) {
-    const { deviceId, capabilityId } = params;
-
-    // 1) Get the device
-    const device = await homey.devices.getDevice({ id: deviceId });
-    if (!device) {
-      throw new Error(`Device ${deviceId} not found`);
-    }
-
-    // 2) Read the capability value
-    //    The actual location might differ; often it's device.capabilitiesObj[capabilityId!]?.value ?? null;
-
-    // 3) Return the value (could be number, string, boolean, etc.)
-    return currentValue;
+    return result;
   },
 };

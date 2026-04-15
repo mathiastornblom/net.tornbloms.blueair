@@ -1,3 +1,115 @@
-#zones {
-  text-align-last: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--homey-text-color, #1a1a1a);
+  padding: 14px;
+  font-size: 13px;
+}
+
+/* ── Device selector ── */
+#device-select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--homey-text-color-light, #666);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* ── State views ── */
+.state-view {
+  text-align: center;
+  color: var(--homey-text-color-light, #888);
+  padding: 20px 0;
+  font-size: 13px;
+}
+
+/* ── PM2.5 primary card ── */
+#pm25-card {
+  text-align: center;
+  padding: 4px 0 12px;
+}
+
+#pm25-value {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  transition: color 0.4s ease;
+}
+
+#pm25-unit {
+  font-size: 11px;
+  color: var(--homey-text-color-light, #888);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+#pm25-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+/* ── Secondary metrics grid ── */
+#metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 4px;
+  margin: 4px 0 10px;
+}
+
+.metric {
+  text-align: center;
+  padding: 6px 2px;
+  border-radius: 8px;
+  background: rgba(128, 128, 128, 0.06);
+}
+
+.metric-value {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--homey-text-color, #1a1a1a);
+}
+
+.metric-label {
+  font-size: 10px;
+  color: var(--homey-text-color-light, #888);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ── Status bar ── */
+#status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(128, 128, 128, 0.15);
+  font-size: 11px;
+  color: var(--homey-text-color-light, #888);
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
 }

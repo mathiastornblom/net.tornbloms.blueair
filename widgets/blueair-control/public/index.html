@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <title>BlueAir Control</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="header">
+        <select id="device-select" aria-label="Select device"></select>
+      </div>
+
+      <div id="state-loading" class="state-view">Loading…</div>
+      <div id="state-no-devices" class="state-view" hidden>No BlueAir devices found</div>
+      <div id="state-error" class="state-view" hidden>Could not load device</div>
+
+      <div id="main" hidden>
+        <!-- Fan speed (range input — shown only when device has fanspeed) -->
+        <div id="row-fanspeed" class="control-row" hidden>
+          <span class="control-label">Fan speed</span>
+          <div class="slider-wrap">
+            <input id="slider-fanspeed" type="range" min="0" max="100" step="1" />
+            <span id="value-fanspeed" class="slider-value">—</span>
+          </div>
+        </div>
+
+        <!-- Toggle rows -->
+        <div id="row-automode" class="control-row" hidden>
+          <span class="control-label">Auto mode</span>
+          <label class="toggle">
+            <input id="toggle-automode" type="checkbox" />
+            <span class="track"></span>
+          </label>
+        </div>
+
+        <div id="row-nightmode" class="control-row" hidden>
+          <span class="control-label">Night mode</span>
+          <label class="toggle">
+            <input id="toggle-nightmode" type="checkbox" />
+            <span class="track"></span>
+          </label>
+        </div>
+
+        <!-- standby capability: true = device is ON (not in standby) -->
+        <div id="row-standby" class="control-row" hidden>
+          <span class="control-label">Power on</span>
+          <label class="toggle">
+            <input id="toggle-standby" type="checkbox" />
+            <span class="track"></span>
+          </label>
+        </div>
+
+        <div id="row-child_lock" class="control-row" hidden>
+          <span class="control-label">Child lock</span>
+          <label class="toggle">
+            <input id="toggle-child_lock" type="checkbox" />
+            <span class="track"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
