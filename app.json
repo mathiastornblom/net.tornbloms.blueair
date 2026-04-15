@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.tornbloms.blueair",
-  "version": "3.2.11",
+  "version": "3.2.12",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "brandColor": "#0C2F4F",
@@ -5474,63 +5474,25 @@
   "widgets": {
     "blueair": {
       "name": {
-        "en": "BlueAir Widget",
-        "nl": "BlueAir Widget",
-        "da": "BlueAir Widget",
-        "de": "BlueAir Widget",
-        "es": "BlueAir Widget",
-        "fr": "BlueAir Widget",
-        "it": "BlueAir Widget",
-        "no": "BlueAir Widget",
-        "sv": "BlueAir Widget",
-        "pl": "BlueAir Widget",
-        "ru": "BlueAir Widget",
-        "ko": "BlueAir 위젯"
+        "en": "BlueAir Air Quality",
+        "nl": "BlueAir Luchtkwaliteit",
+        "da": "BlueAir Luftkvalitet",
+        "de": "BlueAir Luftqualität",
+        "es": "BlueAir Calidad del Aire",
+        "fr": "BlueAir Qualité de l'Air",
+        "it": "BlueAir Qualità dell'Aria",
+        "no": "BlueAir Luftkvalitet",
+        "sv": "BlueAir Luftkvalitet",
+        "pl": "BlueAir Jakość Powietrza",
+        "ru": "BlueAir Качество воздуха",
+        "ko": "BlueAir 공기질"
       },
-      "transparent": true,
+      "transparent": false,
       "settings": [
-        {
-          "id": "selectedDevice",
-          "type": "dropdown",
-          "label": {
-            "en": "Select BlueAir device",
-            "nl": "Selecteer BlueAir-apparaat",
-            "da": "Vælg BlueAir-enhed",
-            "de": "BlueAir-Gerät auswählen",
-            "es": "Seleccionar dispositivo BlueAir",
-            "fr": "Sélectionner l'appareil BlueAir",
-            "it": "Seleziona dispositivo BlueAir",
-            "no": "Velg BlueAir-enhet",
-            "sv": "Välj BlueAir-enhet",
-            "pl": "Wybierz urządzenie BlueAir",
-            "ru": "Выберите устройство BlueAir",
-            "ko": "BlueAir 장치 선택"
-          },
-          "values": []
-        },
-        {
-          "id": "selectedCapability",
-          "type": "dropdown",
-          "label": {
-            "en": "Select measurement",
-            "nl": "Selecteer meting",
-            "da": "Vælg måling",
-            "de": "Messung auswählen",
-            "es": "Seleccionar medición",
-            "fr": "Sélectionner la mesure",
-            "it": "Seleziona misurazione",
-            "no": "Velg måling",
-            "sv": "Välj mätning",
-            "pl": "Wybierz pomiar",
-            "ru": "Выберите измерение",
-            "ko": "측정 선택"
-          },
-          "values": []
-        },
         {
           "id": "refreshSeconds",
           "type": "number",
-          "title": {
+          "label": {
             "en": "Refresh interval (seconds)",
             "nl": "Vernieuwingsinterval (seconden)",
             "da": "Opdateringsinterval (sekunder)",
@@ -5544,25 +5506,54 @@
             "ru": "Интервал обновления (секунды)",
             "ko": "갱신 간격 (초)"
           },
-          "min": 2,
-          "value": 5
+          "min": 5,
+          "value": 15
         }
       ],
       "api": {
-        "getBlueAirDevices": {
+        "getDevices": {
           "method": "GET",
           "path": "/devices"
         },
-        "getBlueAirCapabilities": {
+        "getDeviceValues": {
           "method": "GET",
-          "path": "/capabilities"
-        },
-        "getBlueAirCapabilityValue": {
-          "method": "GET",
-          "path": "/device:/capability:"
+          "path": "/device/:deviceId/values"
         }
       },
       "id": "blueair"
+    },
+    "blueair-control": {
+      "name": {
+        "en": "BlueAir Control",
+        "nl": "BlueAir Bediening",
+        "da": "BlueAir Styring",
+        "de": "BlueAir Steuerung",
+        "es": "BlueAir Control",
+        "fr": "BlueAir Contrôle",
+        "it": "BlueAir Controllo",
+        "no": "BlueAir Styring",
+        "sv": "BlueAir Styrning",
+        "pl": "BlueAir Sterowanie",
+        "ru": "BlueAir Управление",
+        "ko": "BlueAir 제어"
+      },
+      "transparent": false,
+      "settings": [],
+      "api": {
+        "getDevices": {
+          "method": "GET",
+          "path": "/devices"
+        },
+        "getDeviceState": {
+          "method": "GET",
+          "path": "/device/:deviceId/state"
+        },
+        "setCapability": {
+          "method": "POST",
+          "path": "/device/:deviceId/capability/:capabilityId"
+        }
+      },
+      "id": "blueair-control"
     }
   },
   "capabilities": {
