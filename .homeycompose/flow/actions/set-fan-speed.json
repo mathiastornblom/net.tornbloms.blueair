@@ -11,7 +11,8 @@
     "no": "Sett viftehastighet (classic)",
     "pl": "Ustaw prędkość wentylatora (classic)",
     "ru": "Установить скорость вентилятора (classic)",
-    "ko": "팬 속도 설정 (classic)"
+    "ko": "팬 속도 설정 (classic)",
+    "ar": "ضبط سرعة المروحة (الكلاسيكية)"
   },
   "titleFormatted": {
     "en": "Set the fan speed to [[fanspeed]]",
@@ -25,7 +26,8 @@
     "no": "Sett viftehastigheten til [[fanspeed]]",
     "pl": "Ustaw prędkość wentylatora na [[fanspeed]]",
     "ru": "Установите скорость вентилятора на [[fanspeed]]",
-    "ko": "팬 속도를 [[fanspeed]]로 설정"
+    "ko": "팬 속도를 [[fanspeed]]로 설정",
+    "ar": "اضبط سرعة المروحة على [[fanspeed]]"
   },
   "platforms": [
     "local"
@@ -51,14 +53,14 @@
         "no": "Viftehastighet",
         "pl": "Prędkość wentylatora",
         "ru": "Скорость вентилятора",
-        "ko": "팬 속도"
+        "ko": "팬 속도",
+        "ar": "سرعة المروحة"
       },
       "values": [
         {
           "id": "auto",
           "label": {
             "en": "Auto",
-            "se": "Auto",
             "nl": "Auto",
             "da": "Auto",
             "de": "Auto",
@@ -66,16 +68,18 @@
             "fr": "Auto",
             "it": "Auto",
             "no": "Auto",
+            "sv": "Auto",
             "pl": "Auto",
             "ru": "Авто",
-            "ko": "자동"
+            "ko": "자동",
+            "ar": "تلقائي",
+            "se": "Auto"
           }
         },
         {
           "id": "0",
           "label": {
             "en": "0%",
-            "se": "0%",
             "nl": "0%",
             "da": "0%",
             "de": "0%",
@@ -83,16 +87,18 @@
             "fr": "0%",
             "it": "0%",
             "no": "0%",
+            "sv": "0 %",
             "pl": "0%",
             "ru": "0%",
-            "ko": "0%"
+            "ko": "0%",
+            "ar": "٠٪",
+            "se": "0%"
           }
         },
         {
           "id": "1",
           "label": {
             "en": "25%",
-            "se": "25%",
             "nl": "25%",
             "da": "25%",
             "de": "25%",
@@ -100,16 +106,18 @@
             "fr": "25%",
             "it": "25%",
             "no": "25%",
+            "sv": "25 %",
             "pl": "25%",
             "ru": "25%",
-            "ko": "25%"
+            "ko": "25%",
+            "ar": "٢٥٪",
+            "se": "25%"
           }
         },
         {
           "id": "2",
           "label": {
             "en": "50%",
-            "se": "50%",
             "nl": "50%",
             "da": "50%",
             "de": "50%",
@@ -117,16 +125,18 @@
             "fr": "50%",
             "it": "50%",
             "no": "50%",
+            "sv": "50 %",
             "pl": "50%",
             "ru": "50%",
-            "ko": "50%"
+            "ko": "50%",
+            "ar": "٥٠٪",
+            "se": "50%"
           }
         },
         {
           "id": "3",
           "label": {
             "en": "100%",
-            "se": "100%",
             "nl": "100%",
             "da": "100%",
             "de": "100%",
@@ -134,9 +144,12 @@
             "fr": "100%",
             "it": "100%",
             "no": "100%",
+            "sv": "100 %",
             "pl": "100%",
             "ru": "100%",
-            "ko": "100%"
+            "ko": "100%",
+            "ar": "١٠٠٪",
+            "se": "100%"
           }
         }
       ]

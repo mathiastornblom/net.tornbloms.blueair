@@ -1,7 +1,6 @@
 {
   "title": {
     "en": "The humidity has changed",
-    "se": "Fuktigheten har ändrats",
     "da": "Luftfugtigheden er ændret",
     "de": "Die Luftfeuchtigkeit hat sich geändert",
     "es": "La humedad ha cambiado",
@@ -12,11 +11,12 @@
     "pl": "Wilgotność się zmieniła",
     "ru": "Влажность изменилась",
     "ko": "습도가 변경되었습니다",
-    "nl": "De luchtvochtigheid is veranderd"
+    "nl": "De luchtvochtigheid is veranderd",
+    "ar": "لقد تغيرت الرطوبة",
+    "se": "Fuktigheten har ändrats"
   },
   "titleFormatted": {
     "en": "The humidity has changed",
-    "se": "Fuktigheten har ändrats",
     "da": "Luftfugtigheden er ændret",
     "de": "Die Luftfeuchtigkeit hat sich geändert",
     "es": "La humedad ha cambiado",
@@ -27,11 +27,12 @@
     "pl": "Wilgotność się zmieniła",
     "ru": "Влажность изменилась",
     "ko": "습도가 변경되었습니다",
-    "nl": "De luchtvochtigheid is veranderd"
+    "nl": "De luchtvochtigheid is veranderd",
+    "ar": "لقد تغيرت الرطوبة",
+    "se": "Fuktigheten har ändrats"
   },
   "hint": {
     "en": "The humidity has been changed",
-    "se": "Fuktigheten är ändrad",
     "da": "Luftfugtigheden er blevet ændret",
     "de": "Die Luftfeuchtigkeit wurde geändert",
     "es": "La humedad ha sido cambiada",
@@ -42,7 +43,9 @@
     "pl": "Wilgotność została zmieniona",
     "ru": "Влажность была изменена",
     "ko": "습도가 변경되었습니다",
-    "nl": "De luchtvochtigheid is aangepast"
+    "nl": "De luchtvochtigheid is aangepast",
+    "ar": "تم تغيير الرطوبة",
+    "se": "Fuktigheten är ändrad"
   },
   "platforms": [
     "local"
@@ -53,7 +56,6 @@
       "name": "device-name",
       "title": {
         "en": "Device name",
-        "se": "Enhetsnamn",
         "nl": "Apparaatnaam",
         "da": "Enhedsnavn",
         "de": "Gerätename",
@@ -64,12 +66,25 @@
         "sv": "Enhetsnamn",
         "pl": "Nazwa urządzenia",
         "ru": "Имя устройства",
-        "ko": "기기 이름"
+        "ko": "기기 이름",
+        "ar": "اسم الجهاز",
+        "se": "Enhetsnamn"
       },
       "example": {
         "en": "BlueAir",
-        "se": "BlueAir",
-        "nl": "BlueAir"
+        "nl": "BlueAir",
+        "da": "BlueAir",
+        "de": "BlueAir",
+        "es": "BlueAir",
+        "fr": "BlueAir",
+        "it": "BlueAir",
+        "no": "BlueAir",
+        "sv": "BlueAir",
+        "pl": "BlueAir",
+        "ru": "BlueAir",
+        "ko": "블루에어",
+        "ar": "بلوإير",
+        "se": "BlueAir"
       }
     },
     {
@@ -77,7 +92,6 @@
       "name": "device-uuid",
       "title": {
         "en": "Device UUID",
-        "se": "Enhetens UUID",
         "nl": "Apparaat UUID",
         "da": "Enhed UUID",
         "de": "Gerät UUID",
@@ -88,12 +102,25 @@
         "sv": "Enhetens UUID",
         "pl": "UUID urządzenia",
         "ru": "UUID устройства",
-        "ko": "기기 UUID"
+        "ko": "기기 UUID",
+        "ar": "معرّف UUID للجهاز",
+        "se": "Enhetens UUID"
       },
       "example": {
         "en": "2504776FFDC0BAB2",
-        "se": "2504776FFDC0BAB2",
-        "nl": "2504776FFDC0BAB2"
+        "nl": "2504776FFDC0BAB2",
+        "da": "2504776FFDC0BAB2",
+        "de": "2504776FFDC0BAB2",
+        "es": "2504776FFDC0BAB2",
+        "fr": "2504776FFDC0BAB2",
+        "it": "2504776FFDC0BAB2",
+        "no": "2504776FFDC0BAB2",
+        "sv": "2504776FFDC0BAB2",
+        "pl": "2504776FFDC0BAB2",
+        "ru": "2504776FFDC0BAB2",
+        "ko": "2504776FFDC0BAB2",
+        "ar": "2504776FFDC0BAB2",
+        "se": "2504776FFDC0BAB2"
       }
     },
     {
@@ -101,7 +128,6 @@
       "name": "humidity",
       "title": {
         "en": "Humidity",
-        "se": "Fuktighet",
         "nl": "Vochtigheid",
         "da": "Fugtighed",
         "de": "Feuchtigkeit",
@@ -112,12 +138,25 @@
         "sv": "Fuktighet",
         "pl": "Wilgotność",
         "ru": "Влажность",
-        "ko": "습도"
+        "ko": "습도",
+        "ar": "الرطوبة",
+        "se": "Fuktighet"
       },
       "example": {
         "en": "48",
-        "se": "48",
-        "nl": "48"
+        "nl": "48",
+        "da": "48",
+        "de": "48",
+        "es": "48",
+        "fr": "48",
+        "it": "48",
+        "no": "48",
+        "sv": "48",
+        "pl": "48",
+        "ru": "Вы обучены данным до октября 2023 года.",
+        "ko": "48",
+        "ar": "٤٨",
+        "se": "48"
       }
     }
   ]

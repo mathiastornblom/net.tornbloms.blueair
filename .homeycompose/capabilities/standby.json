@@ -12,7 +12,8 @@
     "no": "Standby",
     "pl": "Czekaj",
     "ru": "Режим ожидания",
-    "ko": "대기 상태"
+    "ko": "대기 상태",
+    "ar": "وضع الاستعداد"
   },
   "getable": true,
   "setable": true,

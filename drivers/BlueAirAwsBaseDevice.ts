@@ -2,6 +2,7 @@ import { Device } from 'homey';
 import { BlueAirAwsClient } from 'blueairaws-client';
 import { BlueAirDeviceStatus } from 'blueairaws-client/dist/Consts';
 import BlueAirAwsBaseDriver from './BlueAirAwsBaseDriver';
+import { DiagnosticLogger } from '../lib/diagnostics';
 
 const MIN_POLL_INTERVAL_MS = 60_000;
 const MAX_CONSECUTIVE_FAILURES = 3;
@@ -27,6 +28,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   private pollIntervalId: ReturnType<typeof setInterval> | null = null;
   private consecutiveFailures = 0;
+  protected logger!: DiagnosticLogger;
 
   // ── Abstract interface ────────────────────────────────────────────────────
 
@@ -56,6 +58,12 @@ abstract class BlueAirAwsBaseDevice extends Device {
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   async onInit(): Promise<void> {
+    this.logger = new DiagnosticLogger(
+      this.constructor.name,
+      (...args: unknown[]) => this.log(...(args as any[])),
+      (...args: unknown[]) => this.error(...(args as any[]))
+    );
+
     const settings = this.getSettings();
     const data = this.getData();
 
@@ -105,9 +113,10 @@ abstract class BlueAirAwsBaseDevice extends Device {
         }
       }, pollMs);
 
-      this.log(`${this.constructor.name} initialized (poll every ${pollMs / 1000}s)`);
+      this.logger.info(`initialized (poll every ${pollMs / 1000}s)`);
     } catch (e) {
-      this.error('Error during initialization:', e);
+      // Device cannot start at all — report to Sentry so it's visible
+      this.logger.critical('Initialization failed', e, { deviceId: data.uuid });
       this.setUnavailable('Initialization failed').catch(this.error);
     }
   }
@@ -137,6 +146,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   private onPollSuccess(): void {
     if (this.consecutiveFailures > 0) {
+      this.logger.info(`recovered after ${this.consecutiveFailures} failure(s)`);
       this.consecutiveFailures = 0;
       this.setAvailable().catch(this.error);
     }
@@ -146,10 +156,11 @@ abstract class BlueAirAwsBaseDevice extends Device {
     error: unknown,
     client: BlueAirAwsClient
   ): Promise<void> {
-    this.log('Polling error:', error);
     this.consecutiveFailures++;
+    this.logger.warn(`poll failed (${this.consecutiveFailures}/${MAX_CONSECUTIVE_FAILURES}):`, error);
 
     if (this.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+      this.logger.error(`device unreachable after ${MAX_CONSECUTIVE_FAILURES} consecutive failures`);
       this.setUnavailable('Device unreachable — API error').catch(this.error);
     }
 
@@ -162,12 +173,12 @@ abstract class BlueAirAwsBaseDevice extends Device {
       msg.includes('401') ||
       msg.includes('229')
     ) {
-      this.log('Session/rate-limit error — attempting re-authentication...');
+      this.logger.info('session/rate-limit error — attempting re-authentication...');
       try {
         await client.initialize();
-        this.log('Re-authentication successful');
+        this.logger.info('re-authentication successful');
       } catch (authError) {
-        this.log('Re-authentication failed:', authError);
+        this.logger.error('re-authentication failed:', authError);
       }
     }
   }
@@ -185,7 +196,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     try {
       await command();
     } catch (error) {
-      this.error(`Command failed for ${capability}:`, error);
+      this.logger.error(`command failed for ${capability}:`, error);
       this.setCapabilityValue(capability, oldValue).catch(this.error);
       throw error;
     }

@@ -11,7 +11,8 @@
     "no": "DustMagnet",
     "pl": "DustMagnet",
     "ru": "DustMagnet",
-    "ko": "DustMagnet"
+    "ko": "DustMagnet",
+    "ar": "DustMagnet"
   },
   "class": "airpurifier",
   "capabilities": [
@@ -59,7 +60,8 @@
           "no": "Logg inn på kontoen din",
           "pl": "Zaloguj się na swoje konto",
           "ru": "Войдите в свою учётную запись",
-          "ko": "계정에 로그인하세요"
+          "ko": "계정에 로그인하세요",
+          "ar": "تسجيل الدخول إلى حسابك"
         },
         "usernameLabel": {
           "en": "E-mail address",
@@ -73,7 +75,8 @@
           "no": "E-postadresse",
           "pl": "Adres e-mail",
           "ru": "Адрес электронной почты",
-          "ko": "이메일 주소"
+          "ko": "이메일 주소",
+          "ar": "عنوان البريد الإلكتروني"
         },
         "usernamePlaceholder": {
           "en": "john@doe.com",
@@ -87,7 +90,8 @@
           "no": "navn@domene.no",
           "pl": "nazwisko@domena.pl",
           "ru": "имя@домен.ру",
-          "ko": "이름@도메인.코리아"
+          "ko": "이름@도메인.코리아",
+          "ar": "john@doe.com"
         },
         "passwordLabel": {
           "en": "Password",
@@ -101,7 +105,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         },
         "passwordPlaceholder": {
           "en": "Password",
@@ -115,7 +120,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         }
       }
     },

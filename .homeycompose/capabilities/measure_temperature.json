@@ -12,7 +12,8 @@
     "da": "Temperatur",
     "ru": "Температура",
     "pl": "Temperatura",
-    "ko": "온도"
+    "ko": "온도",
+    "ar": "درجة الحرارة"
   },
   "units": {
     "en": "°C",
@@ -26,7 +27,8 @@
     "fr": "°C",
     "it": "°C",
     "sv": "°C",
-    "pl": "°C"
+    "pl": "°C",
+    "ar": "درجة مئوية"
   },
   "insights": true,
   "desc": {
@@ -41,7 +43,8 @@
     "da": "Temperatur i Celsius (°C)",
     "ru": "Температура в градусах Цельсия (°C)",
     "pl": "Temperatura w stopniach Celsjusza (°C)",
-    "ko": "온도 섭씨(°C)"
+    "ko": "온도 섭씨(°C)",
+    "ar": "درجة الحرارة بالدرجة المئوية (°م)"
   },
   "decimals": 1,
   "chartType": "spline",
@@ -65,7 +68,8 @@
           "da": "Temperaturen ændrede sig",
           "ru": "Температура изменяется",
           "pl": "Zmiana temperatury",
-          "ko": "온도 변경됨"
+          "ko": "온도 변경됨",
+          "ar": "تغيرات درجة الحرارة"
         },
         "tokens": [
           {
@@ -82,7 +86,8 @@
               "da": "Temperatur",
               "ru": "Температура",
               "pl": "Temperatura",
-              "ko": "온도"
+              "ko": "온도",
+              "ar": "درجة الحرارة"
             },
             "type": "number",
             "example": 23.5

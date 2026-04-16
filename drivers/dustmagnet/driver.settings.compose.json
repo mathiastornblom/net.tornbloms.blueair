@@ -13,7 +13,8 @@
       "no": "Innloggingsdetaljer",
       "pl": "Szczegóły logowania",
       "ru": "Детали входа",
-      "ko": "로그인 정보"
+      "ko": "로그인 정보",
+      "ar": "تفاصيل تسجيل الدخول"
     },
     "children": [
       {
@@ -31,7 +32,8 @@
           "no": "E-post",
           "pl": "E-mail",
           "ru": "Электронная почта",
-          "ko": "이메일"
+          "ko": "이메일",
+          "ar": "البريد الإلكتروني"
         },
         "value": "JohnDoe@domain.com",
         "hint": {
@@ -46,7 +48,8 @@
           "no": "Brukerens e-post.",
           "pl": "E-mail użytkownika.",
           "ru": "Электронная почта пользователя.",
-          "ko": "사용자의 이메일."
+          "ko": "사용자의 이메일.",
+          "ar": "البريد الإلكتروني للمستخدم."
         }
       },
       {
@@ -64,7 +67,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         },
         "value": "Secret",
         "hint": {
@@ -79,7 +83,8 @@
           "no": "Brukerens passord.",
           "pl": "Hasło użytkownika.",
           "ru": "Пароль пользователя.",
-          "ko": "사용자의 비밀번호."
+          "ko": "사용자의 비밀번호.",
+          "ar": "كلمة مرور المستخدم."
         }
       }
     ]
@@ -98,7 +103,8 @@
       "no": "Enhetsinformasjon",
       "pl": "Informacje o urządzeniu",
       "ru": "Информация об устройстве",
-      "ko": "장치 정보"
+      "ko": "장치 정보",
+      "ar": "معلومات الجهاز"
     },
     "children": [
       {
@@ -116,7 +122,8 @@
           "no": "UUID",
           "pl": "UUID",
           "ru": "UUID",
-          "ko": "UUID"
+          "ko": "UUID",
+          "ar": "UUID"
         },
         "value": "EE04776CEDC0BAB2",
         "hint": {
@@ -131,7 +138,8 @@
           "no": "Den unike id'en til enheten.",
           "pl": "Unikalny identyfikator urządzenia.",
           "ru": "Уникальный ID устройства.",
-          "ko": "장치의 고유 ID."
+          "ko": "장치의 고유 ID.",
+          "ar": "المعرف الفريد للجهاز."
         }
       },
       {
@@ -149,7 +157,8 @@
           "no": "Navn",
           "pl": "Nazwa",
           "ru": "Имя",
-          "ko": "이름"
+          "ko": "이름",
+          "ar": "الاسم"
         },
         "value": "BlueAir DustMagnet",
         "hint": {
@@ -164,7 +173,8 @@
           "no": "Navnet på enheten",
           "pl": "Nazwa urządzenia",
           "ru": "Имя устройства",
-          "ko": "장치 이름"
+          "ko": "장치 이름",
+          "ar": "اسم الجهاز"
         }
       },
       {
@@ -182,7 +192,8 @@
           "no": "Modell",
           "pl": "Model",
           "ru": "Модель",
-          "ko": "모델"
+          "ko": "모델",
+          "ar": "نموذج"
         },
         "value": "1.0.9",
         "hint": {
@@ -197,7 +208,8 @@
           "no": "Modell av enheten",
           "pl": "Model urządzenia",
           "ru": "Модель устройства",
-          "ko": "장치 모델"
+          "ko": "장치 모델",
+          "ar": "نموذج الجهاز"
         }
       },
       {
@@ -215,7 +227,8 @@
           "no": "MAC",
           "pl": "MAC",
           "ru": "MAC",
-          "ko": "MAC"
+          "ko": "MAC",
+          "ar": "ماك"
         },
         "value": "34EAE728765C",
         "hint": {
@@ -230,7 +243,8 @@
           "no": "MAC-adresse til enheten",
           "pl": "Adres MAC urządzenia",
           "ru": "MAC-адрес устройства",
-          "ko": "장치의 MAC 주소"
+          "ko": "장치의 MAC 주소",
+          "ar": "عنوان MAC للجهاز"
         }
       },
       {
@@ -248,7 +262,8 @@
           "no": "MCU Firmware",
           "pl": "Oprogramowanie MCU",
           "ru": "Прошивка MCU",
-          "ko": "MCU 펌웨어"
+          "ko": "MCU 펌웨어",
+          "ar": "البرامج الثابتة لوحدة التحكم الدقيقة (MCU)"
         },
         "value": "1.0.35",
         "hint": {
@@ -263,7 +278,8 @@
           "no": "Versjon av MCU Firmware",
           "pl": "Wersja oprogramowania MCU",
           "ru": "Версия прошивки MCU",
-          "ko": "MCU 펌웨어 버전"
+          "ko": "MCU 펌웨어 버전",
+          "ar": "إصدار البرنامج الثابت لوحدة التحكم الدقيقة (MCU)"
         }
       },
       {
@@ -281,7 +297,8 @@
           "no": "WLAN-driver",
           "pl": "Sterownik WLAN",
           "ru": "Драйвер WLAN",
-          "ko": "WLAN 드라이버"
+          "ko": "WLAN 드라이버",
+          "ar": "برنامج تشغيل WLAN"
         },
         "value": "V10",
         "hint": {
@@ -296,7 +313,8 @@
           "no": "Versjon av WLAN-driver",
           "pl": "Wersja sterownika WLAN",
           "ru": "Версия драйвера WLAN",
-          "ko": "WLAN 드라이버 버전"
+          "ko": "WLAN 드라이버 버전",
+          "ar": "إصدار برنامج تشغيل WLAN"
         }
       },
       {
@@ -314,7 +332,8 @@
           "no": "Serienummer",
           "pl": "Numer seryjny",
           "ru": "Серийный номер",
-          "ko": "일련번호"
+          "ko": "일련번호",
+          "ar": "رقم تسلسلي"
         },
         "value": "102938765378827653",
         "hint": {
@@ -329,7 +348,8 @@
           "no": "Serienummeret til enheten.",
           "pl": "Numer seryjny urządzenia.",
           "ru": "Серийный номер устройства.",
-          "ko": "장치의 일련번호."
+          "ko": "장치의 일련번호.",
+          "ar": "الرقم التسلسلي للجهاز."
         }
       }
     ]
@@ -348,7 +368,8 @@
       "no": "Avanserte innstillinger",
       "pl": "Zaawansowane ustawienia",
       "ru": "Расширенные настройки",
-      "ko": "고급 설정"
+      "ko": "고급 설정",
+      "ar": "الإعدادات المتقدمة"
     },
     "children": [
       {
@@ -366,7 +387,8 @@
           "no": "Oppdateringsintervall",
           "pl": "Interwał aktualizacji",
           "ru": "Интервал обновления",
-          "ko": "업데이트 간격"
+          "ko": "업데이트 간격",
+          "ar": "فترة التحديث"
         },
         "value": 60,
         "min": 60,
@@ -383,7 +405,8 @@
           "no": "Sekunder",
           "pl": "Sekundy",
           "ru": "Секунды",
-          "ko": "초"
+          "ko": "초",
+          "ar": "ثوانٍ"
         }
       },
       {
@@ -393,7 +416,17 @@
         "label": {
           "en": "Temperature unit",
           "sv": "Temperatur",
-          "nl": "Temperatuureenheid"
+          "nl": "Temperatuureenheid",
+          "da": "Temperaturenhed",
+          "de": "Temperatureinheit",
+          "es": "Unidad de temperatura",
+          "fr": "Unité de température",
+          "it": "Unità di temperatura",
+          "no": "Temperaturenhet",
+          "pl": "Jednostka temperatury",
+          "ru": "Единица измерения температуры",
+          "ko": "온도 단위",
+          "ar": "وحدة درجة الحرارة"
         },
         "values": [
           {
@@ -410,7 +443,8 @@
               "no": "Celsius",
               "pl": "Celsius",
               "ru": "Цельсий",
-              "ko": "섭씨"
+              "ko": "섭씨",
+              "ar": "درجة مئوية"
             }
           },
           {
@@ -427,7 +461,8 @@
               "no": "Fahrenheit",
               "pl": "Fahrenheit",
               "ru": "Фаренгейт",
-              "ko": "화씨"
+              "ko": "화씨",
+              "ar": "فهرنهايت"
             }
           }
         ]

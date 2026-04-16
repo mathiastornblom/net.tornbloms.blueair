@@ -11,7 +11,8 @@
     "sv": "pm2.5 mätning",
     "pl": "pomiar pm2.5",
     "ru": "измерение pm2.5",
-    "ko": "pm2.5 측정"
+    "ko": "pm2.5 측정",
+    "ar": "قياس pm2.5"
   },
   "titleFormatted": {
     "en": "pm2.5 level [[argument_main]]",
@@ -25,7 +26,8 @@
     "sv": "pm2.5 nivå [[argument_main]]",
     "pl": "poziom pm2.5 [[argument_main]]",
     "ru": "уровень pm2.5 [[argument_main]]",
-    "ko": "pm2.5 수준 [[argument_main]]"
+    "ko": "pm2.5 수준 [[argument_main]]",
+    "ar": "مستوى pm2.5 [[argument_main]]"
   },
   "hint": {
     "en": "pm2.5 measurement",
@@ -39,7 +41,8 @@
     "sv": "pm2.5 mätning",
     "pl": "pomiar pm2.5",
     "ru": "измерение pm2.5",
-    "ko": "pm2.5 측정"
+    "ko": "pm2.5 측정",
+    "ar": "قياس pm2.5"
   },
   "args": [
     {
@@ -47,6 +50,7 @@
       "type": "dropdown",
       "title": {
         "en": "Level",
+        "nl": "Niveau",
         "da": "Niveau",
         "de": "Niveau",
         "es": "Nivel",
@@ -56,7 +60,8 @@
         "sv": "Nivå",
         "pl": "Poziom",
         "ru": "Уровень",
-        "ko": "수준"
+        "ko": "수준",
+        "ar": "المستوى"
       },
       "values": [
         {
@@ -73,7 +78,8 @@
             "sv": "utmärkt, poäng under 12 µg/m³",
             "pl": "doskonały, wynik poniżej 12 µg/m³",
             "ru": "отлично, показатель ниже 12 мкг/м³",
-            "ko": "우수한, 12 µg/m³ 이하 점수"
+            "ko": "우수한, 12 µg/m³ 이하 점수",
+            "ar": "ممتاز، درجة أقل من 12 ميكروغرام/م³"
           }
         },
         {
@@ -90,7 +96,8 @@
             "sv": "bra, poäng mellan 12,1 och 35,4 µg/m³",
             "pl": "dobry, wynik między 12,1 a 35,4 µg/m³",
             "ru": "хорошо, показатель между 12,1 и 35,4 мкг/м³",
-            "ko": "좋음, 12.1 µg/m³과 35.4 µg/m³ 사이 점수"
+            "ko": "좋음, 12.1 µg/m³과 35.4 µg/m³ 사이 점수",
+            "ar": "جيد، النتيجة بين 12.1 و 35.4 ميكروغرام/م³"
           }
         },
         {
@@ -107,7 +114,8 @@
             "sv": "genomsnittlig, mellan 35,5 och 55,4 µg/m³",
             "pl": "średni, między 35,5 a 55,4 µg/m³",
             "ru": "средне, между 35,5 и 55,4 мкг/м³",
-            "ko": "보통, 35.5 µg/m³과 55.4 µg/m³ 사이"
+            "ko": "보통, 35.5 µg/m³과 55.4 µg/m³ 사이",
+            "ar": "متوسط، بين 35.5 و 55.4 ميكروغرام/م³"
           }
         },
         {
@@ -124,7 +132,8 @@
             "sv": "dålig, mellan 55,5 och 150,4 µg/m³",
             "pl": "słaby, między 55,5 a 150,4 µg/m³",
             "ru": "плохо, между 55,5 и 150,4 мкг/м³",
-            "ko": "나쁨, 55.5 µg/m³과 150.4 µg/m³ 사이"
+            "ko": "나쁨, 55.5 µg/m³과 150.4 µg/m³ 사이",
+            "ar": "ضعيف، بين 55.5 و 150.4 ميكروغرام/م³"
           }
         },
         {
@@ -141,7 +150,8 @@
             "sv": "väldigt dålig, över 150,5 µg/m³",
             "pl": "bardzo słaby, powyżej 150,5 µg/m³",
             "ru": "очень плохо, выше 150,5 мкг/м³",
-            "ko": "매우 나쁨, 150.5 µg/m³ 이상"
+            "ko": "매우 나쁨, 150.5 µg/m³ 이상",
+            "ar": "سيء جدًا، فوق 150.5 ميكروغرام/م³"
           }
         }
       ]

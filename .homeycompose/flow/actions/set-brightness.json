@@ -1,7 +1,6 @@
 {
   "title": {
     "en": "Set brightness (classic)",
-    "se": "Sätt ljusstyrkan (classic)",
     "nl": "Helderheid instellen (classic)",
     "da": "Indstil lysstyrke (classic)",
     "de": "Helligkeit einstellen (classic)",
@@ -12,11 +11,12 @@
     "sv": "Ställ in ljusstyrkan (classic)",
     "pl": "Ustaw jasność (classic)",
     "ru": "Установить яркость (classic)",
-    "ko": "밝기 설정 (classic)"
+    "ko": "밝기 설정 (classic)",
+    "ar": "ضبط السطوع (الكلاسيكي)",
+    "se": "Sätt ljusstyrkan (classic)"
   },
   "titleFormatted": {
     "en": "Set the brightness to a [[brightness]]",
-    "se": "Sätt ljusstyrkan till [[brightness]]",
     "nl": "Stel de helderheid in op [[brightness]]",
     "da": "Indstil lysstyrken til [[brightness]]",
     "de": "Helligkeit auf [[brightness]] einstellen",
@@ -27,7 +27,9 @@
     "sv": "Ställ in ljusstyrkan till [[brightness]]",
     "pl": "Ustaw jasność na [[brightness]]",
     "ru": "Установите яркость на [[brightness]]",
-    "ko": "[[brightness]] 밝기로 설정"
+    "ko": "[[brightness]] 밝기로 설정",
+    "ar": "اضبط السطوع إلى [[brightness]]",
+    "se": "Sätt ljusstyrkan till [[brightness]]"
   },
   "platforms": [
     "local"
@@ -43,7 +45,6 @@
       "name": "brightness",
       "title": {
         "en": "Brightness",
-        "se": "ljusstyrkan",
         "nl": "Helderheid",
         "da": "Lysstyrke",
         "de": "Helligkeit",
@@ -54,14 +55,15 @@
         "sv": "Ljusstyrka",
         "pl": "Jasność",
         "ru": "Яркость",
-        "ko": "밝기"
+        "ko": "밝기",
+        "ar": "السطوع",
+        "se": "ljusstyrkan"
       },
       "values": [
         {
           "id": "0",
           "label": {
             "en": "0%",
-            "se": "0%",
             "nl": "0%",
             "da": "0%",
             "de": "0%",
@@ -72,14 +74,15 @@
             "sv": "0%",
             "pl": "0%",
             "ru": "0%",
-            "ko": "0%"
+            "ko": "0%",
+            "ar": "٠٪",
+            "se": "0%"
           }
         },
         {
           "id": "1",
           "label": {
             "en": "25%",
-            "se": "25%",
             "nl": "25%",
             "da": "25%",
             "de": "25%",
@@ -90,14 +93,15 @@
             "sv": "25%",
             "pl": "25%",
             "ru": "25%",
-            "ko": "25%"
+            "ko": "25%",
+            "ar": "٢٥٪",
+            "se": "25%"
           }
         },
         {
           "id": "2",
           "label": {
             "en": "50%",
-            "se": "50%",
             "nl": "50%",
             "da": "50%",
             "de": "50%",
@@ -108,14 +112,15 @@
             "sv": "50%",
             "pl": "50%",
             "ru": "50%",
-            "ko": "50%"
+            "ko": "50%",
+            "ar": "٥٠٪",
+            "se": "50%"
           }
         },
         {
           "id": "3",
           "label": {
             "en": "75%",
-            "se": "75%",
             "nl": "75%",
             "da": "75%",
             "de": "75%",
@@ -126,14 +131,15 @@
             "sv": "75%",
             "pl": "75%",
             "ru": "75%",
-            "ko": "75%"
+            "ko": "75%",
+            "ar": "٧٥٪",
+            "se": "75%"
           }
         },
         {
           "id": "4",
           "label": {
             "en": "100%",
-            "se": "100%",
             "nl": "100%",
             "da": "100%",
             "de": "100%",
@@ -144,7 +150,9 @@
             "sv": "100%",
             "pl": "100%",
             "ru": "100%",
-            "ko": "100%"
+            "ko": "100%",
+            "ar": "١٠٠٪",
+            "se": "100%"
           }
         }
       ]

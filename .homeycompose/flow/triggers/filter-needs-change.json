@@ -1,7 +1,6 @@
 {
   "title": {
     "en": "Filter needs change",
-    "se": "Filtret behöver bytas",
     "nl": "Filter moet worden vervangen",
     "da": "Filteret skal skiftes",
     "de": "Filter muss gewechselt werden",
@@ -12,11 +11,12 @@
     "sv": "Filtret behöver bytas",
     "pl": "Filtr wymaga zmiany",
     "ru": "Требуется замена фильтра",
-    "ko": "필터 교체가 필요합니다."
+    "ko": "필터 교체가 필요합니다.",
+    "ar": "يحتاج الفلتر إلى تغيير",
+    "se": "Filtret behöver bytas"
   },
   "titleFormatted": {
     "en": "The filter needs to be changed",
-    "se": "Filtret behöver bytas",
     "nl": "Het filter moet worden vervangen",
     "da": "Filteret skal skiftes",
     "de": "Der Filter muss gewechselt werden",
@@ -27,11 +27,12 @@
     "sv": "Filtret behöver bytas",
     "pl": "Filtr należy wymienić",
     "ru": "Фильтр нужно заменить",
-    "ko": "필터를 교체해야 합니다."
+    "ko": "필터를 교체해야 합니다.",
+    "ar": "يجب تغيير الفلتر",
+    "se": "Filtret behöver bytas"
   },
   "hint": {
     "en": "Normaly filter has a status OK but if it changes this flow wioll trigger.",
-    "se": "Vanligtvis har filtret en status som OK, men om den ändras kommer denna flöde att utlösas.",
     "nl": "Normaal gesproken heeft het filter een status van OK, maar als dit verandert, zal deze flow worden geactiveerd.",
     "da": "Normalt har filteret en status OK, men hvis det ændres, vil denne flow blive udløst.",
     "de": "Normalerweise hat der Filter den Status OK, aber wenn er sich ändert, wird dieser Ablauf ausgelöst.",
@@ -42,7 +43,9 @@
     "sv": "Vanligtvis har filtret en status som OK, men om den ändras kommer denna flöde att utlösas.",
     "pl": "Zazwyczaj filtr ma status OK, ale jeśli się zmieni, ten proces zostanie uruchomiony.",
     "ru": "Обычно статус фильтра ОК, но если он изменится, этот поток будет запущен.",
-    "ko": "일반적으로 필터의 상태는 OK이지만 변경되면 이 흐름이 트리거됩니다."
+    "ko": "일반적으로 필터의 상태는 OK이지만 변경되면 이 흐름이 트리거됩니다.",
+    "ar": "عادةً ما يكون فلتر الهواء في حالة جيدة، ولكن إذا تغيرت حالته، فسيتم تفعيل هذا التدفق.",
+    "se": "Vanligtvis har filtret en status som OK, men om den ändras kommer denna flöde att utlösas."
   },
   "platforms": [
     "local"
@@ -53,7 +56,6 @@
       "name": "device-name",
       "title": {
         "en": "Device name",
-        "se": "Enhetsnamn",
         "nl": "Apparaatnaam",
         "da": "Enhedsnavn",
         "de": "Gerätename",
@@ -64,11 +66,12 @@
         "sv": "Enhetsnamn",
         "pl": "Nazwa urządzenia",
         "ru": "Имя устройства",
-        "ko": "장치 이름"
+        "ko": "장치 이름",
+        "ar": "اسم الجهاز",
+        "se": "Enhetsnamn"
       },
       "example": {
         "en": "BlueAir 405 Classic",
-        "se": "BlueAir 405 Classic",
         "nl": "BlueAir 405 Classic",
         "da": "BlueAir 405 Classic",
         "de": "BlueAir 405 Classic",
@@ -79,7 +82,9 @@
         "sv": "BlueAir 405 Classic",
         "pl": "BlueAir 405 Classic",
         "ru": "BlueAir 405 Classic",
-        "ko": "BlueAir 405 Classic"
+        "ko": "BlueAir 405 Classic",
+        "ar": "BlueAir 405 كلاسيك",
+        "se": "BlueAir 405 Classic"
       }
     },
     {
@@ -87,7 +92,6 @@
       "name": "device-uuid",
       "title": {
         "en": "Device UUID",
-        "se": "Enhetens UUID",
         "nl": "Apparaat UUID",
         "da": "Enhedens UUID",
         "de": "Gerät UUID",
@@ -98,11 +102,12 @@
         "sv": "Enhetens UUID",
         "pl": "UUID urządzenia",
         "ru": "UUID устройства",
-        "ko": "장치 UUID"
+        "ko": "장치 UUID",
+        "ar": "معرّف UUID للجهاز",
+        "se": "Enhetens UUID"
       },
       "example": {
         "en": "2504776FFDC0BAB2",
-        "se": "2504776FFDC0BAB2",
         "nl": "2504776FFDC0BAB2",
         "da": "2504776FFDC0BAB2",
         "de": "2504776FFDC0BAB2",
@@ -113,7 +118,9 @@
         "sv": "2504776FFDC0BAB2",
         "pl": "2504776FFDC0BAB2",
         "ru": "2504776FFDC0BAB2",
-        "ko": "2504776FFDC0BAB2"
+        "ko": "2504776FFDC0BAB2",
+        "ar": "2504776FFDC0BAB2",
+        "se": "2504776FFDC0BAB2"
       }
     },
     {
@@ -121,7 +128,6 @@
       "name": "device-response",
       "title": {
         "en": "Device response",
-        "se": "Enthetens svar",
         "nl": "Apparaatreactie",
         "da": "Enhedens svar",
         "de": "Geräteantwort",
@@ -132,11 +138,12 @@
         "sv": "Enhetens svar",
         "pl": "Odpowiedź urządzenia",
         "ru": "Ответ устройства",
-        "ko": "장치 응답"
+        "ko": "장치 응답",
+        "ar": "استجابة الجهاز",
+        "se": "Enthetens svar"
       },
       "example": {
         "en": "OK",
-        "se": "OK",
         "nl": "OK",
         "da": "OK",
         "de": "OK",
@@ -147,7 +154,9 @@
         "sv": "OK",
         "pl": "OK",
         "ru": "OK",
-        "ko": "OK"
+        "ko": "OK",
+        "ar": "حسنًا",
+        "se": "OK"
       }
     }
   ]

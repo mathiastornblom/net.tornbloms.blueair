@@ -12,7 +12,8 @@
     "es": "Nivel de TVOC",
     "fr": "Niveau de COVT",
     "no": "TVOC-nivå",
-    "de": "TVOC-Niveau"
+    "de": "TVOC-Niveau",
+    "ar": "مستوى TVOC"
   },
   "desc": {
     "en": "The level of total volatile organic compounds in the air.",
@@ -26,7 +27,8 @@
     "es": "El nivel de compuestos orgánicos volátiles totales en el aire.",
     "fr": "Le niveau de composés organiques volatils totaux dans l'air.",
     "no": "Nivået av total mengde flyktige organiske forbindelser i luften.",
-    "de": "Der Gehalt an flüchtigen organischen Verbindungen in der Luft."
+    "de": "Der Gehalt an flüchtigen organischen Verbindungen in der Luft.",
+    "ar": "مستوى المركبات العضوية المتطايرة الكلية في الهواء."
   },
   "values": [
     {
@@ -43,7 +45,8 @@
         "es": "Bajo",
         "fr": "Faible",
         "no": "Lavt",
-        "de": "Niedrig"
+        "de": "Niedrig",
+        "ar": "منخفض"
       }
     },
     {
@@ -60,7 +63,8 @@
         "es": "Intermedio",
         "fr": "Moyen",
         "no": "Middels",
-        "de": "Mittel"
+        "de": "Mittel",
+        "ar": "متوسط"
       }
     },
     {
@@ -77,7 +81,8 @@
         "es": "Alto",
         "fr": "Élevé",
         "no": "Høyt",
-        "de": "Hoch"
+        "de": "Hoch",
+        "ar": "مرتفع"
       }
     },
     {
@@ -94,7 +99,8 @@
         "es": "Crítico",
         "fr": "Critique",
         "no": "Kritisk",
-        "de": "Kritisch"
+        "de": "Kritisch",
+        "ar": "حرج"
       }
     }
   ],
@@ -118,7 +124,8 @@
           "es": "El nivel de COVT ha cambiado a",
           "fr": "Le niveau en COVT est passé à",
           "no": "TVOC-nivået ble endret til",
-          "de": "Das TVOC-Niveau änderte sich zu"
+          "de": "Das TVOC-Niveau änderte sich zu",
+          "ar": "تم تغيير مستوى TVOC إلى"
         },
         "args": [
           {
@@ -139,7 +146,8 @@
                   "es": "Bajo",
                   "fr": "Faible",
                   "no": "Lavt",
-                  "de": "Niedrig"
+                  "de": "Niedrig",
+                  "ar": "منخفض"
                 }
               },
               {
@@ -156,7 +164,8 @@
                   "es": "Intermedio",
                   "fr": "Moyen",
                   "no": "Middels",
-                  "de": "Mittel"
+                  "de": "Mittel",
+                  "ar": "متوسط"
                 }
               },
               {
@@ -173,7 +182,8 @@
                   "es": "Alto",
                   "fr": "Élevé",
                   "no": "Høyt",
-                  "de": "Hoch"
+                  "de": "Hoch",
+                  "ar": "مرتفع"
                 }
               },
               {
@@ -190,7 +200,8 @@
                   "es": "Crítico",
                   "fr": "Critique",
                   "no": "Kritisk",
-                  "de": "Kritisch"
+                  "de": "Kritisch",
+                  "ar": "حرج"
                 }
               }
             ],
@@ -216,7 +227,8 @@
           "es": "El nivel de TVOC !{{es|no es}}",
           "fr": "Le niveau de COVT !{{est|n'est pas}}",
           "no": "TVOC-nivået !{{er|er ikke}}",
-          "de": "Das TVOC-Niveau !{{ist|ist nicht}}"
+          "de": "Das TVOC-Niveau !{{ist|ist nicht}}",
+          "ar": "مستوى TVOC !{{هو|ليس}}"
         },
         "args": [
           {
@@ -237,7 +249,8 @@
                   "es": "Bajo",
                   "fr": "Faible",
                   "no": "Lavt",
-                  "de": "Niedrig"
+                  "de": "Niedrig",
+                  "ar": "منخفض"
                 }
               },
               {
@@ -254,7 +267,8 @@
                   "es": "Intermedio",
                   "fr": "Moyen",
                   "no": "Middels",
-                  "de": "Mittel"
+                  "de": "Mittel",
+                  "ar": "متوسط"
                 }
               },
               {
@@ -271,7 +285,8 @@
                   "es": "Alto",
                   "fr": "Élevé",
                   "no": "Høyt",
-                  "de": "Hoch"
+                  "de": "Hoch",
+                  "ar": "مرتفع"
                 }
               },
               {
@@ -288,7 +303,8 @@
                   "es": "Crítico",
                   "fr": "Critique",
                   "no": "Kritisk",
-                  "de": "Kritisch"
+                  "de": "Kritisch",
+                  "ar": "حرج"
                 }
               }
             ],

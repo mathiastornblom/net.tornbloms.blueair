@@ -11,7 +11,8 @@
     "sv": "BlueAir Luftkvalitet",
     "pl": "BlueAir Jakość Powietrza",
     "ru": "BlueAir Качество воздуха",
-    "ko": "BlueAir 공기질"
+    "ko": "BlueAir 공기질",
+    "ar": "جودة الهواء BlueAir"
   },
   "transparent": false,
   "settings": [
@@ -30,7 +31,8 @@
         "sv": "Uppdateringsintervall (sekunder)",
         "pl": "Interwał odświeżania (sekundy)",
         "ru": "Интервал обновления (секунды)",
-        "ko": "갱신 간격 (초)"
+        "ko": "갱신 간격 (초)",
+        "ar": "فاصل التحديث (بالثواني)"
       },
       "min": 5,
       "value": 15

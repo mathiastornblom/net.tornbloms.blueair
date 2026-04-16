@@ -11,7 +11,8 @@
     "sv": "Ställ in automatisk",
     "pl": "Ustaw automatycznie",
     "ru": "Установить автоматическое",
-    "ko": "자동 설정"
+    "ko": "자동 설정",
+    "ar": "تعيين تلقائي"
   },
   "titleFormatted": {
     "en": "Set the automatic to a [[automatic]]",
@@ -25,7 +26,8 @@
     "sv": "Ställ in den automatiska till en [[automatic]]",
     "pl": "Ustaw automatyczność na [[automatic]]",
     "ru": "Настройка автоматического на [[automatic]]",
-    "ko": "자동을 [[automatic]]으로 설정"
+    "ko": "자동을 [[automatic]]으로 설정",
+    "ar": "اضبط الوضع التلقائي على [[automatic]]"
   },
   "platforms": [
     "local"
@@ -51,7 +53,8 @@
         "sv": "Automatisk",
         "pl": "Automatyczny",
         "ru": "Автоматический",
-        "ko": "자동"
+        "ko": "자동",
+        "ar": "تلقائي"
       },
       "values": [
         {
@@ -68,7 +71,8 @@
             "sv": "På",
             "pl": "Włączony",
             "ru": "Вкл",
-            "ko": "켜짐"
+            "ko": "켜짐",
+            "ar": "تشغيل"
           }
         },
         {
@@ -85,7 +89,8 @@
             "sv": "Av",
             "pl": "Wyłączony",
             "ru": "Выкл",
-            "ko": "꺼짐"
+            "ko": "꺼짐",
+            "ar": "إيقاف"
           }
         }
       ]

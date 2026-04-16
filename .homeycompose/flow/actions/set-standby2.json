@@ -11,7 +11,8 @@
     "sv": "Ställ in standby-läge",
     "pl": "Ustaw tryb gotowości",
     "ru": "Установить режим ожидания",
-    "ko": "대기 모드 설정"
+    "ko": "대기 모드 설정",
+    "ar": "تفعيل وضع الاستعداد"
   },
   "titleFormatted": {
     "en": "Set the standby mode to a [[standby]]",
@@ -25,7 +26,8 @@
     "sv": "Ställ in standby-läge till [[standby]]",
     "pl": "Ustaw tryb gotowości na [[standby]]",
     "ru": "Установите режим ожидания на [[standby]]",
-    "ko": "[[standby]] 대기 모드로 설정"
+    "ko": "[[standby]] 대기 모드로 설정",
+    "ar": "اضبط وضع الاستعداد على [[standby]]"
   },
   "platforms": [
     "local"
@@ -51,7 +53,8 @@
         "sv": "Standby",
         "pl": "Gotowość",
         "ru": "Ожидание",
-        "ko": "대기"
+        "ko": "대기",
+        "ar": "وضع الاستعداد"
       },
       "values": [
         {
@@ -68,7 +71,8 @@
             "sv": "På",
             "pl": "Włącz",
             "ru": "Вкл",
-            "ko": "켜짐"
+            "ko": "켜짐",
+            "ar": "تشغيل"
           }
         },
         {
@@ -85,7 +89,8 @@
             "sv": "Av",
             "pl": "Wyłącz",
             "ru": "Выкл",
-            "ko": "꺼짐"
+            "ko": "꺼짐",
+            "ar": "إيقاف"
           }
         }
       ]
