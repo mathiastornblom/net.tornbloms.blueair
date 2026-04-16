@@ -145,5 +145,8 @@
   },
   "3.2.13": {
     "en": "Fix widget API handlers"
+  },
+  "3.2.14": {
+    "en": "Translations"
   }
 }
