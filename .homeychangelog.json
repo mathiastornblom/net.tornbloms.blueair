@@ -151,5 +151,8 @@
   },
   "3.2.15": {
     "en": "Updated logging"
+  },
+  "3.2.16": {
+    "en": "Updated images from feedback from Homey QA"
   }
 }
