@@ -301,6 +301,18 @@ abstract class BlueAirAwsBaseDevice extends Device {
     }
   }
 
+  public async performSetMoodLight(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-moodlight → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setDeviceStatus(this.getData().uuid, 'gsnm', value);
+      this.logger.debug('action:set-moodlight ok');
+    } catch (err) {
+      this.logger.error('action:set-moodlight failed:', err);
+      throw err;
+    }
+  }
+
   public async performSetGermShield(value: boolean): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
     this.logger.info(`action:set-germshield → "${this.getName()}" value=${value}`);

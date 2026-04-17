@@ -70,6 +70,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const online      = filterSettings(attrs, 'online');
     const automode    = filterSettings(attrs, 'automode');
     const germshield       = filterSettings(attrs, 'germshield');
+    const moodlight        = filterSettings(attrs, 'gsnm');
     const co2              = filterSettings(attrs, 'co2');
     const filterLife       = calculateRemainingFilterLife(attrs);
     const filterLifePercent = calculateFilterLifePercent(attrs);
@@ -93,6 +94,9 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.setCapabilityValue('automode',            automode?.value === 'true').catch(this.error);
     if (this.hasCapability('germ_shield')) {
       this.setCapabilityValue('germ_shield',       germshield?.value === 'true').catch(this.error);
+    }
+    if (this.hasCapability('mood_light')) {
+      this.setCapabilityValue('mood_light',        moodlight?.value === 'true').catch(this.error);
     }
     if (this.hasCapability('measure_co2')) {
       this.setCapabilityValue('measure_co2',       Number(co2?.value ?? 0)).catch(this.error);
@@ -268,6 +272,18 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
 
       this.homey.flow.getActionCard('set-germshield2').registerRunListener(async (args) => {
         await (args.device as BlueAirAwsBaseDevice).performSetGermShield(args.germshield === 'true');
+      });
+    }
+
+    if (this.hasCapability('mood_light')) {
+      this.registerCapabilityListener('mood_light', async (value) => {
+        await this.safeSetCommand('mood_light', () =>
+          this.performSetMoodLight(value)
+        );
+      });
+
+      this.homey.flow.getActionCard('set-moodlight2').registerRunListener(async (args) => {
+        await (args.device as BlueAirAwsBaseDevice).performSetMoodLight(args.moodlight === 'true');
       });
     }
 
