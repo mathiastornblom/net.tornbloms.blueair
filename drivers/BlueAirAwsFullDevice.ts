@@ -45,6 +45,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
   private savedPM10: DeviceSetting | null = null;
   private savedtVOC: DeviceSetting | null = null;
   private savedFilterStatus: string | null = null;
+  private savedCo2: DeviceSetting | null = null;
 
   // ── applyStatus ───────────────────────────────────────────────────────────
 
@@ -66,6 +67,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const online      = filterSettings(attrs, 'online');
     const automode    = filterSettings(attrs, 'automode');
     const germshield  = filterSettings(attrs, 'germshield');
+    const co2         = filterSettings(attrs, 'co2');
     const filterLife  = calculateRemainingFilterLife(attrs);
 
     this.setCapabilityValue('fanspeed',           Number(fanspeed?.value ?? 0)).catch(this.error);
@@ -85,11 +87,14 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     if (this.hasCapability('germ_shield')) {
       this.setCapabilityValue('germ_shield',       germshield?.value === 'true').catch(this.error);
     }
+    if (this.hasCapability('measure_co2')) {
+      this.setCapabilityValue('measure_co2',       Number(co2?.value ?? 0)).catch(this.error);
+    }
 
     // Only trigger flow cards after initial load
     if (this.isInitialized) {
       this.triggerFlowCards(settings, {
-        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, filterLife,
+        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, co2, filterLife,
       });
     }
 
@@ -101,6 +106,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.savedPM25        = pm25;
     this.savedPM10        = pm10;
     this.savedtVOC        = tvoc;
+    this.savedCo2         = co2;
     this.savedFilterStatus = filterLife;
   }
 
@@ -116,6 +122,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       pm25:        DeviceSetting | null;
       pm10:        DeviceSetting | null;
       tvoc:        DeviceSetting | null;
+      co2:         DeviceSetting | null;
       filterLife:  string | null;
     }
   ): void {
@@ -162,6 +169,12 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       this.homey.flow.getTriggerCard('tVOC-has-changed')
         .trigger({ 'device-name': name, 'device-uuid': uuid, 'tVOC new': Number(current.tvoc?.value ?? 0), 'tVOC old': Number(this.savedtVOC?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger tVOC-has-changed', e));
+    }
+
+    if (this.hasCapability('measure_co2') && this.savedCo2?.value !== current.co2?.value) {
+      this.homey.flow.getTriggerCard('CO2-has-changed')
+        .trigger({ 'device-name': name, 'device-uuid': uuid, 'co2': Number(current.co2?.value ?? 0) })
+        .catch((e) => this.error('Failed to trigger CO2-has-changed', e));
     }
 
     if (this.savedFilterStatus !== current.filterLife) {

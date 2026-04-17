@@ -1,0 +1,99 @@
+{
+  "type": "number",
+  "title": {
+    "en": "CO2",
+    "nl": "CO2",
+    "da": "CO2",
+    "it": "CO2",
+    "ko": "CO2",
+    "pl": "CO2",
+    "ru": "CO2",
+    "sv": "CO2",
+    "es": "CO2",
+    "fr": "CO2",
+    "no": "CO2",
+    "de": "CO2",
+    "ar": "CO2"
+  },
+  "units": {
+    "en": "ppm",
+    "nl": "ppm",
+    "da": "ppm",
+    "it": "ppm",
+    "ko": "ppm",
+    "pl": "ppm",
+    "ru": "ppm",
+    "sv": "ppm",
+    "es": "ppm",
+    "fr": "ppm",
+    "no": "ppm",
+    "de": "ppm",
+    "ar": "ppm"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Carbon dioxide concentration in parts per million (ppm)",
+    "nl": "Koolstofdioxide concentratie in delen per miljoen (ppm)",
+    "da": "Kuldioxidkoncentration i dele per million (ppm)",
+    "it": "Concentrazione di anidride carbonica in parti per milione (ppm)",
+    "ko": "백만분율(ppm) 단위의 이산화탄소 농도",
+    "pl": "Stężenie dwutlenku węgla w częściach na milion (ppm)",
+    "ru": "Концентрация углекислого газа в частях на миллион (ppm)",
+    "sv": "Koldioxidkoncentration i delar per miljon (ppm)",
+    "es": "Concentración de dióxido de carbono en partes por millón (ppm)",
+    "fr": "Concentration de dioxyde de carbone en parties par million (ppm)",
+    "no": "Karbondioksidkonsentrasjon i deler per million (ppm)",
+    "de": "Kohlendioxidkonzentration in Teilen pro Million (ppm)",
+    "ar": "تركيز ثاني أكسيد الكربون بالأجزاء في المليون (ppm)"
+  },
+  "chartType": "spline",
+  "decimals": 0,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_co2_changed",
+        "title": {
+          "en": "The CO2 level has changed",
+          "nl": "Het CO2-niveau is veranderd",
+          "da": "CO2-niveauet har ændret sig",
+          "it": "Il livello di CO2 è cambiato",
+          "ko": "CO2 수준이 변경되었습니다",
+          "pl": "Poziom CO2 się zmienił",
+          "ru": "Уровень CO2 изменился",
+          "sv": "CO2-nivån har ändrats",
+          "es": "El nivel de CO2 ha cambiado",
+          "fr": "Le niveau de CO2 a changé",
+          "no": "CO2-nivået har endret seg",
+          "de": "Der CO2-Wert hat sich geändert",
+          "ar": "تغير مستوى CO2"
+        },
+        "tokens": [
+          {
+            "name": "measure_co2",
+            "title": {
+              "en": "CO2",
+              "nl": "CO2",
+              "da": "CO2",
+              "it": "CO2",
+              "ko": "CO2",
+              "pl": "CO2",
+              "ru": "CO2",
+              "sv": "CO2",
+              "es": "CO2",
+              "fr": "CO2",
+              "no": "CO2",
+              "de": "CO2",
+              "ar": "CO2"
+            },
+            "type": "number",
+            "example": 800
+          }
+        ]
+      }
+    ]
+  },
+  "minCompatibility": "12.2.0"
+}
