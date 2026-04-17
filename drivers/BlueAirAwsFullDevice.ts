@@ -48,6 +48,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
   private savedtVOC: DeviceSetting | null = null;
   private savedFilterStatus: string | null = null;
   private savedCo2: DeviceSetting | null = null;
+  private savedWifiStatus: boolean | null = null;
 
   // ── applyStatus ───────────────────────────────────────────────────────────
 
@@ -100,7 +101,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     // Only trigger flow cards after initial load
     if (this.isInitialized) {
       this.triggerFlowCards(settings, {
-        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, co2, filterLife,
+        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, co2, online, filterLife,
       });
     }
 
@@ -113,6 +114,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.savedPM10        = pm10;
     this.savedtVOC        = tvoc;
     this.savedCo2         = co2;
+    this.savedWifiStatus  = online?.value === 'true';
     this.savedFilterStatus = filterLife;
   }
 
@@ -129,6 +131,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       pm10:        DeviceSetting | null;
       tvoc:        DeviceSetting | null;
       co2:         DeviceSetting | null;
+      online:      DeviceSetting | null;
       filterLife:  string | null;
     }
   ): void {
@@ -175,6 +178,13 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       this.homey.flow.getTriggerCard('tVOC-has-changed')
         .trigger({ 'device-name': name, 'device-uuid': uuid, 'tVOC new': Number(current.tvoc?.value ?? 0), 'tVOC old': Number(this.savedtVOC?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger tVOC-has-changed', e));
+    }
+
+    const isOnline = current.online?.value === 'true';
+    if (this.savedWifiStatus !== null && this.savedWifiStatus !== isOnline) {
+      this.homey.flow.getTriggerCard('wifi-status-changed')
+        .trigger({ 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
+        .catch((e) => this.error('Failed to trigger wifi-status-changed', e));
     }
 
     if (this.hasCapability('measure_co2') && this.savedCo2?.value !== current.co2?.value) {
