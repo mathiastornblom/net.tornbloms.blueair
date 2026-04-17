@@ -206,33 +206,75 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   public async performSetFanSpeed(value: number): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    await this.client.setFanSpeed(this.getData().uuid, value);
+    this.logger.info(`action:set-fan-speed → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setFanSpeed(this.getData().uuid, value);
+      this.logger.debug('action:set-fan-speed ok');
+    } catch (err) {
+      this.logger.error('action:set-fan-speed failed:', err);
+      throw err;
+    }
   }
 
   public async performSetBrightness(value: number): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    await this.client.setBrightness(this.getData().uuid, value);
+    this.logger.info(`action:set-brightness → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setBrightness(this.getData().uuid, value);
+      this.logger.debug('action:set-brightness ok');
+    } catch (err) {
+      this.logger.error('action:set-brightness failed:', err);
+      throw err;
+    }
   }
 
   public async performSetAutomatic(value: boolean): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    await this.client.setFanAuto(this.getData().uuid, value);
+    this.logger.info(`action:set-automatic → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setFanAuto(this.getData().uuid, value);
+      this.logger.debug('action:set-automatic ok');
+    } catch (err) {
+      this.logger.error('action:set-automatic failed:', err);
+      throw err;
+    }
   }
 
   public async performSetNightMode(value: boolean): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    await this.client.setNightMode(this.getData().uuid, value);
+    this.logger.info(`action:set-nightmode → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setNightMode(this.getData().uuid, value);
+      this.logger.debug('action:set-nightmode ok');
+    } catch (err) {
+      this.logger.error('action:set-nightmode failed:', err);
+      throw err;
+    }
   }
 
   public async performSetStandby(value: boolean): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    // Action card "On" = standby ON; no capability inversion needed here
-    await this.client.setStandby(this.getData().uuid, value);
+    this.logger.info(`action:set-standby → "${this.getName()}" value=${value}`);
+    try {
+      // Action card "On" = standby ON; no capability inversion needed here
+      await this.client.setStandby(this.getData().uuid, value);
+      this.logger.debug('action:set-standby ok');
+    } catch (err) {
+      this.logger.error('action:set-standby failed:', err);
+      throw err;
+    }
   }
 
   public async performSetChildLock(value: boolean): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    await this.client.setChildLock(this.getData().uuid, value);
+    this.logger.info(`action:set-childlock → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setChildLock(this.getData().uuid, value);
+      this.logger.debug('action:set-childlock ok');
+    } catch (err) {
+      this.logger.error('action:set-childlock failed:', err);
+      throw err;
+    }
   }
 }
 

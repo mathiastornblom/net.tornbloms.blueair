@@ -140,5 +140,15 @@
   "source": "https://github.com/mathiastornblom/net.tornbloms.blueair",
   "support": "mailto:mathias@tornbloms.net",
   "homeyCommunityTopicId": 87805,
-  "homepage": "https://github.com/mathiastornblom/net.tornbloms.blueair"
+  "homepage": "https://github.com/mathiastornblom/net.tornbloms.blueair",
+  "api": {
+    "getLogs": {
+      "method": "GET",
+      "path": "/logs"
+    },
+    "clearLogs": {
+      "method": "DELETE",
+      "path": "/logs"
+    }
+  }
 }
