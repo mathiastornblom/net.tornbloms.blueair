@@ -24,6 +24,7 @@
     "automode",
     "wifi_status",
     "filter_status",
+    "measure_filter_life",
     "measure_pm25"
   ],
   "platforms": [

@@ -4,6 +4,7 @@ import BlueAirAwsBaseDevice from './BlueAirAwsBaseDevice';
 import {
   filterSettings,
   calculateRemainingFilterLife,
+  calculateFilterLifePercent,
   DeviceSetting,
   conditionScorePm25ToString,
   conditionScorePm1ToString,
@@ -25,6 +26,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     'child_lock',
     'fanspeed',
     'filter_status',
+    'measure_filter_life',
     'measure_humidity',
     'measure_pm1',
     'measure_pm10',
@@ -66,9 +68,10 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const standby     = filterSettings(attrs, 'standby');
     const online      = filterSettings(attrs, 'online');
     const automode    = filterSettings(attrs, 'automode');
-    const germshield  = filterSettings(attrs, 'germshield');
-    const co2         = filterSettings(attrs, 'co2');
-    const filterLife  = calculateRemainingFilterLife(attrs);
+    const germshield       = filterSettings(attrs, 'germshield');
+    const co2              = filterSettings(attrs, 'co2');
+    const filterLife       = calculateRemainingFilterLife(attrs);
+    const filterLifePercent = calculateFilterLifePercent(attrs);
 
     this.setCapabilityValue('fanspeed',           Number(fanspeed?.value ?? 0)).catch(this.error);
     this.setCapabilityValue('measure_humidity',    Number(humidity?.value ?? 0)).catch(this.error);
@@ -82,7 +85,10 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.setCapabilityValue('nightmode',           nightmode?.value === 'true').catch(this.error);
     this.setCapabilityValue('standby',             standby?.value === 'false').catch(this.error);
     this.setCapabilityValue('wifi_status',         online?.value === 'true').catch(this.error);
-    this.setCapabilityValue('filter_status',       filterLife).catch(this.error);
+    this.setCapabilityValue('filter_status',        filterLife).catch(this.error);
+    if (filterLifePercent != null) {
+      this.setCapabilityValue('measure_filter_life', filterLifePercent).catch(this.error);
+    }
     this.setCapabilityValue('automode',            automode?.value === 'true').catch(this.error);
     if (this.hasCapability('germ_shield')) {
       this.setCapabilityValue('germ_shield',       germshield?.value === 'true').catch(this.error);

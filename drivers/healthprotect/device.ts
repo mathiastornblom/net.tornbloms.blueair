@@ -9,6 +9,7 @@ class BlueAirHealthProtectDevice extends BlueAirAwsFullDevice {
     'filter_status',
     'germ_shield',
     'measure_co2',
+    'measure_filter_life',
     'measure_humidity',
     'measure_pm1',
     'measure_pm10',
