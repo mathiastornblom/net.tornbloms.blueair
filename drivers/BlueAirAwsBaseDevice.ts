@@ -233,6 +233,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-fan-speed → "${this.getName()}" value=${value}`);
     try {
       await this.client.setFanSpeed(this.getData().uuid, value);
+      this.setCapabilityValue('fanspeed', value).catch(this.error);
       this.logger.debug('action:set-fan-speed ok');
     } catch (err) {
       this.logger.error('action:set-fan-speed failed:', err);
@@ -245,6 +246,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-brightness → "${this.getName()}" value=${value}`);
     try {
       await this.client.setBrightness(this.getData().uuid, value);
+      this.setCapabilityValue('brightness2', value).catch(this.error);
       this.logger.debug('action:set-brightness ok');
     } catch (err) {
       this.logger.error('action:set-brightness failed:', err);
@@ -257,6 +259,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-automatic → "${this.getName()}" value=${value}`);
     try {
       await this.client.setFanAuto(this.getData().uuid, value);
+      this.setCapabilityValue('automode', value).catch(this.error);
       this.logger.debug('action:set-automatic ok');
     } catch (err) {
       this.logger.error('action:set-automatic failed:', err);
@@ -269,6 +272,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-nightmode → "${this.getName()}" value=${value}`);
     try {
       await this.client.setNightMode(this.getData().uuid, value);
+      this.setCapabilityValue('nightmode', value).catch(this.error);
       this.logger.debug('action:set-nightmode ok');
     } catch (err) {
       this.logger.error('action:set-nightmode failed:', err);
@@ -280,8 +284,10 @@ abstract class BlueAirAwsBaseDevice extends Device {
     if (!this.client) throw new Error('Client not initialized');
     this.logger.info(`action:set-standby → "${this.getName()}" value=${value}`);
     try {
-      // Action card "On" = standby ON; no capability inversion needed here
+      // Action card "standby=true" = put device IN standby.
+      // Capability 'standby' is true = device ON (not in standby), so invert.
       await this.client.setStandby(this.getData().uuid, value);
+      this.setCapabilityValue('standby', !value).catch(this.error);
       this.logger.debug('action:set-standby ok');
     } catch (err) {
       this.logger.error('action:set-standby failed:', err);
@@ -294,6 +300,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-childlock → "${this.getName()}" value=${value}`);
     try {
       await this.client.setChildLock(this.getData().uuid, value);
+      this.setCapabilityValue('child_lock', value).catch(this.error);
       this.logger.debug('action:set-childlock ok');
     } catch (err) {
       this.logger.error('action:set-childlock failed:', err);
@@ -306,6 +313,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-moodlight → "${this.getName()}" value=${value}`);
     try {
       await this.client.setDeviceStatus(this.getData().uuid, 'gsnm', value);
+      this.setCapabilityValue('mood_light', value).catch(this.error);
       this.logger.debug('action:set-moodlight ok');
     } catch (err) {
       this.logger.error('action:set-moodlight failed:', err);
@@ -318,6 +326,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.logger.info(`action:set-germshield → "${this.getName()}" value=${value}`);
     try {
       await this.client.setDeviceStatus(this.getData().uuid, 'germshield', value);
+      this.setCapabilityValue('germ_shield', value).catch(this.error);
       this.logger.debug('action:set-germshield ok');
     } catch (err) {
       this.logger.error('action:set-germshield failed:', err);
