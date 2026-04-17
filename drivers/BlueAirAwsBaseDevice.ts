@@ -27,6 +27,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
   protected isInitialized = false;
 
   private pollIntervalId: ReturnType<typeof setInterval> | null = null;
+  private reAuthIntervalId: ReturnType<typeof setInterval> | null = null;
   private consecutiveFailures = 0;
   protected logger!: DiagnosticLogger;
 
@@ -109,9 +110,21 @@ abstract class BlueAirAwsBaseDevice extends Device {
           this.syncDeviceInfo(attrs);
           this.onPollSuccess();
         } catch (error) {
-          await this.onPollFailure(error, client);
+          await this.onPollFailure(error, settings);
         }
       }, pollMs);
+
+      const REAUTH_INTERVAL_MS = 20 * 60 * 60 * 1000;
+      this.reAuthIntervalId = setInterval(async () => {
+        if (!this.client) return;
+        this.logger.info('scheduled proactive re-authentication');
+        try {
+          await this.client.initialize();
+          this.logger.info('proactive re-auth ok');
+        } catch (err) {
+          this.logger.warn('proactive re-auth failed:', err);
+        }
+      }, REAUTH_INTERVAL_MS);
 
       this.logger.info(`initialized (poll every ${pollMs / 1000}s)`);
     } catch (e) {
@@ -125,6 +138,10 @@ abstract class BlueAirAwsBaseDevice extends Device {
     if (this.pollIntervalId) {
       clearInterval(this.pollIntervalId);
       this.pollIntervalId = null;
+    }
+    if (this.reAuthIntervalId) {
+      clearInterval(this.reAuthIntervalId);
+      this.reAuthIntervalId = null;
     }
   }
 
@@ -154,28 +171,35 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   private async onPollFailure(
     error: unknown,
-    client: BlueAirAwsClient
+    settings: Record<string, any>
   ): Promise<void> {
     this.consecutiveFailures++;
     this.logger.warn(`poll failed (${this.consecutiveFailures}/${MAX_CONSECUTIVE_FAILURES}):`, error);
 
     if (this.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-      this.logger.error(`device unreachable after ${MAX_CONSECUTIVE_FAILURES} consecutive failures`);
+      this.logger.error(`device unreachable after ${MAX_CONSECUTIVE_FAILURES} consecutive failures — clearing cached client`);
+      (this.driver as BlueAirAwsBaseDriver).clearClient(settings.username as string);
+      this.client = null;
       this.setUnavailable('Device unreachable — API error').catch(this.error);
     }
 
-    // Attempt re-authentication on session / rate-limit errors
+    // Attempt re-authentication on session / auth / rate-limit errors
     const msg = String(error).toLowerCase();
     if (
       msg.includes('session') ||
       msg.includes('rate limit') ||
       msg.includes('403') ||
       msg.includes('401') ||
-      msg.includes('229')
+      msg.includes('229') ||
+      msg.includes('unauthorized') ||
+      msg.includes('gigya') ||
+      msg.includes('token') ||
+      msg.includes('invalid')
     ) {
-      this.logger.info('session/rate-limit error — attempting re-authentication...');
+      if (!this.client) return;
+      this.logger.info('auth/session error — attempting re-authentication...');
       try {
-        await client.initialize();
+        await this.client.initialize();
         this.logger.info('re-authentication successful');
       } catch (authError) {
         this.logger.error('re-authentication failed:', authError);
