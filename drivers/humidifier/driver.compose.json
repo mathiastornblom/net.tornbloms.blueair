@@ -1,0 +1,148 @@
+{
+  "name": {
+    "en": "Humidifier",
+    "sv": "Luftfuktare",
+    "nl": "Luchtbevochtiger",
+    "da": "Luftfugter",
+    "de": "Luftbefeuchter",
+    "es": "Humidificador",
+    "fr": "Humidificateur",
+    "it": "Umidificatore",
+    "no": "Luftfukter",
+    "pl": "Nawilżacz",
+    "ru": "Увлажнитель",
+    "ko": "가습기",
+    "ar": "جهاز ترطيب الهواء"
+  },
+  "class": "humidifier",
+  "capabilities": [
+    "fanspeed",
+    "brightness2",
+    "child_lock",
+    "nightmode",
+    "standby",
+    "automode",
+    "wifi_status",
+    "filter_status",
+    "measure_filter_life",
+    "measure_humidity",
+    "measure_temperature"
+  ],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "cloud"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "logo": "icon.svg",
+        "title": {
+          "en": "Login to your account",
+          "sv": "Logga in på ditt konto",
+          "nl": "Inloggen op uw account",
+          "da": "Log ind på din konto",
+          "de": "Melden Sie sich bei Ihrem Konto an",
+          "es": "Iniciar sesión en tu cuenta",
+          "fr": "Connectez-vous à votre compte",
+          "it": "Accedi al tuo account",
+          "no": "Logg inn på kontoen din",
+          "pl": "Zaloguj się na swoje konto",
+          "ru": "Войти в ваш аккаунт",
+          "ko": "계정에 로그인",
+          "ar": "تسجيل الدخول إلى حسابك"
+        },
+        "usernameLabel": {
+          "en": "E-mail address",
+          "sv": "E-postadress",
+          "nl": "E-mailadres",
+          "da": "E-mailadresse",
+          "de": "E-Mail-Adresse",
+          "es": "Dirección de correo electrónico",
+          "fr": "Adresse e-mail",
+          "it": "Indirizzo email",
+          "no": "E-postadresse",
+          "pl": "Adres e-mail",
+          "ru": "Адрес электронной почты",
+          "ko": "이메일 주소",
+          "ar": "عنوان البريد الإلكتروني"
+        },
+        "usernamePlaceholder": {
+          "en": "john@doe.com",
+          "sv": "namn@domain.se",
+          "nl": "naam@voorbeeld.com",
+          "da": "navn@domæne.dk",
+          "de": "name@domain.de",
+          "es": "nombre@dominio.es",
+          "fr": "nom@domaine.fr",
+          "it": "nome@dominio.it",
+          "no": "navn@domenet.no",
+          "pl": "imie@domena.pl",
+          "ru": "имя@домен.ру",
+          "ko": "이름@도메인.한국",
+          "ar": "john@doe.com"
+        },
+        "passwordLabel": {
+          "en": "Password",
+          "sv": "Lösenord",
+          "nl": "Wachtwoord",
+          "da": "Adgangskode",
+          "de": "Passwort",
+          "es": "Contraseña",
+          "fr": "Mot de passe",
+          "it": "Password",
+          "no": "Passord",
+          "pl": "Hasło",
+          "ru": "Пароль",
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
+        },
+        "passwordPlaceholder": {
+          "en": "Password",
+          "sv": "Lösenord",
+          "nl": "Wachtwoord",
+          "da": "Adgangskode",
+          "de": "Passwort",
+          "es": "Contraseña",
+          "fr": "Mot de passe",
+          "it": "Password",
+          "no": "Passord",
+          "pl": "Hasło",
+          "ru": "Пароль",
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
+        }
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "energy": {
+    "approximation": {
+      "usageOff": 0,
+      "usageOn": 25
+    }
+  },
+  "capabilitiesOptions": {
+    "measure_power": {
+      "approximated": true
+    }
+  }
+}

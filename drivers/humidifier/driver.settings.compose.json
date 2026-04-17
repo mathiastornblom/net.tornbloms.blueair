@@ -1,0 +1,472 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Login details",
+      "sv": "Login detaljer",
+      "nl": "Inloggegevens",
+      "da": "Login detaljer",
+      "de": "Anmeldedaten",
+      "es": "Detalles de inicio de sesión",
+      "fr": "Détails de connexion",
+      "it": "Dettagli di accesso",
+      "no": "Innloggingsdetaljer",
+      "pl": "Szczegóły logowania",
+      "ru": "Детали входа",
+      "ko": "로그인 정보",
+      "ar": "تفاصيل تسجيل الدخول"
+    },
+    "children": [
+      {
+        "id": "username",
+        "type": "text",
+        "label": {
+          "en": "E-mail",
+          "sv": "Epost",
+          "nl": "E-mail",
+          "da": "E-mail",
+          "de": "E-Mail",
+          "es": "Correo electrónico",
+          "fr": "E-mail",
+          "it": "E-mail",
+          "no": "E-post",
+          "pl": "E-mail",
+          "ru": "Электронная почта",
+          "ko": "이메일",
+          "ar": "البريد الإلكتروني"
+        },
+        "value": "JohnDoe@domain.com",
+        "hint": {
+          "en": "The email of the user.",
+          "sv": "Epostadressen för användaren.",
+          "nl": "De e-mail van de gebruiker.",
+          "da": "Brugerens e-mail.",
+          "de": "Die E-Mail des Benutzers.",
+          "es": "El correo electrónico del usuario.",
+          "fr": "L'email de l'utilisateur.",
+          "it": "L'email dell'utente.",
+          "no": "Brukerens e-post.",
+          "pl": "E-mail użytkownika.",
+          "ru": "Электронная почта пользователя.",
+          "ko": "사용자의 이메일.",
+          "ar": "البريد الإلكتروني للمستخدم."
+        }
+      },
+      {
+        "id": "password",
+        "type": "text",
+        "label": {
+          "en": "Password",
+          "sv": "Lösenord",
+          "nl": "Wachtwoord",
+          "da": "Kodeord",
+          "de": "Passwort",
+          "es": "Contraseña",
+          "fr": "Mot de passe",
+          "it": "Password",
+          "no": "Passord",
+          "pl": "Hasło",
+          "ru": "Пароль",
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
+        },
+        "value": "Secret",
+        "hint": {
+          "en": "The password of the user.",
+          "sv": "Lösenordet för användaren.",
+          "nl": "Het wachtwoord van de gebruiker.",
+          "da": "Brugerens kodeord.",
+          "de": "Das Passwort des Benutzers.",
+          "es": "La contraseña del usuario.",
+          "fr": "Le mot de passe de l'utilisateur.",
+          "it": "La password dell'utente.",
+          "no": "Brukerens passord.",
+          "pl": "Hasło użytkownika.",
+          "ru": "Пароль пользователя.",
+          "ko": "사용자의 비밀번호.",
+          "ar": "كلمة مرور المستخدم."
+        }
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Device infomation",
+      "sv": "Enhetsdetaljer",
+      "nl": "Apparaatinformatie",
+      "da": "Enhedsoplysninger",
+      "de": "Geräteinformationen",
+      "es": "Información del dispositivo",
+      "fr": "Informations sur l'appareil",
+      "it": "Informazioni sul dispositivo",
+      "no": "Enhetsinformasjon",
+      "pl": "Informacje o urządzeniu",
+      "ru": "Информация об устройстве",
+      "ko": "장치 정보",
+      "ar": "معلومات الجهاز"
+    },
+    "children": [
+      {
+        "id": "uuid",
+        "type": "label",
+        "label": {
+          "en": "UUID",
+          "sv": "UUID",
+          "nl": "UUID",
+          "da": "UUID",
+          "de": "UUID",
+          "es": "UUID",
+          "fr": "UUID",
+          "it": "UUID",
+          "no": "UUID",
+          "pl": "UUID",
+          "ru": "UUID",
+          "ko": "UUID",
+          "ar": "UUID"
+        },
+        "value": "EE04776CEDC0BAB2",
+        "hint": {
+          "en": "The uniqe id of the device.",
+          "sv": "Unik identifierare för enheten.",
+          "nl": "De unieke id van het apparaat.",
+          "da": "Den unikke id for enheden.",
+          "de": "Die eindeutige ID des Geräts.",
+          "es": "El ID único del dispositivo.",
+          "fr": "L'ID unique de l'appareil.",
+          "it": "L'ID univoco del dispositivo.",
+          "no": "Den unike id'en til enheten.",
+          "pl": "Unikalny identyfikator urządzenia.",
+          "ru": "Уникальный ID устройства.",
+          "ko": "장치의 고유 ID.",
+          "ar": "المعرف الفريد للجهاز."
+        }
+      },
+      {
+        "id": "name",
+        "type": "label",
+        "label": {
+          "en": "Name",
+          "sv": "Namn",
+          "nl": "Naam",
+          "da": "Navn",
+          "de": "Name",
+          "es": "Nombre",
+          "fr": "Nom",
+          "it": "Nome",
+          "no": "Navn",
+          "pl": "Nazwa",
+          "ru": "Имя",
+          "ko": "이름",
+          "ar": "الاسم"
+        },
+        "value": "BlueAir DustMagnet",
+        "hint": {
+          "en": "Name of the device",
+          "sv": "Namn på enheten",
+          "nl": "Naam van het apparaat",
+          "da": "Navn på enheden",
+          "de": "Name des Geräts",
+          "es": "Nombre del dispositivo",
+          "fr": "Nom de l'appareil",
+          "it": "Nome del dispositivo",
+          "no": "Navnet på enheten",
+          "pl": "Nazwa urządzenia",
+          "ru": "Имя устройства",
+          "ko": "장치 이름",
+          "ar": "اسم الجهاز"
+        }
+      },
+      {
+        "id": "model",
+        "type": "label",
+        "label": {
+          "en": "Model",
+          "sv": "Model",
+          "nl": "Model",
+          "da": "Model",
+          "de": "Modell",
+          "es": "Modelo",
+          "fr": "Modèle",
+          "it": "Modello",
+          "no": "Modell",
+          "pl": "Model",
+          "ru": "Модель",
+          "ko": "모델",
+          "ar": "نموذج"
+        },
+        "value": "1.0.9",
+        "hint": {
+          "en": "Model of the device",
+          "sv": "Model på enheten",
+          "nl": "Model van het apparaat",
+          "da": "Model af enheden",
+          "de": "Modell des Geräts",
+          "es": "Modelo del dispositivo",
+          "fr": "Modèle de l'appareil",
+          "it": "Modello del dispositivo",
+          "no": "Modell av enheten",
+          "pl": "Model urządzenia",
+          "ru": "Модель устройства",
+          "ko": "장치 모델",
+          "ar": "نموذج الجهاز"
+        }
+      },
+      {
+        "id": "mac",
+        "type": "label",
+        "label": {
+          "en": "MAC",
+          "sv": "MAC",
+          "nl": "MAC",
+          "da": "MAC",
+          "de": "MAC",
+          "es": "MAC",
+          "fr": "MAC",
+          "it": "MAC",
+          "no": "MAC",
+          "pl": "MAC",
+          "ru": "MAC",
+          "ko": "MAC",
+          "ar": "ماك"
+        },
+        "value": "34EAE728765C",
+        "hint": {
+          "en": "MAC address of the device",
+          "sv": "MAC address på enheten",
+          "nl": "MAC-adres van het apparaat",
+          "da": "MAC-adresse for enheden",
+          "de": "MAC-Adresse des Geräts",
+          "es": "Dirección MAC del dispositivo",
+          "fr": "Adresse MAC de l'appareil",
+          "it": "Indirizzo MAC del dispositivo",
+          "no": "MAC-adresse til enheten",
+          "pl": "Adres MAC urządzenia",
+          "ru": "MAC-адрес устройства",
+          "ko": "장치의 MAC 주소",
+          "ar": "عنوان MAC للجهاز"
+        }
+      },
+      {
+        "id": "mcuFirmware",
+        "type": "label",
+        "label": {
+          "en": "MCU Firmware",
+          "sv": "MCU Firmware",
+          "nl": "MCU Firmware",
+          "da": "MCU Firmware",
+          "de": "MCU Firmware",
+          "es": "Firmware de MCU",
+          "fr": "Firmware de MCU",
+          "it": "Firmware MCU",
+          "no": "MCU Firmware",
+          "pl": "Oprogramowanie MCU",
+          "ru": "Прошивка MCU",
+          "ko": "MCU 펌웨어",
+          "ar": "البرامج الثابتة لوحدة التحكم الدقيقة (MCU)"
+        },
+        "value": "1.0.35",
+        "hint": {
+          "en": "Version of the MCU Firmware",
+          "sv": "Vesion på MCU Firmware",
+          "nl": "Versie van de MCU-firmware",
+          "da": "Version af MCU Firmware",
+          "de": "Version der MCU Firmware",
+          "es": "Versión del firmware de MCU",
+          "fr": "Version du firmware MCU",
+          "it": "Versione del firmware MCU",
+          "no": "Versjon av MCU Firmware",
+          "pl": "Wersja oprogramowania MCU",
+          "ru": "Версия прошивки MCU",
+          "ko": "MCU 펌웨어 버전",
+          "ar": "إصدار البرنامج الثابت لوحدة التحكم الدقيقة (MCU)"
+        }
+      },
+      {
+        "id": "wlanDriver",
+        "type": "label",
+        "label": {
+          "en": "WLAN Driver",
+          "sv": "WLAN Driver",
+          "nl": "WLAN-Driver",
+          "da": "WLAN Driver",
+          "de": "WLAN-Treiber",
+          "es": "Controlador WLAN",
+          "fr": "Pilote WLAN",
+          "it": "Driver WLAN",
+          "no": "WLAN-driver",
+          "pl": "Sterownik WLAN",
+          "ru": "Драйвер WLAN",
+          "ko": "WLAN 드라이버",
+          "ar": "برنامج تشغيل WLAN"
+        },
+        "value": "V10",
+        "hint": {
+          "en": "Version of the WLAN Driver",
+          "sv": "Version av WLAN Driver",
+          "nl": "Versie van de WLAN-driver",
+          "da": "Version af WLAN Driver",
+          "de": "Version des WLAN-Treibers",
+          "es": "Versión del controlador WLAN",
+          "fr": "Version du pilote WLAN",
+          "it": "Versione del driver WLAN",
+          "no": "Versjon av WLAN-driver",
+          "pl": "Wersja sterownika WLAN",
+          "ru": "Версия драйвера WLAN",
+          "ko": "WLAN 드라이버 버전",
+          "ar": "إصدار برنامج تشغيل WLAN"
+        }
+      },
+      {
+        "id": "serial",
+        "type": "label",
+        "label": {
+          "en": "Serial",
+          "sv": "Serienummer",
+          "nl": "Serienummer",
+          "da": "Serienummer",
+          "de": "Seriennummer",
+          "es": "Número de serie",
+          "fr": "Numéro de série",
+          "it": "Seriale",
+          "no": "Serienummer",
+          "pl": "Numer seryjny",
+          "ru": "Серийный номер",
+          "ko": "일련번호",
+          "ar": "رقم تسلسلي"
+        },
+        "value": "102938765378827653",
+        "hint": {
+          "en": "The serial number of the device.",
+          "sv": "Serienummer på enheten.",
+          "nl": "Serienummer van het apparaat.",
+          "da": "Serienummer på enheden.",
+          "de": "Die Seriennummer des Geräts.",
+          "es": "El número de serie del dispositivo.",
+          "fr": "Le numéro de série de l'appareil.",
+          "it": "Il numero di serie del dispositivo.",
+          "no": "Serienummeret til enheten.",
+          "pl": "Numer seryjny urządzenia.",
+          "ru": "Серийный номер устройства.",
+          "ko": "장치의 일련번호.",
+          "ar": "الرقم التسلسلي للجهاز."
+        }
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Advanced settings",
+      "sv": "Avancerade inställningar",
+      "nl": "Geavanceerde instellingen",
+      "da": "Avancerede indstillinger",
+      "de": "Erweiterte Einstellungen",
+      "es": "Configuración avanzada",
+      "fr": "Paramètres avancés",
+      "it": "Impostazioni avanzate",
+      "no": "Avanserte innstillinger",
+      "pl": "Zaawansowane ustawienia",
+      "ru": "Расширенные настройки",
+      "ko": "고급 설정",
+      "ar": "الإعدادات المتقدمة"
+    },
+    "children": [
+      {
+        "id": "update",
+        "type": "number",
+        "label": {
+          "en": "Update interval",
+          "sv": "Uppdatera",
+          "nl": "Update-interval",
+          "da": "Opdateringsinterval",
+          "de": "Update-Intervall",
+          "es": "Intervalo de actualización",
+          "fr": "Intervalle de mise à jour",
+          "it": "Intervallo di aggiornamento",
+          "no": "Oppdateringsintervall",
+          "pl": "Interwał aktualizacji",
+          "ru": "Интервал обновления",
+          "ko": "업데이트 간격",
+          "ar": "فترة التحديث"
+        },
+        "value": 60,
+        "min": 60,
+        "max": 300,
+        "units": {
+          "en": "Seconds",
+          "sv": "Sekunder",
+          "nl": "Seconden",
+          "da": "Sekunder",
+          "de": "Sekunden",
+          "es": "Segundos",
+          "fr": "Secondes",
+          "it": "Secondi",
+          "no": "Sekunder",
+          "pl": "Sekundy",
+          "ru": "Секунды",
+          "ko": "초",
+          "ar": "ثوانٍ"
+        }
+      },
+      {
+        "id": "temperatureUnit",
+        "type": "dropdown",
+        "value": "C",
+        "label": {
+          "en": "Temperature unit",
+          "sv": "Temperatur",
+          "nl": "Temperatuureenheid",
+          "da": "Temperaturenhed",
+          "de": "Temperatureinheit",
+          "es": "Unidad de temperatura",
+          "fr": "Unité de température",
+          "it": "Unità di temperatura",
+          "no": "Temperaturenhet",
+          "pl": "Jednostka temperatury",
+          "ru": "Единица измерения температуры",
+          "ko": "온도 단위",
+          "ar": "وحدة درجة الحرارة"
+        },
+        "values": [
+          {
+            "id": "C",
+            "label": {
+              "en": "Celsius",
+              "sv": "Celsius",
+              "nl": "Celsius",
+              "da": "Celsius",
+              "de": "Celsius",
+              "es": "Celsius",
+              "fr": "Celsius",
+              "it": "Celsius",
+              "no": "Celsius",
+              "pl": "Celsius",
+              "ru": "Цельсий",
+              "ko": "섭씨",
+              "ar": "درجة مئوية"
+            }
+          },
+          {
+            "id": "F",
+            "label": {
+              "en": "Fahrenheit",
+              "sv": "Fahrenheit",
+              "nl": "Fahrenheit",
+              "da": "Fahrenheit",
+              "de": "Fahrenheit",
+              "es": "Fahrenheit",
+              "fr": "Fahrenheit",
+              "it": "Fahrenheit",
+              "no": "Fahrenheit",
+              "pl": "Fahrenheit",
+              "ru": "Фаренгейт",
+              "ko": "화씨",
+              "ar": "فهرنهايت"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
