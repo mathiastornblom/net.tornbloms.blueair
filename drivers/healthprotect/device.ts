@@ -8,6 +8,7 @@ class BlueAirHealthProtectDevice extends BlueAirAwsFullDevice {
     'fanspeed',
     'filter_status',
     'germ_shield',
+    'measure_hcho',
     'mood_light',
     'measure_co2',
     'measure_filter_life',

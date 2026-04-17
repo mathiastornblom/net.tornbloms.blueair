@@ -48,6 +48,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
   private savedtVOC: DeviceSetting | null = null;
   private savedFilterStatus: string | null = null;
   private savedCo2: DeviceSetting | null = null;
+  private savedHcho: DeviceSetting | null = null;
   private savedWifiStatus: boolean | null = null;
 
   // ── applyStatus ───────────────────────────────────────────────────────────
@@ -72,6 +73,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const germshield       = filterSettings(attrs, 'germshield');
     const moodlight        = filterSettings(attrs, 'gsnm');
     const co2              = filterSettings(attrs, 'co2');
+    const hcho             = filterSettings(attrs, 'hcho');
     const filterLife       = calculateRemainingFilterLife(attrs);
     const filterLifePercent = calculateFilterLifePercent(attrs);
 
@@ -101,11 +103,14 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     if (this.hasCapability('measure_co2')) {
       this.setCapabilityValue('measure_co2',       Number(co2?.value ?? 0)).catch(this.error);
     }
+    if (this.hasCapability('measure_hcho')) {
+      this.setCapabilityValue('measure_hcho',      Number(hcho?.value ?? 0)).catch(this.error);
+    }
 
     // Only trigger flow cards after initial load
     if (this.isInitialized) {
       this.triggerFlowCards(settings, {
-        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, co2, online, filterLife,
+        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, co2, hcho, online, filterLife,
       });
     }
 
@@ -118,6 +123,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.savedPM10        = pm10;
     this.savedtVOC        = tvoc;
     this.savedCo2         = co2;
+    this.savedHcho        = hcho;
     this.savedWifiStatus  = online?.value === 'true';
     this.savedFilterStatus = filterLife;
   }
@@ -135,6 +141,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       pm10:        DeviceSetting | null;
       tvoc:        DeviceSetting | null;
       co2:         DeviceSetting | null;
+      hcho:        DeviceSetting | null;
       online:      DeviceSetting | null;
       filterLife:  string | null;
     }
@@ -195,6 +202,12 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       this.homey.flow.getTriggerCard('CO2-has-changed')
         .trigger({ 'device-name': name, 'device-uuid': uuid, 'co2': Number(current.co2?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger CO2-has-changed', e));
+    }
+
+    if (this.hasCapability('measure_hcho') && this.savedHcho?.value !== current.hcho?.value) {
+      this.homey.flow.getTriggerCard('HCHO-has-changed')
+        .trigger({ 'device-name': name, 'device-uuid': uuid, 'hcho': Number(current.hcho?.value ?? 0) })
+        .catch((e) => this.error('Failed to trigger HCHO-has-changed', e));
     }
 
     if (this.savedFilterStatus !== current.filterLife) {
