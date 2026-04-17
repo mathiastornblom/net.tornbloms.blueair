@@ -51,6 +51,25 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
   private savedHcho: DeviceSetting | null = null;
   private savedWifiStatus: boolean | null = null;
 
+  // ── discoverOptionalCapabilities ─────────────────────────────────────────
+
+  protected async discoverOptionalCapabilities(
+    attrs: BlueAirDeviceStatus[]
+  ): Promise<void> {
+    const optionals: { capId: string; attrKey: string }[] = [
+      { capId: 'measure_co2', attrKey: 'co2' },
+      { capId: 'measure_hcho', attrKey: 'hcho' },
+      { capId: 'germ_shield', attrKey: 'germshield' },
+      { capId: 'mood_light', attrKey: 'gsnm' },
+    ];
+    for (const { capId, attrKey } of optionals) {
+      if (filterSettings(attrs, attrKey)?.value != null && !this.hasCapability(capId)) {
+        this.log(`SKU discovery: adding optional capability "${capId}"`);
+        await this.addCapability(capId);
+      }
+    }
+  }
+
   // ── applyStatus ───────────────────────────────────────────────────────────
 
   protected applyStatus(

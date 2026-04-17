@@ -1,16 +1,14 @@
 import BlueAirAwsFullDevice from '../BlueAirAwsFullDevice';
 
 class BlueAirHealthProtectDevice extends BlueAirAwsFullDevice {
+  // measure_co2, measure_hcho, germ_shield, mood_light are optional —
+  // added dynamically by discoverOptionalCapabilities based on API response.
   protected readonly deviceCapabilities = [
     'automode',
     'brightness2',
     'child_lock',
     'fanspeed',
     'filter_status',
-    'germ_shield',
-    'measure_hcho',
-    'mood_light',
-    'measure_co2',
     'measure_filter_life',
     'measure_humidity',
     'measure_pm1',

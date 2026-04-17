@@ -47,6 +47,15 @@ abstract class BlueAirAwsBaseDevice extends Device {
   ): void;
 
   /**
+   * Called once after the first successful status fetch, before setupListeners.
+   * Override to add optional capabilities that depend on what the device reports.
+   * Default is a no-op.
+   */
+  protected async discoverOptionalCapabilities(
+    _attrs: BlueAirDeviceStatus[]
+  ): Promise<void> {}
+
+  /**
    * Called once after the first successful status fetch.
    * Subclasses register capability listeners and flow/action/condition cards.
    */
@@ -98,6 +107,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
       const attrs = await client.getDeviceStatus(data.accountuuid, [data.uuid]);
       this.applyStatus(attrs, settings);
       this.syncDeviceInfo(attrs);
+      await this.discoverOptionalCapabilities(attrs);
       this.setupListeners(client, data, settings);
 
       // Mark initialized before starting the poll loop
