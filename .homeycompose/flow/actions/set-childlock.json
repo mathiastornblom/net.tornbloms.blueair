@@ -11,7 +11,8 @@
     "sv": "Ställ in barnlås (klassisk)",
     "pl": "Ustaw blokadę dla dzieci (klasyczny)",
     "ru": "Установите замок для детей (классический)",
-    "ko": "아동 잠금 설정 (클래식)"
+    "ko": "아동 잠금 설정 (클래식)",
+    "ar": "تفعيل قفل الأطفال (كلاسيكي)"
   },
   "titleFormatted": {
     "en": "Set the child lock to a [[childlock]]",
@@ -25,7 +26,8 @@
     "sv": "Ställ in barnlåset till [[childlock]]",
     "pl": "Ustaw blokadę dla dzieci na [[childlock]]",
     "ru": "Установите детский замок на [[childlock]]",
-    "ko": "어린이 잠금 장치를 [[childlock]]로 설정하세요"
+    "ko": "어린이 잠금 장치를 [[childlock]]로 설정하세요",
+    "ar": "اضبط قفل الأطفال على [[childlock]]"
   },
   "platforms": [
     "local"
@@ -51,7 +53,8 @@
         "sv": "Barnlås",
         "pl": "Blokada dla dzieci",
         "ru": "Детский замок",
-        "ko": "아동 잠금 장치"
+        "ko": "아동 잠금 장치",
+        "ar": "قفل الأطفال"
       },
       "values": [
         {
@@ -68,7 +71,8 @@
             "sv": "På",
             "pl": "Włączone",
             "ru": "Вкл",
-            "ko": "켜짐"
+            "ko": "켜짐",
+            "ar": "تشغيل"
           }
         },
         {
@@ -85,7 +89,8 @@
             "sv": "Av",
             "pl": "Wyłączone",
             "ru": "Выкл",
-            "ko": "꺼짐"
+            "ko": "꺼짐",
+            "ar": "إيقاف"
           }
         }
       ]

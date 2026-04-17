@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueAir Settings</title>
+  <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      background: var(--homey-background-color, #f5f5f5);
+      color: var(--homey-text-color, #1a1a1a);
+      padding: 16px;
+      min-height: 100vh;
+    }
+
+    .page { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--homey-card-background-color, #fff);
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--homey-color-separator, #e8e8e8);
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--homey-text-color-secondary, #888);
+    }
+
+    /* ── Toggle row ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-label { font-size: 15px; font-weight: 500; }
+    .toggle-sub { font-size: 12px; color: var(--homey-text-color-secondary, #888); margin-top: 2px; }
+
+    .toggle-switch {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      background: var(--homey-color-separator, #ccc);
+      border-radius: 28px;
+      transition: background .2s;
+      cursor: pointer;
+    }
+
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+      transition: transform .2s;
+    }
+
+    .toggle-switch input:checked + .toggle-track {
+      background: var(--homey-color-primary, #0C2F4F);
+    }
+
+    .toggle-switch input:checked + .toggle-track::after {
+      transform: translateX(20px);
+    }
+
+    /* ── Log toolbar ── */
+    .log-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--homey-color-separator, #e8e8e8);
+    }
+
+    .stat-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      line-height: 1.6;
+    }
+    .stat-total  { background: #e8ecf0; color: #555; }
+    .stat-warn   { background: #fff3cd; color: #856404; }
+    .stat-error  { background: #fde8e8; color: #c0392b; }
+
+    .spacer { flex: 1; }
+
+    .btn {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn:active { opacity: .75; }
+    .btn-primary { background: var(--homey-color-primary, #0C2F4F); color: #fff; }
+    .btn-ghost   { background: var(--homey-color-separator, #e8e8e8); color: var(--homey-text-color, #1a1a1a); }
+
+    /* ── Log viewer ── */
+    .log-viewer {
+      height: 340px;
+      overflow-y: auto;
+      padding: 12px 0;
+      scroll-behavior: smooth;
+    }
+
+    .log-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--homey-text-color-secondary, #aaa);
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .log-entry {
+      display: grid;
+      grid-template-columns: 68px 60px 1fr;
+      gap: 0 10px;
+      padding: 3px 20px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+      line-height: 1.5;
+      border-left: 3px solid transparent;
+    }
+
+    .log-entry:hover { background: rgba(0,0,0,.03); }
+
+    .log-ts   { color: var(--homey-text-color-secondary, #aaa); white-space: nowrap; }
+    .log-tag  { color: var(--homey-text-color-secondary, #888); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .log-msg  { word-break: break-word; }
+
+    .log-entry.level-debug { border-left-color: #ccc; }
+    .log-entry.level-debug .log-msg { color: #999; }
+
+    .log-entry.level-info  { border-left-color: var(--homey-color-primary, #0C2F4F); }
+
+    .log-entry.level-warn  { border-left-color: #f39c12; background: #fffdf0; }
+    .log-entry.level-warn .log-msg { color: #7d5800; }
+
+    .log-entry.level-error    { border-left-color: #e74c3c; background: #fff8f8; }
+    .log-entry.level-error .log-msg { color: #c0392b; }
+
+    .log-entry.level-critical { border-left-color: #c0392b; background: #fde8e8; }
+    .log-entry.level-critical .log-msg { color: #922b21; font-weight: 600; }
+
+    /* ── Status footer ── */
+    .status-bar {
+      padding: 8px 20px;
+      font-size: 11px;
+      color: var(--homey-text-color-secondary, #aaa);
+      border-top: 1px solid var(--homey-color-separator, #e8e8e8);
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Verbose logging toggle ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Diagnostics</span>
+    </div>
+    <label class="toggle-row" for="verbose-toggle">
+      <div>
+        <div class="toggle-label">Verbose logging</div>
+        <div class="toggle-sub">Captures debug-level entries (action card dispatch &amp; confirmation)</div>
+      </div>
+      <div class="toggle-switch">
+        <input type="checkbox" id="verbose-toggle" />
+        <span class="toggle-track"></span>
+      </div>
+    </label>
+  </div>
+
+  <!-- ── Log viewer ── -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Log entries</span>
+    </div>
+
+    <div class="log-toolbar">
+      <span class="stat-badge stat-total" id="stat-total">0 entries</span>
+      <span class="stat-badge stat-warn"  id="stat-warn"  style="display:none">0 warnings</span>
+      <span class="stat-badge stat-error" id="stat-error" style="display:none">0 errors</span>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost" id="btn-clear">Clear</button>
+      <button class="btn btn-primary" id="btn-refresh">Refresh</button>
+    </div>
+
+    <div class="log-viewer" id="log-viewer">
+      <div class="log-empty" id="log-empty">
+        <span>No log entries yet</span>
+        <span style="font-size:11px">Trigger a flow action to generate entries</span>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <span id="status-text">Press Refresh to load</span>
+      <span>Last 150 entries kept in memory</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function onHomeyReady(Homey) {
+  Homey.ready();
+
+  const toggle   = document.getElementById('verbose-toggle');
+  const viewer   = document.getElementById('log-viewer');
+  const empty    = document.getElementById('log-empty');
+  const statTotal = document.getElementById('stat-total');
+  const statWarn  = document.getElementById('stat-warn');
+  const statErr   = document.getElementById('stat-error');
+  const statusTxt = document.getElementById('status-text');
+  const btnRefresh = document.getElementById('btn-refresh');
+  const btnClear   = document.getElementById('btn-clear');
+
+  // ── Load initial verbose setting ──
+  Homey.get('verboseLogging', function(err, value) {
+    toggle.checked = !!value;
+  });
+
+  toggle.addEventListener('change', function() {
+    Homey.set('verboseLogging', toggle.checked, function(err) {
+      if (err) statusTxt.textContent = 'Failed to save setting';
+    });
+  });
+
+  // ── Helpers ──
+  function formatTime(isoStr) {
+    const d = new Date(isoStr);
+    const h = String(d.getHours()).padStart(2, '0');
+    const m = String(d.getMinutes()).padStart(2, '0');
+    const s = String(d.getSeconds()).padStart(2, '0');
+    return h + ':' + m + ':' + s;
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function renderEntries(entries) {
+    if (!entries || entries.length === 0) {
+      viewer.innerHTML = '';
+      viewer.appendChild(empty);
+      statTotal.textContent = '0 entries';
+      statWarn.style.display = 'none';
+      statErr.style.display = 'none';
+      return;
+    }
+
+    const warns    = entries.filter(e => e.level === 'warn').length;
+    const errors   = entries.filter(e => e.level === 'error' || e.level === 'critical').length;
+
+    statTotal.textContent = entries.length + ' entr' + (entries.length === 1 ? 'y' : 'ies');
+    statWarn.textContent  = warns + ' warning' + (warns === 1 ? '' : 's');
+    statErr.textContent   = errors + ' error' + (errors === 1 ? '' : 's');
+    statWarn.style.display = warns  > 0 ? '' : 'none';
+    statErr.style.display  = errors > 0 ? '' : 'none';
+
+    const html = entries.map(function(e) {
+      return '<div class="log-entry level-' + e.level + '">'
+        + '<span class="log-ts">'  + escapeHtml(formatTime(e.ts)) + '</span>'
+        + '<span class="log-tag">' + escapeHtml(e.tag) + '</span>'
+        + '<span class="log-msg">' + escapeHtml(e.msg) + '</span>'
+        + '</div>';
+    }).join('');
+
+    viewer.innerHTML = html;
+    viewer.scrollTop = viewer.scrollHeight;
+  }
+
+  // ── Refresh ──
+  function refresh() {
+    btnRefresh.textContent = '…';
+    btnRefresh.disabled = true;
+
+    Homey.api('GET', '/logs', null, function(err, data) {
+      btnRefresh.textContent = 'Refresh';
+      btnRefresh.disabled = false;
+
+      if (err) {
+        statusTxt.textContent = 'Error: ' + err.message;
+        return;
+      }
+
+      renderEntries(data);
+      statusTxt.textContent = 'Updated ' + new Date().toLocaleTimeString();
+    });
+  }
+
+  // ── Clear ──
+  btnClear.addEventListener('click', function() {
+    Homey.api('DELETE', '/logs', null, function(err) {
+      if (err) {
+        statusTxt.textContent = 'Error: ' + err.message;
+        return;
+      }
+      renderEntries([]);
+      statusTxt.textContent = 'Cleared ' + new Date().toLocaleTimeString();
+    });
+  });
+
+  btnRefresh.addEventListener('click', refresh);
+
+  // Auto-load on open
+  refresh();
+}
+</script>
+</body>
+</html>

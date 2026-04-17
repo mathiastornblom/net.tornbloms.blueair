@@ -11,7 +11,8 @@
     "sv": "Ställ in ljusstyrka",
     "pl": "Ustaw jasność",
     "ru": "Настроить яркость",
-    "ko": "밝기 설정"
+    "ko": "밝기 설정",
+    "ar": "ضبط السطوع"
   },
   "titleFormatted": {
     "en": "Set the brightness to a [[brightness]]",
@@ -25,13 +26,14 @@
     "sv": "Ställ in ljusstyrkan på [[brightness]]",
     "pl": "Ustaw jasność na [[brightness]]",
     "ru": "Настроить яркость до [[brightness]]",
-    "ko": "[[brightness]]로 밝기 설정"
+    "ko": "[[brightness]]로 밝기 설정",
+    "ar": "اضبط السطوع إلى [[brightness]]"
   },
   "args": [
     {
       "name": "device",
       "type": "device",
-      "filter": "driver_id=dustmagnet|healthprotect"
+      "filter": "driver_id=dustmagnet|healthprotect|pure"
     },
     {
       "type": "range",
@@ -48,7 +50,8 @@
         "sv": "Ljusstyrka",
         "pl": "Jasność",
         "ru": "Яркость",
-        "ko": "밝기"
+        "ko": "밝기",
+        "ar": "السطوع"
       },
       "min": 0,
       "max": 100,

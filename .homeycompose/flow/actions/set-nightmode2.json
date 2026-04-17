@@ -11,7 +11,8 @@
     "sv": "Ställ in nattläge",
     "pl": "Ustaw tryb nocny",
     "ru": "Установить ночной режим",
-    "ko": "야간 모드 설정"
+    "ko": "야간 모드 설정",
+    "ar": "تفعيل وضع الليل"
   },
   "titleFormatted": {
     "en": "Set the night mode to a [[nightmode]]",
@@ -25,7 +26,8 @@
     "sv": "Ställ in nattläget till [[nightmode]]",
     "pl": "Ustaw tryb nocny na [[nightmode]]",
     "ru": "Установите ночной режим на [[nightmode]]",
-    "ko": "[[nightmode]] 야간 모드 설정"
+    "ko": "[[nightmode]] 야간 모드 설정",
+    "ar": "اضبط وضع الليل على [[nightmode]]"
   },
   "platforms": [
     "local"
@@ -34,7 +36,7 @@
     {
       "name": "device",
       "type": "device",
-      "filter": "driver_id=dustmagnet|healthprotect"
+      "filter": "driver_id=dustmagnet|healthprotect|pure"
     },
     {
       "type": "dropdown",
@@ -51,7 +53,8 @@
         "sv": "Nattläge",
         "pl": "Tryb nocny",
         "ru": "Ночной режим",
-        "ko": "야간 모드"
+        "ko": "야간 모드",
+        "ar": "الوضع الليلي"
       },
       "values": [
         {
@@ -68,7 +71,8 @@
             "sv": "På",
             "pl": "Włączony",
             "ru": "Включено",
-            "ko": "켜짐"
+            "ko": "켜짐",
+            "ar": "تشغيل"
           }
         },
         {
@@ -85,7 +89,8 @@
             "sv": "Av",
             "pl": "Wyłączony",
             "ru": "Выключено",
-            "ko": "꺼짐"
+            "ko": "꺼짐",
+            "ar": "إيقاف"
           }
         }
       ]

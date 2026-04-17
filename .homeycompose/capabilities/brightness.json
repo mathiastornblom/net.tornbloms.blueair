@@ -12,7 +12,8 @@
     "no": "Lysstyrke",
     "pl": "Jasność",
     "ru": "Яркость",
-    "ko": "밝기"
+    "ko": "밝기",
+    "ar": "السطوع"
   },
   "uiComponent": "slider",
   "uiQuickAction": true,

@@ -12,7 +12,8 @@
     "no": "Wi-Fi-status",
     "pl": "Stan Wi-Fi",
     "ru": "Статус Wi-Fi",
-    "ko": "Wi-Fi 상태"
+    "ko": "Wi-Fi 상태",
+    "ar": "حالة الواي فاي"
   },
   "getable": true,
   "setable": false,

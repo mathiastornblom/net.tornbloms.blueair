@@ -12,7 +12,8 @@
     "ru": "ТЧ10",
     "pl": "PM10",
     "ko": "PM10",
-    "da": "PM10"
+    "da": "PM10",
+    "ar": "PM10"
   },
   "units": {
     "en": "μg/m³",
@@ -26,7 +27,8 @@
     "sv": "μg/m³",
     "es": "μg/m³",
     "fr": "μg/m³",
-    "de": "μg/m³"
+    "de": "μg/m³",
+    "ar": "ميكروغرام/متر مكعب"
   },
   "insights": true,
   "desc": {
@@ -41,7 +43,8 @@
     "da": "Atmosfæriske partikler (μg/m³)",
     "ru": "Твердые частицы в воздухе (мкг/м³)",
     "pl": "Pył zawieszony w powietrzu (μg/m³)",
-    "ko": "대기 중 미세입자 수(μg/m³)"
+    "ko": "대기 중 미세입자 수(μg/m³)",
+    "ar": "الجسيمات العالقة في الهواء (ميكروغرام/متر مكعب)"
   },
   "chartType": "spline",
   "decimals": 2,
@@ -64,7 +67,8 @@
           "da": "PM10-værdien har ændret sig",
           "ru": "Значение ТЧ10 изменилось",
           "pl": "Zmieniła się wartość PM10",
-          "ko": "PM10 값 변경됨"
+          "ko": "PM10 값 변경됨",
+          "ar": "تغيرت قيمة PM10"
         },
         "tokens": [
           {
@@ -81,7 +85,8 @@
               "ru": "ТЧ10",
               "pl": "PM10",
               "ko": "PM10",
-              "da": "PM10"
+              "da": "PM10",
+              "ar": "PM10"
             },
             "type": "number",
             "example": 2

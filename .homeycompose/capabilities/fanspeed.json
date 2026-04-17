@@ -12,7 +12,8 @@
     "no": "Viftehastighet",
     "pl": "Prędkość wentylatora",
     "ru": "Скорость вентилятора",
-    "ko": "팬 속도"
+    "ko": "팬 속도",
+    "ar": "سرعة المروحة"
   },
   "type": "number",
   "getable": true,

@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--homey-text-color, #1a1a1a);
+  padding: 14px;
+  font-size: 13px;
+}
+
+/* ── Device selector ── */
+#device-select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--homey-text-color-light, #666);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* ── State views ── */
+.state-view {
+  text-align: center;
+  color: var(--homey-text-color-light, #888);
+  padding: 20px 0;
+  font-size: 13px;
+}
+
+/* ── Control rows ── */
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.control-row:last-child {
+  border-bottom: none;
+}
+
+.control-label {
+  font-size: 13px;
+  color: var(--homey-text-color, #1a1a1a);
+}
+
+/* ── Fan speed slider ── */
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 110px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(128, 128, 128, 0.25);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--homey-color-blue, #2563eb);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.slider-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--homey-text-color, #1a1a1a);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ── Toggle switch ── */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.track {
+  position: absolute;
+  inset: 0;
+  border-radius: 13px;
+  background: rgba(128, 128, 128, 0.3);
+  transition: background 0.2s ease;
+}
+
+.track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.toggle input:checked + .track {
+  background: #22c55e;
+}
+
+.toggle input:checked + .track::after {
+  transform: translateX(18px);
+}
+
+/* Disabled state while a command is in-flight */
+.toggle.sending .track {
+  opacity: 0.5;
+}

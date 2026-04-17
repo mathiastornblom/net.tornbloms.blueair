@@ -12,7 +12,8 @@
     "no": "Siste oppdateringsdato",
     "pl": "Data ostatniej aktualizacji",
     "ru": "Дата последнего обновления",
-    "ko": "최신 업데이트 날짜"
+    "ko": "최신 업데이트 날짜",
+    "ar": "تاريخ آخر تحديث"
   },
   "getable": true,
   "setable": false,

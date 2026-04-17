@@ -1,0 +1,154 @@
+{
+  "title": {
+    "en": "HCHO has changed",
+    "sv": "HCHO har ändrats",
+    "nl": "HCHO is veranderd",
+    "da": "HCHO er ændret",
+    "de": "HCHO hat sich geändert",
+    "es": "HCHO ha cambiado",
+    "fr": "HCHO a changé",
+    "it": "HCHO è cambiato",
+    "no": "HCHO har endret seg",
+    "pl": "HCHO się zmienił",
+    "ru": "HCHO изменился",
+    "ko": "HCHO가 변경되었습니다",
+    "ar": "تم تغيير HCHO"
+  },
+  "titleFormatted": {
+    "en": "Formaldehyde (HCHO) has changed",
+    "sv": "Formaldehyd (HCHO) har ändrats",
+    "nl": "Formaldehyde (HCHO) is veranderd",
+    "da": "Formaldehyd (HCHO) er ændret",
+    "de": "Formaldehyd (HCHO) hat sich geändert",
+    "es": "Formaldehído (HCHO) ha cambiado",
+    "fr": "Formaldéhyde (HCHO) a changé",
+    "it": "Formaldeide (HCHO) è cambiata",
+    "no": "Formaldehyd (HCHO) har endret seg",
+    "pl": "Formaldehyd (HCHO) się zmienił",
+    "ru": "Формальдегид (HCHO) изменился",
+    "ko": "포름알데히드 (HCHO)가 변경되었습니다",
+    "ar": "تم تغيير الفورمالديهايد (HCHO)"
+  },
+  "hint": {
+    "en": "Formaldehyde (HCHO) level has changed",
+    "sv": "Formaldehydnivån (HCHO) har ändrats",
+    "nl": "Formaldehydeniveau (HCHO) is veranderd",
+    "da": "Formaldehydniveau (HCHO) er ændret",
+    "de": "Formaldehyd (HCHO)-Wert hat sich geändert",
+    "es": "El nivel de formaldehído (HCHO) ha cambiado",
+    "fr": "Le niveau de formaldéhyde (HCHO) a changé",
+    "it": "Il livello di formaldeide (HCHO) è cambiato",
+    "no": "Formaldehydnivå (HCHO) har endret seg",
+    "pl": "Poziom formaldehydu (HCHO) się zmienił",
+    "ru": "Уровень формальдегида (HCHO) изменился",
+    "ko": "포름알데히드 (HCHO) 수준이 변경되었습니다",
+    "ar": "تغير مستوى الفورمالديهايد (HCHO)"
+  },
+  "platforms": [
+    "local"
+  ],
+  "tokens": [
+    {
+      "type": "string",
+      "name": "device-name",
+      "title": {
+        "en": "Device name",
+        "nl": "Apparaatnaam",
+        "da": "Enhedsnavn",
+        "de": "Gerätename",
+        "es": "Nombre del dispositivo",
+        "fr": "Nom de l'appareil",
+        "it": "Nome del dispositivo",
+        "no": "Enhetsnavn",
+        "sv": "Enhetsnamn",
+        "pl": "Nazwa urządzenia",
+        "ru": "Имя устройства",
+        "ko": "장치 이름",
+        "ar": "اسم الجهاز"
+      },
+      "example": {
+        "en": "BlueAir",
+        "nl": "BlueAir",
+        "da": "BlueAir",
+        "de": "BlueAir",
+        "es": "BlueAir",
+        "fr": "BlueAir",
+        "it": "BlueAir",
+        "no": "BlueAir",
+        "sv": "BlueAir",
+        "pl": "BlueAir",
+        "ru": "BlueAir",
+        "ko": "블루에어",
+        "ar": "BlueAir"
+      }
+    },
+    {
+      "type": "string",
+      "name": "device-uuid",
+      "title": {
+        "en": "Device UUID",
+        "nl": "Apparaat-UUID",
+        "da": "Enheds-UUID",
+        "de": "Geräte-UUID",
+        "es": "UUID del dispositivo",
+        "fr": "UUID de l'appareil",
+        "it": "UUID del dispositivo",
+        "no": "Enhets-UUID",
+        "sv": "Enhets-UUID",
+        "pl": "UUID urządzenia",
+        "ru": "UUID устройства",
+        "ko": "장치 UUID",
+        "ar": "معرّف UUID للجهاز"
+      },
+      "example": {
+        "en": "2504776FFDC0BAB2",
+        "nl": "2504776FFDC0BAB2",
+        "da": "2504776FFDC0BAB2",
+        "de": "2504776FFDC0BAB2",
+        "es": "2504776FFDC0BAB2",
+        "fr": "2504776FFDC0BAB2",
+        "it": "2504776FFDC0BAB2",
+        "no": "2504776FFDC0BAB2",
+        "sv": "2504776FFDC0BAB2",
+        "pl": "2504776FFDC0BAB2",
+        "ru": "2504776FFDC0BAB2",
+        "ko": "2504776FFDC0BAB2",
+        "ar": "2504776FFDC0BAB2"
+      }
+    },
+    {
+      "type": "number",
+      "name": "hcho",
+      "title": {
+        "en": "HCHO (μg/m³)",
+        "sv": "HCHO (μg/m³)",
+        "nl": "HCHO (μg/m³)",
+        "da": "HCHO (μg/m³)",
+        "de": "HCHO (μg/m³)",
+        "es": "HCHO (μg/m³)",
+        "fr": "HCHO (μg/m³)",
+        "it": "HCHO (μg/m³)",
+        "no": "HCHO (μg/m³)",
+        "pl": "HCHO (μg/m³)",
+        "ru": "HCHO (мкг/м³)",
+        "ko": "HCHO (μg/m³)",
+        "ar": "HCHO (μg/m³)"
+      },
+      "example": {
+        "en": "0.05",
+        "nl": "0.05",
+        "da": "0.05",
+        "de": "0.05",
+        "es": "0.05",
+        "fr": "0.05",
+        "it": "0.05",
+        "no": "0.05",
+        "sv": "0.05",
+        "pl": "0.05",
+        "ru": "0.05",
+        "ko": "0.05",
+        "ar": "0.05"
+      }
+    }
+  ]
+}

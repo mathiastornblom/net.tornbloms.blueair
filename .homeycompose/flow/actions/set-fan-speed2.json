@@ -11,7 +11,8 @@
     "no": "Sett viftehastighet",
     "pl": "Ustaw prędkość wentylatora",
     "ru": "Установить скорость вентилятора",
-    "ko": "팬 속도 설정"
+    "ko": "팬 속도 설정",
+    "ar": "ضبط سرعة المروحة"
   },
   "titleFormatted": {
     "en": "Set the fan speed to [[fanspeed]]",
@@ -25,13 +26,14 @@
     "no": "Sett viftehastigheten til [[fanspeed]]",
     "pl": "Ustaw prędkość wentylatora na [[fanspeed]]",
     "ru": "Установите скорость вентилятора на [[fanspeed]]",
-    "ko": "팬 속도를 [[fanspeed]]로 설정"
+    "ko": "팬 속도를 [[fanspeed]]로 설정",
+    "ar": "اضبط سرعة المروحة على [[fanspeed]]"
   },
   "args": [
     {
       "name": "device",
       "type": "device",
-      "filter": "driver_id=dustmagnet|healthprotect"
+      "filter": "driver_id=dustmagnet|healthprotect|pure"
     },
     {
       "type": "range",
@@ -48,7 +50,8 @@
         "sv": "Lufthastighet",
         "pl": "Prędkość powietrza",
         "ru": "Скорость воздуха",
-        "ko": "공기 속도"
+        "ko": "공기 속도",
+        "ar": "سرعة الهواء"
       },
       "min": 0,
       "max": 100,

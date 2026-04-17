@@ -11,18 +11,24 @@
     "no": "HealthProtect",
     "pl": "HealthProtect",
     "ru": "HealthProtect",
-    "ko": "HealthProtect"
+    "ko": "HealthProtect",
+    "ar": "هيلث بروتكت"
   },
   "class": "airpurifier",
   "capabilities": [
     "fanspeed",
     "brightness2",
     "child_lock",
+    "germ_shield",
+    "measure_hcho",
+    "mood_light",
     "nightmode",
     "standby",
     "automode",
     "wifi_status",
     "filter_status",
+    "measure_filter_life",
+    "measure_co2",
     "measure_humidity",
     "measure_pm1",
     "measure_pm25",
@@ -59,7 +65,8 @@
           "no": "Logg inn på kontoen din",
           "pl": "Zaloguj się na swoje konto",
           "ru": "Войдите в свой аккаунт",
-          "ko": "계정에 로그인하세요"
+          "ko": "계정에 로그인하세요",
+          "ar": "تسجيل الدخول إلى حسابك"
         },
         "usernameLabel": {
           "en": "E-mail address",
@@ -73,7 +80,8 @@
           "no": "E-postadresse",
           "pl": "Adres e-mail",
           "ru": "Электронная почта",
-          "ko": "이메일 주소"
+          "ko": "이메일 주소",
+          "ar": "عنوان البريد الإلكتروني"
         },
         "usernamePlaceholder": {
           "en": "john@doe.com",
@@ -87,7 +95,8 @@
           "no": "navn@domene.no",
           "pl": "nazwa@domena.pl",
           "ru": "имя@домен.ру",
-          "ko": "이름@도메인.코.kr"
+          "ko": "이름@도메인.코.kr",
+          "ar": "john@doe.com"
         },
         "passwordLabel": {
           "en": "Password",
@@ -101,7 +110,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         },
         "passwordPlaceholder": {
           "en": "Password",
@@ -115,7 +125,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         }
       }
     },

@@ -2,7 +2,6 @@
   "type": "string",
   "title": {
     "en": "Filter Life Remaining",
-    "se": "Filter livslängd kvar",
     "nl": "Filterlevensduur over",
     "da": "Filterlevetid tilbage",
     "de": "Filterlebensdauer verbleibend",
@@ -13,7 +12,9 @@
     "sv": "Filter livslängd kvar",
     "pl": "Pozostała żywotność filtra",
     "ru": "Оставшийся срок службы фильтра",
-    "ko": "남은 필터 수명"
+    "ko": "남은 필터 수명",
+    "ar": "عمر الفلتر المتبقي",
+    "se": "Filter livslängd kvar"
   },
   "getable": true,
   "setable": false,

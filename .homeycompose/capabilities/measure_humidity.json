@@ -12,7 +12,8 @@
     "da": "Luftfugtighed",
     "ru": "Влажность",
     "pl": "Wilgotność",
-    "ko": "습도"
+    "ko": "습도",
+    "ar": "الرطوبة"
   },
   "units": {
     "en": "%",
@@ -26,7 +27,8 @@
     "fr": "%",
     "it": "%",
     "sv": "%",
-    "pl": "%"
+    "pl": "%",
+    "ar": "٪"
   },
   "insights": true,
   "desc": {
@@ -41,7 +43,8 @@
     "da": "Luftfugtighed i procent (%)",
     "ru": "Влажность в процентах (%)",
     "pl": "Wilgotność w procentach (%)",
-    "ko": "습도(%)"
+    "ko": "습도(%)",
+    "ar": "الرطوبة بالنسبة المئوية (%)"
   },
   "chartType": "spline",
   "decimals": 2,
@@ -64,7 +67,8 @@
           "da": "Luftfugtigheden ændrede sig",
           "ru": "Влажность изменилась",
           "pl": "Zmiana wilgotności",
-          "ko": "습도 변경됨"
+          "ko": "습도 변경됨",
+          "ar": "تغيرت الرطوبة"
         },
         "tokens": [
           {
@@ -81,7 +85,8 @@
               "da": "Luftfugtighed",
               "ru": "Влажность",
               "pl": "Wilgotność",
-              "ko": "습도"
+              "ko": "습도",
+              "ar": "الرطوبة"
             },
             "type": "number",
             "example": 35

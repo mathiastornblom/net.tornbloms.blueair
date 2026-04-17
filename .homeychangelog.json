@@ -133,5 +133,32 @@
   },
   "3.2.8": {
     "en": "Fix for craches when BlueAir stops responding."
+  },
+  "3.2.10": {
+    "en": "Added action card for Pure devices"
+  },
+  "3.2.11": {
+    "en": "Fixes for the \"then\" cards"
+  },
+  "3.2.12": {
+    "en": "Improved widgets: air quality display with color-coded PM2.5 and new device control widget"
+  },
+  "3.2.13": {
+    "en": "Fix widget API handlers"
+  },
+  "3.2.14": {
+    "en": "Translations"
+  },
+  "3.2.15": {
+    "en": "Updated logging"
+  },
+  "3.2.16": {
+    "en": "Updated images from feedback from Homey QA"
+  },
+  "3.2.17": {
+    "en": "add diagnostics settings page with verbose logging toggle and log viewer"
+  },
+  "3.2.18": {
+    "en": "ast_retrieval_date capability was being added then immediately deleted on every Classic device init — a broken migration block. Removed the block; the"
   }
 }

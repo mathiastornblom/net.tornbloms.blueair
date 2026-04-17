@@ -4,6 +4,7 @@ import BlueAirAwsBaseDevice from './BlueAirAwsBaseDevice';
 import {
   filterSettings,
   calculateRemainingFilterLife,
+  calculateFilterLifePercent,
   DeviceSetting,
   conditionScorePm25ToString,
   conditionScorePm1ToString,
@@ -25,6 +26,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     'child_lock',
     'fanspeed',
     'filter_status',
+    'measure_filter_life',
     'measure_humidity',
     'measure_pm1',
     'measure_pm10',
@@ -45,6 +47,28 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
   private savedPM10: DeviceSetting | null = null;
   private savedtVOC: DeviceSetting | null = null;
   private savedFilterStatus: string | null = null;
+  private savedCo2: DeviceSetting | null = null;
+  private savedHcho: DeviceSetting | null = null;
+  private savedWifiStatus: boolean | null = null;
+
+  // ── discoverOptionalCapabilities ─────────────────────────────────────────
+
+  protected async discoverOptionalCapabilities(
+    attrs: BlueAirDeviceStatus[]
+  ): Promise<void> {
+    const optionals: { capId: string; attrKey: string }[] = [
+      { capId: 'measure_co2', attrKey: 'co2' },
+      { capId: 'measure_hcho', attrKey: 'hcho' },
+      { capId: 'germ_shield', attrKey: 'germshield' },
+      { capId: 'mood_light', attrKey: 'gsnm' },
+    ];
+    for (const { capId, attrKey } of optionals) {
+      if (filterSettings(attrs, attrKey)?.value != null && !this.hasCapability(capId)) {
+        this.log(`SKU discovery: adding optional capability "${capId}"`);
+        await this.addCapability(capId);
+      }
+    }
+  }
 
   // ── applyStatus ───────────────────────────────────────────────────────────
 
@@ -65,7 +89,12 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const standby     = filterSettings(attrs, 'standby');
     const online      = filterSettings(attrs, 'online');
     const automode    = filterSettings(attrs, 'automode');
-    const filterLife  = calculateRemainingFilterLife(attrs);
+    const germshield       = filterSettings(attrs, 'germshield');
+    const moodlight        = filterSettings(attrs, 'gsnm');
+    const co2              = filterSettings(attrs, 'co2');
+    const hcho             = filterSettings(attrs, 'hcho');
+    const filterLife       = calculateRemainingFilterLife(attrs);
+    const filterLifePercent = calculateFilterLifePercent(attrs);
 
     this.setCapabilityValue('fanspeed',           Number(fanspeed?.value ?? 0)).catch(this.error);
     this.setCapabilityValue('measure_humidity',    Number(humidity?.value ?? 0)).catch(this.error);
@@ -79,13 +108,28 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.setCapabilityValue('nightmode',           nightmode?.value === 'true').catch(this.error);
     this.setCapabilityValue('standby',             standby?.value === 'false').catch(this.error);
     this.setCapabilityValue('wifi_status',         online?.value === 'true').catch(this.error);
-    this.setCapabilityValue('filter_status',       filterLife).catch(this.error);
+    this.setCapabilityValue('filter_status',        filterLife).catch(this.error);
+    if (filterLifePercent != null) {
+      this.setCapabilityValue('measure_filter_life', filterLifePercent).catch(this.error);
+    }
     this.setCapabilityValue('automode',            automode?.value === 'true').catch(this.error);
+    if (this.hasCapability('germ_shield')) {
+      this.setCapabilityValue('germ_shield',       germshield?.value === 'true').catch(this.error);
+    }
+    if (this.hasCapability('mood_light')) {
+      this.setCapabilityValue('mood_light',        moodlight?.value === 'true').catch(this.error);
+    }
+    if (this.hasCapability('measure_co2')) {
+      this.setCapabilityValue('measure_co2',       Number(co2?.value ?? 0)).catch(this.error);
+    }
+    if (this.hasCapability('measure_hcho')) {
+      this.setCapabilityValue('measure_hcho',      Number(hcho?.value ?? 0)).catch(this.error);
+    }
 
     // Only trigger flow cards after initial load
     if (this.isInitialized) {
       this.triggerFlowCards(settings, {
-        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, filterLife,
+        fanspeed, humidity, temperature, pm1, pm25, pm10, tvoc, co2, hcho, online, filterLife,
       });
     }
 
@@ -97,6 +141,9 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.savedPM25        = pm25;
     this.savedPM10        = pm10;
     this.savedtVOC        = tvoc;
+    this.savedCo2         = co2;
+    this.savedHcho        = hcho;
+    this.savedWifiStatus  = online?.value === 'true';
     this.savedFilterStatus = filterLife;
   }
 
@@ -112,6 +159,9 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       pm25:        DeviceSetting | null;
       pm10:        DeviceSetting | null;
       tvoc:        DeviceSetting | null;
+      co2:         DeviceSetting | null;
+      hcho:        DeviceSetting | null;
+      online:      DeviceSetting | null;
       filterLife:  string | null;
     }
   ): void {
@@ -160,6 +210,25 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
         .catch((e) => this.error('Failed to trigger tVOC-has-changed', e));
     }
 
+    const isOnline = current.online?.value === 'true';
+    if (this.savedWifiStatus !== null && this.savedWifiStatus !== isOnline) {
+      this.homey.flow.getTriggerCard('wifi-status-changed')
+        .trigger({ 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
+        .catch((e) => this.error('Failed to trigger wifi-status-changed', e));
+    }
+
+    if (this.hasCapability('measure_co2') && this.savedCo2?.value !== current.co2?.value) {
+      this.homey.flow.getTriggerCard('CO2-has-changed')
+        .trigger({ 'device-name': name, 'device-uuid': uuid, 'co2': Number(current.co2?.value ?? 0) })
+        .catch((e) => this.error('Failed to trigger CO2-has-changed', e));
+    }
+
+    if (this.hasCapability('measure_hcho') && this.savedHcho?.value !== current.hcho?.value) {
+      this.homey.flow.getTriggerCard('HCHO-has-changed')
+        .trigger({ 'device-name': name, 'device-uuid': uuid, 'hcho': Number(current.hcho?.value ?? 0) })
+        .catch((e) => this.error('Failed to trigger HCHO-has-changed', e));
+    }
+
     if (this.savedFilterStatus !== current.filterLife) {
       this.homey.flow.getTriggerCard('filter-needs-change')
         .trigger({ 'device-name': name, 'device-uuid': uuid, 'device-response': String(current.filterLife ?? 'Unknown') })
@@ -200,30 +269,55 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       await this.safeSetCommand('standby', () => client.setStandby(data.uuid, !value));
     });
 
-    // Action cards
+    // Action cards — use args.device so the correct device is always targeted,
+    // regardless of which device instance last called setupListeners.
     this.homey.flow.getActionCard('set-brightness2').registerRunListener(async (args) => {
-      await client.setBrightness(data.uuid, args.brightness);
+      await (args.device as BlueAirAwsBaseDevice).performSetBrightness(args.brightness);
     });
 
     this.homey.flow.getActionCard('set-fan-speed2').registerRunListener(async (args) => {
-      await client.setFanSpeed(data.uuid, args.fanspeed);
+      await (args.device as BlueAirAwsBaseDevice).performSetFanSpeed(args.fanspeed);
     });
 
     this.homey.flow.getActionCard('set-automatic2').registerRunListener(async (args) => {
-      await client.setFanAuto(data.uuid, args.automatic);
+      await (args.device as BlueAirAwsBaseDevice).performSetAutomatic(args.automatic === 'true');
     });
 
     this.homey.flow.getActionCard('set-nightmode2').registerRunListener(async (args) => {
-      await client.setNightMode(data.uuid, args.nightmode);
+      await (args.device as BlueAirAwsBaseDevice).performSetNightMode(args.nightmode === 'true');
     });
 
     this.homey.flow.getActionCard('set-standby2').registerRunListener(async (args) => {
-      await client.setStandby(data.uuid, args.standby);
+      await (args.device as BlueAirAwsBaseDevice).performSetStandby(args.standby === 'true');
     });
 
     this.homey.flow.getActionCard('set-childlock2').registerRunListener(async (args) => {
-      await client.setChildLock(data.uuid, args.childlock);
+      await (args.device as BlueAirAwsBaseDevice).performSetChildLock(args.childlock === 'true');
     });
+
+    if (this.hasCapability('germ_shield')) {
+      this.registerCapabilityListener('germ_shield', async (value) => {
+        await this.safeSetCommand('germ_shield', () =>
+          this.performSetGermShield(value)
+        );
+      });
+
+      this.homey.flow.getActionCard('set-germshield2').registerRunListener(async (args) => {
+        await (args.device as BlueAirAwsBaseDevice).performSetGermShield(args.germshield === 'true');
+      });
+    }
+
+    if (this.hasCapability('mood_light')) {
+      this.registerCapabilityListener('mood_light', async (value) => {
+        await this.safeSetCommand('mood_light', () =>
+          this.performSetMoodLight(value)
+        );
+      });
+
+      this.homey.flow.getActionCard('set-moodlight2').registerRunListener(async (args) => {
+        await (args.device as BlueAirAwsBaseDevice).performSetMoodLight(args.moodlight === 'true');
+      });
+    }
 
     // Condition cards
     this.homey.flow.getConditionCard('score_pm25').registerRunListener(async (args) =>

@@ -41,6 +41,15 @@ export function calculateRemainingFilterLife(devices: BlueAirDeviceStatus[]): st
 }
 
 /**
+ * Returns the remaining filter life as a number (0–100), or null if unavailable.
+ */
+export function calculateFilterLifePercent(devices: BlueAirDeviceStatus[]): number | null {
+  const usage = filterSettings(devices, 'filterusage');
+  if (usage?.value != null) return 100 - Number(usage.value);
+  return null;
+}
+
+/**
  * Enum representing different air quality levels.
  */
 /* eslint-disable no-unused-vars */

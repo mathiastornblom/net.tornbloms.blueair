@@ -2,6 +2,7 @@ import { Device } from 'homey';
 import { BlueAirAwsClient } from 'blueairaws-client';
 import { BlueAirDeviceStatus } from 'blueairaws-client/dist/Consts';
 import BlueAirAwsBaseDriver from './BlueAirAwsBaseDriver';
+import { DiagnosticLogger } from '../lib/diagnostics';
 
 const MIN_POLL_INTERVAL_MS = 60_000;
 const MAX_CONSECUTIVE_FAILURES = 3;
@@ -26,7 +27,9 @@ abstract class BlueAirAwsBaseDevice extends Device {
   protected isInitialized = false;
 
   private pollIntervalId: ReturnType<typeof setInterval> | null = null;
+  private reAuthIntervalId: ReturnType<typeof setInterval> | null = null;
   private consecutiveFailures = 0;
+  protected logger!: DiagnosticLogger;
 
   // ── Abstract interface ────────────────────────────────────────────────────
 
@@ -44,6 +47,15 @@ abstract class BlueAirAwsBaseDevice extends Device {
   ): void;
 
   /**
+   * Called once after the first successful status fetch, before setupListeners.
+   * Override to add optional capabilities that depend on what the device reports.
+   * Default is a no-op.
+   */
+  protected async discoverOptionalCapabilities(
+    _attrs: BlueAirDeviceStatus[]
+  ): Promise<void> {}
+
+  /**
    * Called once after the first successful status fetch.
    * Subclasses register capability listeners and flow/action/condition cards.
    */
@@ -56,6 +68,12 @@ abstract class BlueAirAwsBaseDevice extends Device {
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   async onInit(): Promise<void> {
+    this.logger = new DiagnosticLogger(
+      this.constructor.name,
+      (...args: unknown[]) => this.log(...(args as any[])),
+      (...args: unknown[]) => this.error(...(args as any[]))
+    );
+
     const settings = this.getSettings();
     const data = this.getData();
 
@@ -89,6 +107,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
       const attrs = await client.getDeviceStatus(data.accountuuid, [data.uuid]);
       this.applyStatus(attrs, settings);
       this.syncDeviceInfo(attrs);
+      await this.discoverOptionalCapabilities(attrs);
       this.setupListeners(client, data, settings);
 
       // Mark initialized before starting the poll loop
@@ -101,13 +120,26 @@ abstract class BlueAirAwsBaseDevice extends Device {
           this.syncDeviceInfo(attrs);
           this.onPollSuccess();
         } catch (error) {
-          await this.onPollFailure(error, client);
+          await this.onPollFailure(error, settings);
         }
       }, pollMs);
 
-      this.log(`${this.constructor.name} initialized (poll every ${pollMs / 1000}s)`);
+      const REAUTH_INTERVAL_MS = 20 * 60 * 60 * 1000;
+      this.reAuthIntervalId = setInterval(async () => {
+        if (!this.client) return;
+        this.logger.info('scheduled proactive re-authentication');
+        try {
+          await this.client.initialize();
+          this.logger.info('proactive re-auth ok');
+        } catch (err) {
+          this.logger.warn('proactive re-auth failed:', err);
+        }
+      }, REAUTH_INTERVAL_MS);
+
+      this.logger.info(`initialized (poll every ${pollMs / 1000}s)`);
     } catch (e) {
-      this.error('Error during initialization:', e);
+      // Device cannot start at all — report to Sentry so it's visible
+      this.logger.critical('Initialization failed', e, { deviceId: data.uuid });
       this.setUnavailable('Initialization failed').catch(this.error);
     }
   }
@@ -116,6 +148,10 @@ abstract class BlueAirAwsBaseDevice extends Device {
     if (this.pollIntervalId) {
       clearInterval(this.pollIntervalId);
       this.pollIntervalId = null;
+    }
+    if (this.reAuthIntervalId) {
+      clearInterval(this.reAuthIntervalId);
+      this.reAuthIntervalId = null;
     }
   }
 
@@ -137,6 +173,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   private onPollSuccess(): void {
     if (this.consecutiveFailures > 0) {
+      this.logger.info(`recovered after ${this.consecutiveFailures} failure(s)`);
       this.consecutiveFailures = 0;
       this.setAvailable().catch(this.error);
     }
@@ -144,30 +181,38 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   private async onPollFailure(
     error: unknown,
-    client: BlueAirAwsClient
+    settings: Record<string, any>
   ): Promise<void> {
-    this.log('Polling error:', error);
     this.consecutiveFailures++;
+    this.logger.warn(`poll failed (${this.consecutiveFailures}/${MAX_CONSECUTIVE_FAILURES}):`, error);
 
     if (this.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+      this.logger.error(`device unreachable after ${MAX_CONSECUTIVE_FAILURES} consecutive failures — clearing cached client`);
+      (this.driver as BlueAirAwsBaseDriver).clearClient(settings.username as string);
+      this.client = null;
       this.setUnavailable('Device unreachable — API error').catch(this.error);
     }
 
-    // Attempt re-authentication on session / rate-limit errors
+    // Attempt re-authentication on session / auth / rate-limit errors
     const msg = String(error).toLowerCase();
     if (
       msg.includes('session') ||
       msg.includes('rate limit') ||
       msg.includes('403') ||
       msg.includes('401') ||
-      msg.includes('229')
+      msg.includes('229') ||
+      msg.includes('unauthorized') ||
+      msg.includes('gigya') ||
+      msg.includes('token') ||
+      msg.includes('invalid')
     ) {
-      this.log('Session/rate-limit error — attempting re-authentication...');
+      if (!this.client) return;
+      this.logger.info('auth/session error — attempting re-authentication...');
       try {
-        await client.initialize();
-        this.log('Re-authentication successful');
+        await this.client.initialize();
+        this.logger.info('re-authentication successful');
       } catch (authError) {
-        this.log('Re-authentication failed:', authError);
+        this.logger.error('re-authentication failed:', authError);
       }
     }
   }
@@ -185,9 +230,117 @@ abstract class BlueAirAwsBaseDevice extends Device {
     try {
       await command();
     } catch (error) {
-      this.error(`Command failed for ${capability}:`, error);
+      this.logger.error(`command failed for ${capability}:`, error);
       this.setCapabilityValue(capability, oldValue).catch(this.error);
       throw error;
+    }
+  }
+
+  // ── Public action methods (called from flow action card listeners) ──────────
+
+  public async performSetFanSpeed(value: number): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-fan-speed → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setFanSpeed(this.getData().uuid, value);
+      this.setCapabilityValue('fanspeed', value).catch(this.error);
+      this.logger.debug('action:set-fan-speed ok');
+    } catch (err) {
+      this.logger.error('action:set-fan-speed failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetBrightness(value: number): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-brightness → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setBrightness(this.getData().uuid, value);
+      this.setCapabilityValue('brightness2', value).catch(this.error);
+      this.logger.debug('action:set-brightness ok');
+    } catch (err) {
+      this.logger.error('action:set-brightness failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetAutomatic(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-automatic → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setFanAuto(this.getData().uuid, value);
+      this.setCapabilityValue('automode', value).catch(this.error);
+      this.logger.debug('action:set-automatic ok');
+    } catch (err) {
+      this.logger.error('action:set-automatic failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetNightMode(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-nightmode → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setNightMode(this.getData().uuid, value);
+      this.setCapabilityValue('nightmode', value).catch(this.error);
+      this.logger.debug('action:set-nightmode ok');
+    } catch (err) {
+      this.logger.error('action:set-nightmode failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetStandby(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-standby → "${this.getName()}" value=${value}`);
+    try {
+      // Action card "standby=true" = put device IN standby.
+      // Capability 'standby' is true = device ON (not in standby), so invert.
+      await this.client.setStandby(this.getData().uuid, value);
+      this.setCapabilityValue('standby', !value).catch(this.error);
+      this.logger.debug('action:set-standby ok');
+    } catch (err) {
+      this.logger.error('action:set-standby failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetChildLock(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-childlock → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setChildLock(this.getData().uuid, value);
+      this.setCapabilityValue('child_lock', value).catch(this.error);
+      this.logger.debug('action:set-childlock ok');
+    } catch (err) {
+      this.logger.error('action:set-childlock failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetMoodLight(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-moodlight → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setDeviceStatus(this.getData().uuid, 'gsnm', value);
+      this.setCapabilityValue('mood_light', value).catch(this.error);
+      this.logger.debug('action:set-moodlight ok');
+    } catch (err) {
+      this.logger.error('action:set-moodlight failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetGermShield(value: boolean): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-germshield → "${this.getName()}" value=${value}`);
+    try {
+      await this.client.setDeviceStatus(this.getData().uuid, 'germshield', value);
+      this.setCapabilityValue('germ_shield', value).catch(this.error);
+      this.logger.debug('action:set-germshield ok');
+    } catch (err) {
+      this.logger.error('action:set-germshield failed:', err);
+      throw err;
     }
   }
 }

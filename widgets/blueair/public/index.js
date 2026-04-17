@@ -1,292 +1,175 @@
-const FONT_SIZE_SMALL = '14px';
-const FONT_SIZE_VERY_SMALL = '12px';
-const INCREMENT = 1;
-const NEXT_TIMEOUT = 60000;
-const TIME_ZERO = 0;
-const TIME_FIVE = 5;
+'use strict';
 
-const colors = [
-  '#1F77B4',
-  '#D62728',
-  '#2CA02C',
-  '#FF7F0E',
-  '#9467BD',
-  '#FFDB58',
-  '#17BECF',
-  '#E377C2',
-  '#7F7F7F',
-  '#393B79',
-  '#E7BA52',
+// ── Air quality thresholds ────────────────────────────────────────────────────
+
+const PM25_LEVELS = [
+  { max: 12,       label: 'Good',           color: '#22c55e' },
+  { max: 35,       label: 'Moderate',       color: '#eab308' },
+  { max: 55,       label: 'Unhealthy',      color: '#f97316' },
+  { max: Infinity, label: 'Very Unhealthy', color: '#ef4444' },
 ];
-const defaultHiddenSeries = [
-  'FlowBoiler',
-  'FlowZone1',
-  'FlowZone2',
-  'MixingTankWater',
-  'ReturnBoiler',
-  'ReturnZone1',
-  'ReturnZone2',
+
+function getPM25Level(value) {
+  return PM25_LEVELS.find((l) => value <= l.max) ?? PM25_LEVELS[PM25_LEVELS.length - 1];
+}
+
+// ── Metric display config ─────────────────────────────────────────────────────
+
+const SECONDARY_METRICS = [
+  { cap: 'measure_pm1',         label: 'PM1',      unit: '' },
+  { cap: 'measure_pm10',        label: 'PM10',     unit: '' },
+  { cap: 'measure_tvoc',        label: 'tVOC',     unit: '' },
+  { cap: 'measure_humidity',    label: 'Humidity', unit: '%' },
+  { cap: 'measure_temperature', label: 'Temp',     unit: '°' },
+  { cap: 'fanspeed',            label: 'Fan',      unit: '%' },
 ];
-const styleCache = {};
 
-let myChart = null;
-let options = {};
-let timeout = null;
+function formatValue(cap, value) {
+  if (value === null || value === undefined) return '—';
+  if (cap === 'measure_temperature') return value.toFixed(1);
+  return String(Math.round(value));
+}
 
-const getDivElement = (id) => {
-  const element = document.getElementById(id);
-  if (!(element instanceof HTMLDivElement)) {
-    throw new Error('Element is not a div');
+// ── State ─────────────────────────────────────────────────────────────────────
+
+const STORAGE_KEY = 'blueair_aq_device';
+let selectedDeviceId = null;
+let refreshTimer = null;
+
+// ── DOM helpers ───────────────────────────────────────────────────────────────
+
+function show(id) { document.getElementById(id).hidden = false; }
+function hide(id) { document.getElementById(id).hidden = true; }
+
+// ── Widget entry point ────────────────────────────────────────────────────────
+
+async function onHomeyReady(Homey) {
+  const settings = Homey.getSettings();
+  const refreshMs = Math.max(5, Number(settings.refreshSeconds) || 15) * 1000;
+
+  let devices;
+  try {
+    devices = await Homey.api('GET', '/devices');
+  } catch {
+    hide('state-loading');
+    show('state-error');
+    Homey.ready({ height: document.body.scrollHeight });
+    return;
   }
-  return element;
-};
 
-const getSelectElement = (id) => {
-  const element = document.getElementById(id);
-  if (!(element instanceof HTMLSelectElement)) {
-    throw new Error('Element is not a select');
+  hide('state-loading');
+
+  if (!devices || devices.length === 0) {
+    show('state-no-devices');
+    Homey.ready({ height: document.body.scrollHeight });
+    return;
   }
-  return element;
-};
 
-const zoneElement = getSelectElement('zones');
-
-const getZoneId = (id) => `${model}_${String(id)}`;
-const getZonePath = () => zoneElement.value.replace('_', '/');
-
-const getStyle = (property) => {
-  styleCache[property] ??= getComputedStyle(document.documentElement)
-    .getPropertyValue(property)
-    .trim();
-  return styleCache[property];
-};
-
-const normalizeSeriesName = (name) => name.replace('Temperature', '');
-
-// eslint-disable-next-line max-lines-per-function
-const getChartLineOptions = (labels) => {
-  const colorLight = getStyle('--homey-text-color-light');
-  const axisStyle = {
-    axisBorder: { color: colorLight, show: true },
-    axisTicks: { color: colorLight, show: true },
-  };
-  const fontStyle = {
-    fontSize: FONT_SIZE_VERY_SMALL,
-    fontWeight: getStyle('--homey-font-weight-regular'),
-  };
-  return {
-    chart: { height, toolbar: { show: false }, type: 'line' },
-    colors,
-    grid: {
-      borderColor: colorLight,
-      strokeDashArray: 3,
-      xaxis: { lines: { show: false } },
-    },
-    legend: {
-      ...fontStyle,
-      labels: { colors: colorLight },
-      markers: { shape: 'square', strokeWidth: 0 },
-    },
-    series: series.map(({ data, name }) => {
-      const newName = normalizeSeriesName(name);
-      return {
-        data,
-        hidden: defaultHiddenSeries.includes(newName),
-        name: newName,
-      };
-    }),
-    stroke: { curve: 'smooth' },
-    title: {
-      offsetX: 5,
-      style: { ...fontStyle, color: colorLight },
-      text: unit,
-    },
-    xaxis: {
-      ...axisStyle,
-      categories: labels,
-      labels: { rotate: 0, style: { ...fontStyle, colors: colorLight } },
-      tickAmount: 3,
-    },
-    yaxis: {
-      ...axisStyle,
-      labels: {
-        formatter: (value) => value.toFixed(),
-        style: { ...fontStyle, colors: colorLight },
-      },
-      ...(unit === 'dBm' ? { max: 0, min: -100 } : undefined),
-    },
-  };
-};
-
-const getChartPieOptions = ({ labels, series }, height) => ({
-  chart: { height, toolbar: { show: false }, type: 'pie' },
-  colors,
-  dataLabels: {
-    dropShadow: { enabled: false },
-    style: {
-      colors: [getStyle('--homey-text-color')],
-      fontSize: FONT_SIZE_SMALL,
-      fontWeight: getStyle('--homey-font-weight-bold'),
-    },
-  },
-  labels: labels.map((label) =>
-    label
-      .replace('Actual', '')
-      .replace('FansStopped', 'Stop')
-      .replace('Mode', '')
-      .replace('Operation', '')
-      .replace('PowerOff', 'Off')
-      .replace('Power', 'Off')
-      .replace('Prevention', '')
-      .replace(/(?<mode>.+)Ventilation$/u, '$<mode>')
-  ),
-  legend: {
-    fontSize: FONT_SIZE_VERY_SMALL,
-    fontWeight: getStyle('--homey-font-weight-regular'),
-    labels: { colors: getStyle('--homey-text-color-light') },
-    markers: { shape: 'square', strokeWidth: 0 },
-  },
-  series,
-  stroke: { show: false },
-});
-
-const getChartOptions = (data, height) =>
-  'unit' in data
-    ? getChartLineOptions(data, height)
-    : getChartPieOptions(data, height);
-
-const getChartFunction = (homey, chart)(
-  (days) => async (days) =>
-    await homey.api(
-      'GET',
-      `/logs/${chart}/${getZonePath()}${
-        ['operation_modes', 'temperatures'].includes(chart) &&
-        days !== undefined
-          ? `?${new URLSearchParams({
-              days: String(days),
-            })}`
-          : ''
-      }`
-    )
-);
-
-const handleChartAndOptions = async (homey, { chart, days, height }) => {
-  const hiddenSeries = (options.series ?? []).map((serie) =>
-    typeof serie === 'number' || serie.hidden !== true ? null : serie.name
-  );
-  const newOptions = getChartOptions(
-    await getChartFunction(homey, chart)(days),
-    height
-  );
-  if (
-    newOptions.chart?.type === 'pie' ||
-    hiddenSeries.some(
-      (name) =>
-        name !== null &&
-        !(newOptions.series ?? [])
-          .map((serie) => (typeof serie === 'number' ? null : serie.name))
-          .includes(name)
-    )
-  ) {
-    myChart?.destroy();
-    myChart = null;
+  // ── Populate device selector ──
+  const select = document.getElementById('device-select');
+  for (const d of devices) {
+    const opt = document.createElement('option');
+    opt.value = d.id;
+    opt.textContent = d.name;
+    select.appendChild(opt);
   }
-  return newOptions;
-};
 
-const getTimeout = (chart) => {
-  if (['hourly_temperatures', 'signal'].includes(chart)) {
-    return NEXT_TIMEOUT;
-  }
-  const now = new Date();
-  const next = new Date(now);
-  next.setHours(next.getHours() + INCREMENT, TIME_FIVE, TIME_ZERO, TIME_ZERO);
-  return next.getTime() - now.getTime();
-};
-
-const draw = async (homey, { chart, days, height }) => {
-  options = await handleChartAndOptions(homey, { chart, days, height });
-  if (myChart) {
-    await myChart.updateOptions(options);
+  // Restore previously selected device from localStorage
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored && devices.find((d) => d.id === stored)) {
+    selectedDeviceId = stored;
   } else {
-    // @ts-expect-error: imported by another script in `./index.html`
-    myChart = new ApexCharts(getDivElement('chart'), options);
-    await myChart.render();
+    selectedDeviceId = devices[0].id;
   }
-  await homey.setHeight(document.body.scrollHeight);
-  timeout = setTimeout(() => {
-    draw(homey, { chart, days, height }).catch(() => {
-      //
-    });
-  }, getTimeout(chart));
-};
+  select.value = selectedDeviceId;
 
-const setDocumentLanguage = async (homey) => {
-  document.documentElement.lang = await homey.api('GET', '/language');
-};
-
-const createOptionElement = (selectElement, { id, label }) => {
-  if (!selectElement.querySelector(`option[value="${id}"]`)) {
-    selectElement.append(new Option(label, id));
-  }
-};
-
-const generateZones = (zones) => {
-  zones.forEach(({ id, model, name: label }) => {
-    createOptionElement(zoneElement, { id: getZoneId(id, model), label });
+  select.addEventListener('change', () => {
+    selectedDeviceId = select.value;
+    localStorage.setItem(STORAGE_KEY, selectedDeviceId);
+    clearTimeout(refreshTimer);
+    fetchAndRender(Homey, refreshMs);
   });
-};
 
-const addEventListeners = (homey, config) => {
-  zoneElement.addEventListener('change', () => {
-    if (timeout) {
-      clearTimeout(timeout);
+  // ── Realtime updates pushed from the app ──
+  // The app can call `this.homey.api.realtime('deviceUpdate', { deviceId, values })`
+  // in device polling to deliver instant updates without waiting for the interval.
+  Homey.on('deviceUpdate', ({ deviceId, values }) => {
+    if (deviceId === selectedDeviceId) {
+      renderValues(values);
+      Homey.setHeight(document.body.scrollHeight);
     }
-    draw(homey, config).catch(() => {
-      //
-    });
   });
-};
 
-const handleDefaultZone = (defaultZone) => {
-  if (defaultZone) {
-    const { id, model } = defaultZone;
-    const value = getZoneId(id, model);
-    if (document.querySelector(`#zones option[value="${value}"]`)) {
-      zoneElement.value = value;
-    }
+  await fetchAndRender(Homey, refreshMs);
+  Homey.ready({ height: document.body.scrollHeight });
+}
+
+// ── Data fetching ─────────────────────────────────────────────────────────────
+
+async function fetchAndRender(Homey, refreshMs) {
+  try {
+    const values = await Homey.api('GET', `/device/${selectedDeviceId}/values`);
+    renderValues(values);
+    Homey.setHeight(document.body.scrollHeight);
+  } catch {
+    // Keep showing the last rendered values; silently retry next interval
   }
-};
+  refreshTimer = setTimeout(() => fetchAndRender(Homey, refreshMs), refreshMs);
+}
 
-const fetchDevices = async (homey) => {
-  const {
-    chart,
-    days,
-    default_zone: defaultZone,
-    height,
-  } = homey.getSettings();
-  const devices = await homey.api(
-    'GET',
-    `/devices${
-      chart === 'hourly_temperatures'
-        ? `?${new URLSearchParams({
-            type: '1',
-          })}`
-        : ''
-    }`
-  );
-  if (devices.length) {
-    addEventListeners(homey, { chart, days, height: Number(height) });
-    generateZones(devices);
-    handleDefaultZone(defaultZone);
-    await draw(homey, { chart, days, height: Number(height) });
+// ── Rendering ─────────────────────────────────────────────────────────────────
+
+function renderValues(values) {
+  show('main');
+
+  // PM2.5 — primary metric
+  const pm25 = values['measure_pm25'];
+  const pm25El = document.getElementById('pm25-value');
+  const pm25Badge = document.getElementById('pm25-badge');
+
+  if (pm25 !== null && pm25 !== undefined) {
+    const level = getPM25Level(pm25);
+    pm25El.textContent = Math.round(pm25);
+    pm25El.style.color = level.color;
+    pm25Badge.textContent = level.label;
+    pm25Badge.style.backgroundColor = level.color;
+    pm25Badge.hidden = false;
+  } else {
+    pm25El.textContent = '—';
+    pm25El.style.color = '';
+    pm25Badge.hidden = true;
   }
-};
 
-// @ts-expect-error: read by another script in `./index.html`
-// eslint-disable-next-line func-style
-async function onHomeyReady(homey) {
-  await setDocumentLanguage(homey);
-  await fetchDevices(homey);
-  homey.ready({ height: document.body.scrollHeight });
+  // Secondary metrics — only render those available on this device
+  const grid = document.getElementById('metrics-grid');
+  grid.innerHTML = '';
+
+  for (const { cap, label, unit } of SECONDARY_METRICS) {
+    if (!(cap in values)) continue;
+    const div = document.createElement('div');
+    div.className = 'metric';
+    div.innerHTML =
+      `<div class="metric-value">${formatValue(cap, values[cap])}${unit}</div>` +
+      `<div class="metric-label">${label}</div>`;
+    grid.appendChild(div);
+  }
+
+  // Status bar
+  const filterEl = document.getElementById('filter-label');
+  const wifiEl   = document.getElementById('wifi-label');
+
+  if ('filter_status' in values && values['filter_status'] !== null) {
+    filterEl.textContent = `Filter: ${values['filter_status']}`;
+  } else {
+    filterEl.textContent = '';
+  }
+
+  if ('wifi_status' in values && values['wifi_status'] !== null) {
+    const online = values['wifi_status'];
+    const color  = online ? '#22c55e' : '#ef4444';
+    const label  = online ? 'Online' : 'Offline';
+    wifiEl.innerHTML = `<span class="dot" style="background:${color}"></span>${label}`;
+  } else {
+    wifiEl.textContent = '';
+  }
 }

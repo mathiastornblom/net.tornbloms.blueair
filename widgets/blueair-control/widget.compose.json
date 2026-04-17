@@ -1,0 +1,33 @@
+{
+  "name": {
+    "en": "BlueAir Control",
+    "nl": "BlueAir Bediening",
+    "da": "BlueAir Styring",
+    "de": "BlueAir Steuerung",
+    "es": "BlueAir Control",
+    "fr": "BlueAir Contrôle",
+    "it": "BlueAir Controllo",
+    "no": "BlueAir Styring",
+    "sv": "BlueAir Styrning",
+    "pl": "BlueAir Sterowanie",
+    "ru": "BlueAir Управление",
+    "ko": "BlueAir 제어",
+    "ar": "التحكم في BlueAir"
+  },
+  "transparent": false,
+  "settings": [],
+  "api": {
+    "getDevices": {
+      "method": "GET",
+      "path": "/devices"
+    },
+    "getDeviceState": {
+      "method": "GET",
+      "path": "/device/:deviceId/state"
+    },
+    "setCapability": {
+      "method": "POST",
+      "path": "/device/:deviceId/capability/:capabilityId"
+    }
+  }
+}

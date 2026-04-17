@@ -1,0 +1,23 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Mood light",
+    "sv": "Stämningsljus",
+    "nl": "Sfeerverlichting",
+    "da": "Stemningslys",
+    "de": "Stimmungslicht",
+    "es": "Luz de ambiente",
+    "fr": "Lumière d'ambiance",
+    "it": "Luce d'atmosfera",
+    "no": "Stemningslys",
+    "pl": "Światło nastrojowe",
+    "ru": "Атмосферный свет",
+    "ko": "무드 조명",
+    "ar": "ضوء الأجواء"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "toggle",
+  "uiQuickAction": false,
+  "icon": "/assets/images/lightbulb.svg"
+}

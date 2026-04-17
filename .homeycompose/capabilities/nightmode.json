@@ -12,7 +12,8 @@
     "no": "Nattmodus",
     "pl": "Tryb nocny",
     "ru": "Ночной режим",
-    "ko": "야간 모드"
+    "ko": "야간 모드",
+    "ar": "وضع الليل"
   },
   "getable": true,
   "setable": true,

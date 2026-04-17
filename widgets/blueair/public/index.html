@@ -2,31 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta content="BlueAir charts" name="description" />
-    <meta
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-      name="viewport"
-    />
-    <title>BlueAir device values</title>
-    <link href="output.css" rel="stylesheet" />
-    <link href="styles.css" rel="stylesheet" />
-    <script defer src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script defer src="index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <title>BlueAir Air Quality</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="homey-widget-full homey-text-align-center">
-    <select
-      id="zones"
-      class="select select-ghost text-default text-color font-bold mb-2 max-w-xs"
-      aria-label="Devices"
-    ></select>
-    <div id="chart"></div>
-    <script type="text/javascript">
-      function onHomeyReady(Homey) {
-        Homey.ready();
+  <body>
+    <div id="app">
+      <div id="header">
+        <select id="device-select" aria-label="Select device"></select>
+      </div>
 
-        // View the settings the user provided if your widget has settings.
-        console.log('Widget settings:', Homey.getSettings());
-      }
-    </script>
+      <div id="state-loading" class="state-view">Loading…</div>
+      <div id="state-no-devices" class="state-view" hidden>No BlueAir devices found</div>
+      <div id="state-error" class="state-view" hidden>Could not load data</div>
+
+      <div id="main" hidden>
+        <!-- Primary metric: PM2.5 -->
+        <div id="pm25-card">
+          <div id="pm25-value">—</div>
+          <div id="pm25-unit">μg/m³  ·  PM2.5</div>
+          <span id="pm25-badge" hidden></span>
+        </div>
+
+        <!-- Secondary metrics grid (PM1, PM10, tVOC, Humidity, Temp, Fan) -->
+        <div id="metrics-grid"></div>
+
+        <!-- Filter + connectivity status -->
+        <div id="status-bar">
+          <span id="filter-label"></span>
+          <span id="wifi-label"></span>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
   </body>
 </html>

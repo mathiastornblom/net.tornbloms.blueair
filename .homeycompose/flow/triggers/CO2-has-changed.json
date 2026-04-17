@@ -1,0 +1,154 @@
+{
+  "title": {
+    "en": "CO2 has changed",
+    "nl": "CO2 is veranderd",
+    "da": "CO2 er ændret",
+    "de": "CO2 hat sich geändert",
+    "es": "CO2 ha cambiado",
+    "fr": "CO2 a changé",
+    "it": "CO2 è cambiato",
+    "no": "CO2 har endret seg",
+    "sv": "CO2 har ändrats",
+    "pl": "CO2 się zmienił",
+    "ru": "CO2 изменился",
+    "ko": "CO2가 변경되었습니다",
+    "ar": "تم تغيير CO2"
+  },
+  "titleFormatted": {
+    "en": "CO2 has changed",
+    "nl": "CO2 is veranderd",
+    "da": "CO2 er ændret",
+    "de": "CO2 hat sich geändert",
+    "es": "CO2 ha cambiado",
+    "fr": "CO2 a changé",
+    "it": "CO2 è cambiato",
+    "no": "CO2 har endret seg",
+    "sv": "CO2 har ändrats",
+    "pl": "CO2 się zmienił",
+    "ru": "CO2 изменился",
+    "ko": "CO2가 변경되었습니다",
+    "ar": "تم تغيير CO2"
+  },
+  "hint": {
+    "en": "CO2 level has changed",
+    "nl": "CO2-niveau is veranderd",
+    "da": "CO2-niveau er ændret",
+    "de": "CO2-Wert wurde geändert",
+    "es": "El nivel de CO2 ha cambiado",
+    "fr": "Le niveau de CO2 a changé",
+    "it": "Il livello di CO2 è cambiato",
+    "no": "CO2-nivå har endret seg",
+    "sv": "CO2-nivån har ändrats",
+    "pl": "Poziom CO2 się zmienił",
+    "ru": "Уровень CO2 изменился",
+    "ko": "CO2 수준이 변경되었습니다",
+    "ar": "تغير مستوى CO2"
+  },
+  "platforms": [
+    "local"
+  ],
+  "tokens": [
+    {
+      "type": "string",
+      "name": "device-name",
+      "title": {
+        "en": "Device name",
+        "nl": "Apparaatnaam",
+        "da": "Enhedsnavn",
+        "de": "Gerätename",
+        "es": "Nombre del dispositivo",
+        "fr": "Nom de l'appareil",
+        "it": "Nome del dispositivo",
+        "no": "Enhetsnavn",
+        "sv": "Enhetsnamn",
+        "pl": "Nazwa urządzenia",
+        "ru": "Имя устройства",
+        "ko": "장치 이름",
+        "ar": "اسم الجهاز"
+      },
+      "example": {
+        "en": "BlueAir",
+        "nl": "BlueAir",
+        "da": "BlueAir",
+        "de": "BlueAir",
+        "es": "BlueAir",
+        "fr": "BlueAir",
+        "it": "BlueAir",
+        "no": "BlueAir",
+        "sv": "BlueAir",
+        "pl": "BlueAir",
+        "ru": "BlueAir",
+        "ko": "블루에어",
+        "ar": "BlueAir"
+      }
+    },
+    {
+      "type": "string",
+      "name": "device-uuid",
+      "title": {
+        "en": "Device UUID",
+        "nl": "Apparaat-UUID",
+        "da": "Enheds-UUID",
+        "de": "Geräte-UUID",
+        "es": "UUID del dispositivo",
+        "fr": "UUID de l'appareil",
+        "it": "UUID del dispositivo",
+        "no": "Enhets-UUID",
+        "sv": "Enhets-UUID",
+        "pl": "UUID urządzenia",
+        "ru": "UUID устройства",
+        "ko": "장치 UUID",
+        "ar": "معرّف UUID للجهاز"
+      },
+      "example": {
+        "en": "2504776FFDC0BAB2",
+        "nl": "2504776FFDC0BAB2",
+        "da": "2504776FFDC0BAB2",
+        "de": "2504776FFDC0BAB2",
+        "es": "2504776FFDC0BAB2",
+        "fr": "2504776FFDC0BAB2",
+        "it": "2504776FFDC0BAB2",
+        "no": "2504776FFDC0BAB2",
+        "sv": "2504776FFDC0BAB2",
+        "pl": "2504776FFDC0BAB2",
+        "ru": "2504776FFDC0BAB2",
+        "ko": "2504776FFDC0BAB2",
+        "ar": "2504776FFDC0BAB2"
+      }
+    },
+    {
+      "type": "number",
+      "name": "co2",
+      "title": {
+        "en": "CO2 (ppm)",
+        "nl": "CO2 (ppm)",
+        "da": "CO2 (ppm)",
+        "de": "CO2 (ppm)",
+        "es": "CO2 (ppm)",
+        "fr": "CO2 (ppm)",
+        "it": "CO2 (ppm)",
+        "no": "CO2 (ppm)",
+        "sv": "CO2 (ppm)",
+        "pl": "CO2 (ppm)",
+        "ru": "CO2 (ppm)",
+        "ko": "CO2 (ppm)",
+        "ar": "CO2 (ppm)"
+      },
+      "example": {
+        "en": "800",
+        "nl": "800",
+        "da": "800",
+        "de": "800",
+        "es": "800",
+        "fr": "800",
+        "it": "800",
+        "no": "800",
+        "sv": "800",
+        "pl": "800",
+        "ru": "800",
+        "ko": "800",
+        "ar": "800"
+      }
+    }
+  ]
+}

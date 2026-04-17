@@ -11,7 +11,8 @@
     "sv": "pm1 mätning",
     "pl": "pomiar pm1",
     "ru": "измерение pm1",
-    "ko": "pm1 측정"
+    "ko": "pm1 측정",
+    "ar": "قياس pm1"
   },
   "titleFormatted": {
     "en": "pm1 level [[argument_main]]",
@@ -25,7 +26,8 @@
     "sv": "pm1 nivå [[argument_main]]",
     "pl": "poziom pm1 [[argument_main]]",
     "ru": "уровень pm1 [[argument_main]]",
-    "ko": "pm1 수준 [[argument_main]]"
+    "ko": "pm1 수준 [[argument_main]]",
+    "ar": "مستوى pm1 [[argument_main]]"
   },
   "hint": {
     "en": "pm1 measurement",
@@ -39,7 +41,8 @@
     "sv": "pm1 mätning",
     "pl": "pomiar pm1",
     "ru": "измерение pm1",
-    "ko": "pm1 측정"
+    "ko": "pm1 측정",
+    "ar": "قياس pm1"
   },
   "args": [
     {
@@ -47,6 +50,7 @@
       "type": "dropdown",
       "title": {
         "en": "Level",
+        "nl": "Niveau",
         "da": "Niveau",
         "de": "Level",
         "es": "Nivel",
@@ -56,7 +60,8 @@
         "sv": "Nivå",
         "pl": "Poziom",
         "ru": "Уровень",
-        "ko": "수준"
+        "ko": "수준",
+        "ar": "المستوى"
       },
       "values": [
         {
@@ -73,7 +78,8 @@
             "sv": "utmärkt, poäng under 10 µg/m³",
             "pl": "doskonały, wynik poniżej 10 µg/m³",
             "ru": "превосходно, результат ниже 10 мкг/м³",
-            "ko": "우수, 10 µg/m³ 이하"
+            "ko": "우수, 10 µg/m³ 이하",
+            "ar": "ممتاز، درجة أقل من 10 ميكروغرام/م³"
           }
         },
         {
@@ -90,7 +96,8 @@
             "sv": "bra, poäng mellan 11 och 20 µg/m³",
             "pl": "dobry, wynik między 11 a 20 µg/m³",
             "ru": "хорошо, результат между 11 и 20 мкг/м³",
-            "ko": "양호, 11에서 20 µg/m³ 사이"
+            "ko": "양호, 11에서 20 µg/m³ 사이",
+            "ar": "جيد، النسبة بين 11 و 20 ميكروغرام/م³"
           }
         },
         {
@@ -107,7 +114,8 @@
             "sv": "genomsnittlig, mellan 21 och 30 µg/m³",
             "pl": "średni, między 21 a 30 µg/m³",
             "ru": "средний, между 21 и 30 мкг/м³",
-            "ko": "보통, 21에서 30 µg/m³ 사이"
+            "ko": "보통, 21에서 30 µg/m³ 사이",
+            "ar": "متوسط، بين 21 و 30 ميكروغرام/م³"
           }
         },
         {
@@ -124,7 +132,8 @@
             "sv": "dålig, mellan 31 och 40 µg/m³",
             "pl": "słaby, między 31 a 40 µg/m³",
             "ru": "плохо, между 31 и 40 мкг/м³",
-            "ko": "나쁨, 31에서 40 µg/m³ 사이"
+            "ko": "나쁨, 31에서 40 µg/m³ 사이",
+            "ar": "سيء، بين 31 و 40 ميكروغرام/م³"
           }
         },
         {
@@ -141,7 +150,8 @@
             "sv": "mycket dålig, över 40 µg/m³",
             "pl": "bardzo słaby, powyżej 40 µg/m³",
             "ru": "очень плохо, выше 40 мкг/м³",
-            "ko": "매우 나쁨, 40 µg/m³ 이상"
+            "ko": "매우 나쁨, 40 µg/m³ 이상",
+            "ar": "سيء جدًا، فوق 40 ميكروغرام/م³"
           }
         }
       ]

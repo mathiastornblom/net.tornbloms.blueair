@@ -12,7 +12,8 @@
     "no": "Automodus",
     "pl": "Tryb automatyczny",
     "ru": "Автоматический режим",
-    "ko": "자동 모드"
+    "ko": "자동 모드",
+    "ar": "وضع تلقائي"
   },
   "getable": true,
   "setable": true,

@@ -11,7 +11,8 @@
     "no": "Pure",
     "pl": "Pure",
     "ru": "Pure",
-    "ko": "Pure"
+    "ko": "Pure",
+    "ar": "نقي"
   },
   "class": "airpurifier",
   "capabilities": [
@@ -23,10 +24,15 @@
     "automode",
     "wifi_status",
     "filter_status",
+    "measure_filter_life",
     "measure_pm25"
   ],
-  "platforms": ["local"],
-  "connectivity": ["cloud"],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "cloud"
+  ],
   "images": {
     "small": "{{driverAssetsPath}}/images/small.png",
     "large": "{{driverAssetsPath}}/images/large.png",
@@ -50,7 +56,8 @@
           "no": "Logg inn på kontoen din",
           "pl": "Zaloguj się na swoje konto",
           "ru": "Войти в ваш аккаунт",
-          "ko": "계정에 로그인"
+          "ko": "계정에 로그인",
+          "ar": "تسجيل الدخول إلى حسابك"
         },
         "usernameLabel": {
           "en": "E-mail address",
@@ -64,7 +71,8 @@
           "no": "E-postadresse",
           "pl": "Adres e-mail",
           "ru": "Адрес электронной почты",
-          "ko": "이메일 주소"
+          "ko": "이메일 주소",
+          "ar": "عنوان البريد الإلكتروني"
         },
         "usernamePlaceholder": {
           "en": "john@doe.com",
@@ -78,7 +86,8 @@
           "no": "navn@domenet.no",
           "pl": "imie@domena.pl",
           "ru": "имя@домен.ру",
-          "ko": "이름@도메인.한국"
+          "ko": "이름@도메인.한국",
+          "ar": "john@doe.com"
         },
         "passwordLabel": {
           "en": "Password",
@@ -92,7 +101,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         },
         "passwordPlaceholder": {
           "en": "Password",
@@ -106,7 +116,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         }
       }
     },

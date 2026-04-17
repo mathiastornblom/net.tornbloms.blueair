@@ -12,7 +12,8 @@
     "no": "Barnesikring",
     "pl": "Blokada dziecięca",
     "ru": "Детский замок",
-    "ko": "차일드락"
+    "ko": "차일드락",
+    "ar": "قفل الأطفال"
   },
   "getable": true,
   "setable": true,

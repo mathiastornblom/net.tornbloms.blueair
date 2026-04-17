@@ -1,0 +1,154 @@
+{
+  "title": {
+    "en": "Wi-Fi status changed",
+    "nl": "Wi-Fi status is veranderd",
+    "da": "Wi-Fi status er ændret",
+    "de": "WLAN-Status hat sich geändert",
+    "es": "El estado Wi-Fi ha cambiado",
+    "fr": "Le statut Wi-Fi a changé",
+    "it": "Lo stato Wi-Fi è cambiato",
+    "no": "Wi-Fi-status har endret seg",
+    "sv": "Wi-Fi-status har ändrats",
+    "pl": "Status Wi-Fi się zmienił",
+    "ru": "Статус Wi-Fi изменился",
+    "ko": "Wi-Fi 상태가 변경되었습니다",
+    "ar": "تغيرت حالة Wi-Fi"
+  },
+  "titleFormatted": {
+    "en": "Wi-Fi status changed",
+    "nl": "Wi-Fi status is veranderd",
+    "da": "Wi-Fi status er ændret",
+    "de": "WLAN-Status hat sich geändert",
+    "es": "El estado Wi-Fi ha cambiado",
+    "fr": "Le statut Wi-Fi a changé",
+    "it": "Lo stato Wi-Fi è cambiato",
+    "no": "Wi-Fi-status har endret seg",
+    "sv": "Wi-Fi-status har ändrats",
+    "pl": "Status Wi-Fi się zmienił",
+    "ru": "Статус Wi-Fi изменился",
+    "ko": "Wi-Fi 상태가 변경되었습니다",
+    "ar": "تغيرت حالة Wi-Fi"
+  },
+  "hint": {
+    "en": "Triggers when the device connects or disconnects from Wi-Fi",
+    "nl": "Activeert wanneer het apparaat verbinding maakt met of verbreekt van Wi-Fi",
+    "da": "Udløses når enheden forbinder eller afbryder forbindelsen til Wi-Fi",
+    "de": "Wird ausgelöst, wenn das Gerät eine WLAN-Verbindung herstellt oder trennt",
+    "es": "Se activa cuando el dispositivo se conecta o desconecta del Wi-Fi",
+    "fr": "Se déclenche lorsque l'appareil se connecte ou se déconnecte du Wi-Fi",
+    "it": "Si attiva quando il dispositivo si connette o si disconnette dal Wi-Fi",
+    "no": "Utløses når enheten kobler til eller fra Wi-Fi",
+    "sv": "Utlöses när enheten ansluter eller kopplar från Wi-Fi",
+    "pl": "Wyzwala się gdy urządzenie łączy lub rozłącza się z Wi-Fi",
+    "ru": "Срабатывает при подключении или отключении устройства от Wi-Fi",
+    "ko": "장치가 Wi-Fi에 연결되거나 연결이 끊길 때 트리거됩니다",
+    "ar": "يُشغَّل عند اتصال الجهاز بشبكة Wi-Fi أو انقطاع الاتصال"
+  },
+  "platforms": [
+    "local"
+  ],
+  "tokens": [
+    {
+      "type": "string",
+      "name": "device-name",
+      "title": {
+        "en": "Device name",
+        "nl": "Apparaatnaam",
+        "da": "Enhedsnavn",
+        "de": "Gerätename",
+        "es": "Nombre del dispositivo",
+        "fr": "Nom de l'appareil",
+        "it": "Nome del dispositivo",
+        "no": "Enhetsnavn",
+        "sv": "Enhetsnamn",
+        "pl": "Nazwa urządzenia",
+        "ru": "Имя устройства",
+        "ko": "장치 이름",
+        "ar": "اسم الجهاز"
+      },
+      "example": {
+        "en": "BlueAir",
+        "nl": "BlueAir",
+        "da": "BlueAir",
+        "de": "BlueAir",
+        "es": "BlueAir",
+        "fr": "BlueAir",
+        "it": "BlueAir",
+        "no": "BlueAir",
+        "sv": "BlueAir",
+        "pl": "BlueAir",
+        "ru": "BlueAir",
+        "ko": "블루에어",
+        "ar": "BlueAir"
+      }
+    },
+    {
+      "type": "string",
+      "name": "device-uuid",
+      "title": {
+        "en": "Device UUID",
+        "nl": "Apparaat-UUID",
+        "da": "Enheds-UUID",
+        "de": "Geräte-UUID",
+        "es": "UUID del dispositivo",
+        "fr": "UUID de l'appareil",
+        "it": "UUID del dispositivo",
+        "no": "Enhets-UUID",
+        "sv": "Enhets-UUID",
+        "pl": "UUID urządzenia",
+        "ru": "UUID устройства",
+        "ko": "장치 UUID",
+        "ar": "معرّف UUID للجهاز"
+      },
+      "example": {
+        "en": "2504776FFDC0BAB2",
+        "nl": "2504776FFDC0BAB2",
+        "da": "2504776FFDC0BAB2",
+        "de": "2504776FFDC0BAB2",
+        "es": "2504776FFDC0BAB2",
+        "fr": "2504776FFDC0BAB2",
+        "it": "2504776FFDC0BAB2",
+        "no": "2504776FFDC0BAB2",
+        "sv": "2504776FFDC0BAB2",
+        "pl": "2504776FFDC0BAB2",
+        "ru": "2504776FFDC0BAB2",
+        "ko": "2504776FFDC0BAB2",
+        "ar": "2504776FFDC0BAB2"
+      }
+    },
+    {
+      "type": "boolean",
+      "name": "online",
+      "title": {
+        "en": "Online",
+        "nl": "Online",
+        "da": "Online",
+        "de": "Online",
+        "es": "En línea",
+        "fr": "En ligne",
+        "it": "Online",
+        "no": "Online",
+        "sv": "Online",
+        "pl": "Online",
+        "ru": "Онлайн",
+        "ko": "온라인",
+        "ar": "متصل"
+      },
+      "example": {
+        "en": "true",
+        "nl": "true",
+        "da": "true",
+        "de": "true",
+        "es": "true",
+        "fr": "true",
+        "it": "true",
+        "no": "true",
+        "sv": "true",
+        "pl": "true",
+        "ru": "true",
+        "ko": "true",
+        "ar": "true"
+      }
+    }
+  ]
+}

@@ -13,7 +13,8 @@
       "no": "Påloggingsdetaljer",
       "pl": "Szczegóły logowania",
       "ru": "Данные для входа",
-      "ko": "로그인 정보"
+      "ko": "로그인 정보",
+      "ar": "تفاصيل تسجيل الدخول"
     },
     "children": [
       {
@@ -31,7 +32,8 @@
           "no": "E-post",
           "pl": "E-mail",
           "ru": "Электронная почта",
-          "ko": "이메일"
+          "ko": "이메일",
+          "ar": "البريد الإلكتروني"
         },
         "value": "JohnDoe@domain.com",
         "hint": {
@@ -46,7 +48,8 @@
           "no": "Brukerens e-post.",
           "pl": "E-mail użytkownika.",
           "ru": "Электронная почта пользователя.",
-          "ko": "사용자의 이메일입니다."
+          "ko": "사용자의 이메일입니다.",
+          "ar": "البريد الإلكتروني للمستخدم."
         }
       },
       {
@@ -64,7 +67,8 @@
           "no": "Passord",
           "pl": "Hasło",
           "ru": "Пароль",
-          "ko": "비밀번호"
+          "ko": "비밀번호",
+          "ar": "كلمة المرور"
         },
         "value": "Secret",
         "hint": {
@@ -79,7 +83,8 @@
           "no": "Brukerens passord.",
           "pl": "Hasło użytkownika.",
           "ru": "Пароль пользователя.",
-          "ko": "사용자의 비밀번호입니다."
+          "ko": "사용자의 비밀번호입니다.",
+          "ar": "كلمة مرور المستخدم."
         }
       }
     ]
@@ -98,7 +103,8 @@
       "no": "Enhetsinformasjon",
       "pl": "Informacje o urządzeniu",
       "ru": "Информация об устройстве",
-      "ko": "장치 정보"
+      "ko": "장치 정보",
+      "ar": "معلومات الجهاز"
     },
     "children": [
       {
@@ -116,7 +122,8 @@
           "no": "UUID",
           "pl": "UUID",
           "ru": "UUID",
-          "ko": "UUID"
+          "ko": "UUID",
+          "ar": "UUID"
         },
         "value": "EE04776CEDC0BAB2",
         "hint": {
@@ -131,7 +138,8 @@
           "no": "Den unike ID-en til enheten.",
           "pl": "Unikalny identyfikator urządzenia.",
           "ru": "Уникальный идентификатор устройства.",
-          "ko": "장치의 고유 ID입니다."
+          "ko": "장치의 고유 ID입니다.",
+          "ar": "المعرف الفريد للجهاز."
         }
       },
       {
@@ -149,7 +157,8 @@
           "no": "Navn",
           "pl": "Nazwa",
           "ru": "Название",
-          "ko": "이름"
+          "ko": "이름",
+          "ar": "الاسم"
         },
         "value": "BlueAir 405 Classic",
         "hint": {
@@ -164,7 +173,8 @@
           "no": "Navnet på enheten",
           "pl": "Nazwa urządzenia",
           "ru": "Название устройства",
-          "ko": "장치의 이름"
+          "ko": "장치의 이름",
+          "ar": "اسم الجهاز"
         }
       },
       {
@@ -182,7 +192,8 @@
           "no": "Kompatibilitet",
           "pl": "Kompatybilność",
           "ru": "Совместимость",
-          "ko": "호환성"
+          "ko": "호환성",
+          "ar": "التوافق"
         },
         "value": "classic_405",
         "hint": {
@@ -197,7 +208,8 @@
           "no": "Kompatibiliteten til enheten",
           "pl": "Kompatybilność urządzenia",
           "ru": "Совместимость устройства",
-          "ko": "장치의 호환성"
+          "ko": "장치의 호환성",
+          "ar": "توافقية الجهاز"
         }
       },
       {
@@ -215,7 +227,8 @@
           "no": "Modell",
           "pl": "Model",
           "ru": "Модель",
-          "ko": "모델"
+          "ko": "모델",
+          "ar": "نموذج"
         },
         "value": "1.0.9",
         "hint": {
@@ -230,7 +243,8 @@
           "no": "Modell av enheten",
           "pl": "Model urządzenia",
           "ru": "Модель устройства",
-          "ko": "장치의 모델"
+          "ko": "장치의 모델",
+          "ar": "طراز الجهاز"
         }
       },
       {
@@ -248,7 +262,8 @@
           "no": "MAC",
           "pl": "MAC",
           "ru": "MAC",
-          "ko": "MAC"
+          "ko": "MAC",
+          "ar": "ماك"
         },
         "value": "34EAE728765C",
         "hint": {
@@ -263,7 +278,8 @@
           "no": "MAC-adressen til enheten",
           "pl": "Adres MAC urządzenia",
           "ru": "MAC-адрес устройства",
-          "ko": "장치의 MAC 주소"
+          "ko": "장치의 MAC 주소",
+          "ar": "عنوان MAC للجهاز"
         }
       },
       {
@@ -281,7 +297,8 @@
           "no": "Fastvare",
           "pl": "Oprogramowanie",
           "ru": "Прошивка",
-          "ko": "펌웨어"
+          "ko": "펌웨어",
+          "ar": "البرامج الثابتة"
         },
         "value": "1.1.38",
         "hint": {
@@ -296,7 +313,8 @@
           "no": "Versjon av fastvaren",
           "pl": "Wersja oprogramowania",
           "ru": "Версия прошивки",
-          "ko": "펌웨어 버전"
+          "ko": "펌웨어 버전",
+          "ar": "إصدار البرنامج الثابت"
         }
       },
       {
@@ -314,7 +332,8 @@
           "no": "MCU fastvare",
           "pl": "Oprogramowanie MCU",
           "ru": "MCU прошивка",
-          "ko": "MCU 펌웨어"
+          "ko": "MCU 펌웨어",
+          "ar": "البرامج الثابتة لوحدة التحكم الدقيقة (MCU)"
         },
         "value": "1.0.35",
         "hint": {
@@ -329,7 +348,8 @@
           "no": "Versjon av MCU fastvaren",
           "pl": "Wersja oprogramowania MCU",
           "ru": "Версия прошивки MCU",
-          "ko": "MCU 펌웨어 버전"
+          "ko": "MCU 펌웨어 버전",
+          "ar": "إصدار البرنامج الثابت لوحدة التحكم الدقيقة (MCU)"
         }
       },
       {
@@ -347,7 +367,8 @@
           "no": "WLAN-driver",
           "pl": "Sterownik WLAN",
           "ru": "Драйвер WLAN",
-          "ko": "WLAN 드라이버"
+          "ko": "WLAN 드라이버",
+          "ar": "برنامج تشغيل WLAN"
         },
         "value": "V10",
         "hint": {
@@ -362,7 +383,8 @@
           "no": "Versjon av WLAN-driveren",
           "pl": "Wersja sterownika WLAN",
           "ru": "Версия драйвера WLAN",
-          "ko": "WLAN 드라이버 버전"
+          "ko": "WLAN 드라이버 버전",
+          "ar": "إصدار برنامج تشغيل WLAN"
         }
       },
       {
@@ -380,7 +402,8 @@
           "no": "Siste synkroniseringsdato",
           "pl": "Data ostatniej synchronizacji",
           "ru": "Дата последней синхронизации",
-          "ko": "마지막 동기화 날짜"
+          "ko": "마지막 동기화 날짜",
+          "ar": "تاريخ آخر مزامنة"
         },
         "value": "2000-01-01",
         "hint": {
@@ -395,7 +418,8 @@
           "no": "Dato for den siste synkroniseringen",
           "pl": "Data ostatniej synchronizacji",
           "ru": "Дата последней синхронизации",
-          "ko": "최근 동기화 날짜"
+          "ko": "최근 동기화 날짜",
+          "ar": "تاريخ آخر مزامنة"
         }
       },
       {
@@ -413,7 +437,8 @@
           "no": "Installasjonsdato",
           "pl": "Data instalacji",
           "ru": "Дата установки",
-          "ko": "설치 날짜"
+          "ko": "설치 날짜",
+          "ar": "تاريخ التثبيت"
         },
         "value": "2000-01-01",
         "hint": {
@@ -428,7 +453,8 @@
           "no": "Dato for installasjon",
           "pl": "Data instalacji",
           "ru": "Дата установки",
-          "ko": "설치 날짜"
+          "ko": "설치 날짜",
+          "ar": "تاريخ التركيب"
         }
       },
       {
@@ -446,7 +472,8 @@
           "no": "Siste kalibreringsdato",
           "pl": "Data ostatniej kalibracji",
           "ru": "Дата последней калибровки",
-          "ko": "마지막 보정 날짜"
+          "ko": "마지막 보정 날짜",
+          "ar": "تاريخ المعايرة الأخير"
         },
         "value": "2000-01-01",
         "hint": {
@@ -461,7 +488,8 @@
           "no": "Dato for den siste kalibreringen",
           "pl": "Data ostatniej kalibracji",
           "ru": "Дата последней калибровки",
-          "ko": "최근 보정 날짜"
+          "ko": "최근 보정 날짜",
+          "ar": "تاريخ آخر معايرة"
         }
       },
       {
@@ -479,7 +507,8 @@
           "no": "initUsagePeriod",
           "pl": "initUsagePeriod",
           "ru": "initUsagePeriod",
-          "ko": "initUsagePeriod"
+          "ko": "initUsagePeriod",
+          "ar": "initUsagePeriod (بدء فترة الاستخدام)"
         },
         "value": "0",
         "hint": {
@@ -494,7 +523,8 @@
           "no": "initUsagePeriod",
           "pl": "initUsagePeriod",
           "ru": "initUsagePeriod",
-          "ko": "initUsagePeriod"
+          "ko": "initUsagePeriod",
+          "ar": "initUsagePeriod (فترة الاستخدام الأولية)"
         }
       },
       {
@@ -512,7 +542,8 @@
           "no": "Omstartperiode",
           "pl": "Okres restartu",
           "ru": "Период перезагрузки",
-          "ko": "재부팅 기간"
+          "ko": "재부팅 기간",
+          "ar": "فترة إعادة التشغيل"
         },
         "value": "10000",
         "hint": {
@@ -527,7 +558,8 @@
           "no": "Omstartperiode",
           "pl": "Okres restartu",
           "ru": "Период перезагрузки",
-          "ko": "재부팅 기간"
+          "ko": "재부팅 기간",
+          "ar": "فترة إعادة التشغيل"
         }
       },
       {
@@ -545,7 +577,8 @@
           "no": "Plassering",
           "pl": "Lokalizacja",
           "ru": "Местоположение",
-          "ko": "위치"
+          "ko": "위치",
+          "ar": "الموقع"
         },
         "value": "kitchen",
         "hint": {
@@ -560,7 +593,8 @@
           "no": "Rommet hvor enheten er plassert.",
           "pl": "Pokój, w którym znajduje się urządzenie.",
           "ru": "Помещение, где находится устройство.",
-          "ko": "장치가 있는 방입니다."
+          "ko": "장치가 있는 방입니다.",
+          "ar": "الغرفة التي يوجد بها الجهاز."
         }
       }
     ]
@@ -579,7 +613,8 @@
       "no": "Avanserte innstillinger",
       "pl": "Ustawienia zaawansowane",
       "ru": "Расширенные настройки",
-      "ko": "고급 설정"
+      "ko": "고급 설정",
+      "ar": "الإعدادات المتقدمة"
     },
     "children": [
       {
@@ -597,7 +632,8 @@
           "no": "Oppdateringsintervall",
           "pl": "Interwał aktualizacji",
           "ru": "Интервал обновлений",
-          "ko": "업데이트 간격"
+          "ko": "업데이트 간격",
+          "ar": "فترة التحديث"
         },
         "value": 30,
         "min": 10,
@@ -614,7 +650,8 @@
           "no": "Sekunder",
           "pl": "Sekundy",
           "ru": "Секунды",
-          "ko": "초"
+          "ko": "초",
+          "ar": "ثوانٍ"
         }
       },
       {
@@ -633,7 +670,8 @@
           "no": "Temperaturenhet",
           "pl": "Jednostka temperatury",
           "ru": "Единица измерения температуры",
-          "ko": "온도 단위"
+          "ko": "온도 단위",
+          "ar": "وحدة درجة الحرارة"
         },
         "values": [
           {
@@ -650,7 +688,8 @@
               "no": "Celsius",
               "pl": "Celsjusz",
               "ru": "Цельсий",
-              "ko": "섭씨"
+              "ko": "섭씨",
+              "ar": "سيلسيوس"
             }
           },
           {
@@ -667,7 +706,8 @@
               "no": "Fahrenheit",
               "pl": "Fahrenheit",
               "ru": "Фаренгейт",
-              "ko": "화씨"
+              "ko": "화씨",
+              "ar": "فهرنهايت"
             }
           }
         ]

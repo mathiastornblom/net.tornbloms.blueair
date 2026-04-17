@@ -25,6 +25,10 @@ abstract class BlueAirAwsBaseDriver extends Driver {
     return this._clientPromises.get(username)!;
   }
 
+  public clearClient(username: string): void {
+    this._clientPromises.delete(username);
+  }
+
   /**
    * onInit is called when the driver is initialized.
    */
