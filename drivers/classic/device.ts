@@ -47,15 +47,6 @@ class BlueAirClassicDevice extends Device {
       }
     }
 
-    // Migrate old misspelled capability to the corrected name
-    if (this.hasCapability('last_retrieval_date')) {
-      const oldValue = this.getCapabilityValue('last_retrieval_date');
-      if (oldValue) {
-        await this.setCapabilityValue('last_retrieval_date', oldValue).catch(this.error);
-      }
-      await this.removeCapability('last_retrieval_date');
-    }
-
     try {
       // Initialize the API client for BlueAir with the username and password from settings
       const client = new ApiClient(settings.username, settings.password);
