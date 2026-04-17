@@ -1,6 +1,23 @@
 import BlueAirAwsFullDevice from '../BlueAirAwsFullDevice';
 
 class BlueAirHealthProtectDevice extends BlueAirAwsFullDevice {
+  protected readonly deviceCapabilities = [
+    'automode',
+    'brightness2',
+    'child_lock',
+    'fanspeed',
+    'filter_status',
+    'germ_shield',
+    'measure_humidity',
+    'measure_pm1',
+    'measure_pm10',
+    'measure_pm25',
+    'measure_temperature',
+    'measure_tvoc',
+    'nightmode',
+    'standby',
+    'wifi_status',
+  ];
   async onAdded(): Promise<void> {
     this.log('BlueAirHealthProtectDevice has been added');
   }

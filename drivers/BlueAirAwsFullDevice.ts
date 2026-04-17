@@ -65,6 +65,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const standby     = filterSettings(attrs, 'standby');
     const online      = filterSettings(attrs, 'online');
     const automode    = filterSettings(attrs, 'automode');
+    const germshield  = filterSettings(attrs, 'germshield');
     const filterLife  = calculateRemainingFilterLife(attrs);
 
     this.setCapabilityValue('fanspeed',           Number(fanspeed?.value ?? 0)).catch(this.error);
@@ -81,6 +82,9 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.setCapabilityValue('wifi_status',         online?.value === 'true').catch(this.error);
     this.setCapabilityValue('filter_status',       filterLife).catch(this.error);
     this.setCapabilityValue('automode',            automode?.value === 'true').catch(this.error);
+    if (this.hasCapability('germ_shield')) {
+      this.setCapabilityValue('germ_shield',       germshield?.value === 'true').catch(this.error);
+    }
 
     // Only trigger flow cards after initial load
     if (this.isInitialized) {
@@ -225,6 +229,18 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     this.homey.flow.getActionCard('set-childlock2').registerRunListener(async (args) => {
       await (args.device as BlueAirAwsBaseDevice).performSetChildLock(args.childlock === 'true');
     });
+
+    if (this.hasCapability('germ_shield')) {
+      this.registerCapabilityListener('germ_shield', async (value) => {
+        await this.safeSetCommand('germ_shield', () =>
+          this.performSetGermShield(value)
+        );
+      });
+
+      this.homey.flow.getActionCard('set-germshield2').registerRunListener(async (args) => {
+        await (args.device as BlueAirAwsBaseDevice).performSetGermShield(args.germshield === 'true');
+      });
+    }
 
     // Condition cards
     this.homey.flow.getConditionCard('score_pm25').registerRunListener(async (args) =>

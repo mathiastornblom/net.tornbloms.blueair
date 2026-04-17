@@ -1,0 +1,99 @@
+{
+  "title": {
+    "en": "Set germ shield",
+    "nl": "Stel kiemschild in",
+    "da": "Indstil kimskjold",
+    "de": "Keimschutz einstellen",
+    "es": "Configurar escudo germicida",
+    "fr": "Configurer le bouclier germicide",
+    "it": "Imposta scudo germi",
+    "no": "Sett kimskjold",
+    "sv": "Ställ in germskydd",
+    "pl": "Ustaw tarczę przeciwbakteryjną",
+    "ru": "Установить защиту от микробов",
+    "ko": "세균 차단 설정",
+    "ar": "تفعيل درع الجراثيم"
+  },
+  "titleFormatted": {
+    "en": "Set the germ shield to [[germshield]]",
+    "nl": "Stel het kiemschild in op [[germshield]]",
+    "da": "Indstil kimskjoldet til [[germshield]]",
+    "de": "Keimschutz auf [[germshield]] einstellen",
+    "es": "Configurar el escudo germicida a [[germshield]]",
+    "fr": "Régler le bouclier germicide sur [[germshield]]",
+    "it": "Imposta lo scudo germi su [[germshield]]",
+    "no": "Sett kimskjoldet til [[germshield]]",
+    "sv": "Ställ in germskyddet till [[germshield]]",
+    "pl": "Ustaw tarczę przeciwbakteryjną na [[germshield]]",
+    "ru": "Установите защиту от микробов на [[germshield]]",
+    "ko": "세균 차단을 [[germshield]] 로 설정합니다",
+    "ar": "اضبط درع الجراثيم على [[germshield]]"
+  },
+  "platforms": [
+    "local"
+  ],
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=healthprotect"
+    },
+    {
+      "type": "dropdown",
+      "name": "germshield",
+      "title": {
+        "en": "Germ shield",
+        "nl": "Kiemschild",
+        "da": "Kimskjold",
+        "de": "Keimschutz",
+        "es": "Escudo germicida",
+        "fr": "Bouclier germicide",
+        "it": "Scudo germi",
+        "no": "Kimskjold",
+        "sv": "Germskydd",
+        "pl": "Tarcza przeciwbakteryjna",
+        "ru": "Защита от микробов",
+        "ko": "세균 차단",
+        "ar": "درع الجراثيم"
+      },
+      "values": [
+        {
+          "id": "true",
+          "label": {
+            "en": "On",
+            "nl": "Aan",
+            "da": "Til",
+            "de": "Ein",
+            "es": "Activado",
+            "fr": "Activé",
+            "it": "Acceso",
+            "no": "På",
+            "sv": "På",
+            "pl": "Włączone",
+            "ru": "Вкл",
+            "ko": "켜짐",
+            "ar": "تشغيل"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "en": "Off",
+            "nl": "Uit",
+            "da": "Fra",
+            "de": "Aus",
+            "es": "Desactivado",
+            "fr": "Désactivé",
+            "it": "Spento",
+            "no": "Av",
+            "sv": "Av",
+            "pl": "Wyłączone",
+            "ru": "Выкл",
+            "ko": "꺼짐",
+            "ar": "إيقاف"
+          }
+        }
+      ]
+    }
+  ]
+}

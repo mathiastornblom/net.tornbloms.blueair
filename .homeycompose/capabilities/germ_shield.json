@@ -1,0 +1,23 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Germ shield",
+    "sv": "Germskydd",
+    "nl": "Kiemschild",
+    "da": "Kimskjold",
+    "de": "Keimschutz",
+    "es": "Escudo germicida",
+    "fr": "Bouclier germicide",
+    "it": "Scudo germi",
+    "no": "Kimskjold",
+    "pl": "Tarcza przeciwbakteryjna",
+    "ru": "Защита от микробов",
+    "ko": "세균 차단",
+    "ar": "درع الجراثيم"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "toggle",
+  "uiQuickAction": false,
+  "icon": "/assets/images/germ-shield.svg"
+}
