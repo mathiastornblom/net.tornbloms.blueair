@@ -156,6 +156,161 @@
     "triggers": [
       {
         "title": {
+          "en": "CO2 has changed",
+          "nl": "CO2 is veranderd",
+          "da": "CO2 er ændret",
+          "de": "CO2 hat sich geändert",
+          "es": "CO2 ha cambiado",
+          "fr": "CO2 a changé",
+          "it": "CO2 è cambiato",
+          "no": "CO2 har endret seg",
+          "sv": "CO2 har ändrats",
+          "pl": "CO2 się zmienił",
+          "ru": "CO2 изменился",
+          "ko": "CO2가 변경되었습니다",
+          "ar": "تم تغيير CO2"
+        },
+        "titleFormatted": {
+          "en": "CO2 has changed",
+          "nl": "CO2 is veranderd",
+          "da": "CO2 er ændret",
+          "de": "CO2 hat sich geändert",
+          "es": "CO2 ha cambiado",
+          "fr": "CO2 a changé",
+          "it": "CO2 è cambiato",
+          "no": "CO2 har endret seg",
+          "sv": "CO2 har ändrats",
+          "pl": "CO2 się zmienił",
+          "ru": "CO2 изменился",
+          "ko": "CO2가 변경되었습니다",
+          "ar": "تم تغيير CO2"
+        },
+        "hint": {
+          "en": "CO2 level has changed",
+          "nl": "CO2-niveau is veranderd",
+          "da": "CO2-niveau er ændret",
+          "de": "CO2-Wert wurde geändert",
+          "es": "El nivel de CO2 ha cambiado",
+          "fr": "Le niveau de CO2 a changé",
+          "it": "Il livello di CO2 è cambiato",
+          "no": "CO2-nivå har endret seg",
+          "sv": "CO2-nivån har ändrats",
+          "pl": "Poziom CO2 się zmienił",
+          "ru": "Уровень CO2 изменился",
+          "ko": "CO2 수준이 변경되었습니다",
+          "ar": "تغير مستوى CO2"
+        },
+        "platforms": [
+          "local"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "device-name",
+            "title": {
+              "en": "Device name",
+              "nl": "Apparaatnaam",
+              "da": "Enhedsnavn",
+              "de": "Gerätename",
+              "es": "Nombre del dispositivo",
+              "fr": "Nom de l'appareil",
+              "it": "Nome del dispositivo",
+              "no": "Enhetsnavn",
+              "sv": "Enhetsnamn",
+              "pl": "Nazwa urządzenia",
+              "ru": "Имя устройства",
+              "ko": "장치 이름",
+              "ar": "اسم الجهاز"
+            },
+            "example": {
+              "en": "BlueAir",
+              "nl": "BlueAir",
+              "da": "BlueAir",
+              "de": "BlueAir",
+              "es": "BlueAir",
+              "fr": "BlueAir",
+              "it": "BlueAir",
+              "no": "BlueAir",
+              "sv": "BlueAir",
+              "pl": "BlueAir",
+              "ru": "BlueAir",
+              "ko": "블루에어",
+              "ar": "BlueAir"
+            }
+          },
+          {
+            "type": "string",
+            "name": "device-uuid",
+            "title": {
+              "en": "Device UUID",
+              "nl": "Apparaat-UUID",
+              "da": "Enheds-UUID",
+              "de": "Geräte-UUID",
+              "es": "UUID del dispositivo",
+              "fr": "UUID de l'appareil",
+              "it": "UUID del dispositivo",
+              "no": "Enhets-UUID",
+              "sv": "Enhets-UUID",
+              "pl": "UUID urządzenia",
+              "ru": "UUID устройства",
+              "ko": "장치 UUID",
+              "ar": "معرّف UUID للجهاز"
+            },
+            "example": {
+              "en": "2504776FFDC0BAB2",
+              "nl": "2504776FFDC0BAB2",
+              "da": "2504776FFDC0BAB2",
+              "de": "2504776FFDC0BAB2",
+              "es": "2504776FFDC0BAB2",
+              "fr": "2504776FFDC0BAB2",
+              "it": "2504776FFDC0BAB2",
+              "no": "2504776FFDC0BAB2",
+              "sv": "2504776FFDC0BAB2",
+              "pl": "2504776FFDC0BAB2",
+              "ru": "2504776FFDC0BAB2",
+              "ko": "2504776FFDC0BAB2",
+              "ar": "2504776FFDC0BAB2"
+            }
+          },
+          {
+            "type": "number",
+            "name": "co2",
+            "title": {
+              "en": "CO2 (ppm)",
+              "nl": "CO2 (ppm)",
+              "da": "CO2 (ppm)",
+              "de": "CO2 (ppm)",
+              "es": "CO2 (ppm)",
+              "fr": "CO2 (ppm)",
+              "it": "CO2 (ppm)",
+              "no": "CO2 (ppm)",
+              "sv": "CO2 (ppm)",
+              "pl": "CO2 (ppm)",
+              "ru": "CO2 (ppm)",
+              "ko": "CO2 (ppm)",
+              "ar": "CO2 (ppm)"
+            },
+            "example": {
+              "en": "800",
+              "nl": "800",
+              "da": "800",
+              "de": "800",
+              "es": "800",
+              "fr": "800",
+              "it": "800",
+              "no": "800",
+              "sv": "800",
+              "pl": "800",
+              "ru": "800",
+              "ko": "800",
+              "ar": "800"
+            }
+          }
+        ],
+        "id": "CO2-has-changed"
+      },
+      {
+        "title": {
           "en": "Fan speed has changed",
           "nl": "De ventilatorsnelheid is veranderd",
           "da": "Ventilatorhastigheden er ændret",
@@ -481,6 +636,161 @@
           }
         ],
         "id": "filter-needs-change"
+      },
+      {
+        "title": {
+          "en": "HCHO has changed",
+          "sv": "HCHO har ändrats",
+          "nl": "HCHO is veranderd",
+          "da": "HCHO er ændret",
+          "de": "HCHO hat sich geändert",
+          "es": "HCHO ha cambiado",
+          "fr": "HCHO a changé",
+          "it": "HCHO è cambiato",
+          "no": "HCHO har endret seg",
+          "pl": "HCHO się zmienił",
+          "ru": "HCHO изменился",
+          "ko": "HCHO가 변경되었습니다",
+          "ar": "تم تغيير HCHO"
+        },
+        "titleFormatted": {
+          "en": "Formaldehyde (HCHO) has changed",
+          "sv": "Formaldehyd (HCHO) har ändrats",
+          "nl": "Formaldehyde (HCHO) is veranderd",
+          "da": "Formaldehyd (HCHO) er ændret",
+          "de": "Formaldehyd (HCHO) hat sich geändert",
+          "es": "Formaldehído (HCHO) ha cambiado",
+          "fr": "Formaldéhyde (HCHO) a changé",
+          "it": "Formaldeide (HCHO) è cambiata",
+          "no": "Formaldehyd (HCHO) har endret seg",
+          "pl": "Formaldehyd (HCHO) się zmienił",
+          "ru": "Формальдегид (HCHO) изменился",
+          "ko": "포름알데히드 (HCHO)가 변경되었습니다",
+          "ar": "تم تغيير الفورمالديهايد (HCHO)"
+        },
+        "hint": {
+          "en": "Formaldehyde (HCHO) level has changed",
+          "sv": "Formaldehydnivån (HCHO) har ändrats",
+          "nl": "Formaldehydeniveau (HCHO) is veranderd",
+          "da": "Formaldehydniveau (HCHO) er ændret",
+          "de": "Formaldehyd (HCHO)-Wert hat sich geändert",
+          "es": "El nivel de formaldehído (HCHO) ha cambiado",
+          "fr": "Le niveau de formaldéhyde (HCHO) a changé",
+          "it": "Il livello di formaldeide (HCHO) è cambiato",
+          "no": "Formaldehydnivå (HCHO) har endret seg",
+          "pl": "Poziom formaldehydu (HCHO) się zmienił",
+          "ru": "Уровень формальдегида (HCHO) изменился",
+          "ko": "포름알데히드 (HCHO) 수준이 변경되었습니다",
+          "ar": "تغير مستوى الفورمالديهايد (HCHO)"
+        },
+        "platforms": [
+          "local"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "device-name",
+            "title": {
+              "en": "Device name",
+              "nl": "Apparaatnaam",
+              "da": "Enhedsnavn",
+              "de": "Gerätename",
+              "es": "Nombre del dispositivo",
+              "fr": "Nom de l'appareil",
+              "it": "Nome del dispositivo",
+              "no": "Enhetsnavn",
+              "sv": "Enhetsnamn",
+              "pl": "Nazwa urządzenia",
+              "ru": "Имя устройства",
+              "ko": "장치 이름",
+              "ar": "اسم الجهاز"
+            },
+            "example": {
+              "en": "BlueAir",
+              "nl": "BlueAir",
+              "da": "BlueAir",
+              "de": "BlueAir",
+              "es": "BlueAir",
+              "fr": "BlueAir",
+              "it": "BlueAir",
+              "no": "BlueAir",
+              "sv": "BlueAir",
+              "pl": "BlueAir",
+              "ru": "BlueAir",
+              "ko": "블루에어",
+              "ar": "BlueAir"
+            }
+          },
+          {
+            "type": "string",
+            "name": "device-uuid",
+            "title": {
+              "en": "Device UUID",
+              "nl": "Apparaat-UUID",
+              "da": "Enheds-UUID",
+              "de": "Geräte-UUID",
+              "es": "UUID del dispositivo",
+              "fr": "UUID de l'appareil",
+              "it": "UUID del dispositivo",
+              "no": "Enhets-UUID",
+              "sv": "Enhets-UUID",
+              "pl": "UUID urządzenia",
+              "ru": "UUID устройства",
+              "ko": "장치 UUID",
+              "ar": "معرّف UUID للجهاز"
+            },
+            "example": {
+              "en": "2504776FFDC0BAB2",
+              "nl": "2504776FFDC0BAB2",
+              "da": "2504776FFDC0BAB2",
+              "de": "2504776FFDC0BAB2",
+              "es": "2504776FFDC0BAB2",
+              "fr": "2504776FFDC0BAB2",
+              "it": "2504776FFDC0BAB2",
+              "no": "2504776FFDC0BAB2",
+              "sv": "2504776FFDC0BAB2",
+              "pl": "2504776FFDC0BAB2",
+              "ru": "2504776FFDC0BAB2",
+              "ko": "2504776FFDC0BAB2",
+              "ar": "2504776FFDC0BAB2"
+            }
+          },
+          {
+            "type": "number",
+            "name": "hcho",
+            "title": {
+              "en": "HCHO (μg/m³)",
+              "sv": "HCHO (μg/m³)",
+              "nl": "HCHO (μg/m³)",
+              "da": "HCHO (μg/m³)",
+              "de": "HCHO (μg/m³)",
+              "es": "HCHO (μg/m³)",
+              "fr": "HCHO (μg/m³)",
+              "it": "HCHO (μg/m³)",
+              "no": "HCHO (μg/m³)",
+              "pl": "HCHO (μg/m³)",
+              "ru": "HCHO (мкг/м³)",
+              "ko": "HCHO (μg/m³)",
+              "ar": "HCHO (μg/m³)"
+            },
+            "example": {
+              "en": "0.05",
+              "nl": "0.05",
+              "da": "0.05",
+              "de": "0.05",
+              "es": "0.05",
+              "fr": "0.05",
+              "it": "0.05",
+              "no": "0.05",
+              "sv": "0.05",
+              "pl": "0.05",
+              "ru": "0.05",
+              "ko": "0.05",
+              "ar": "0.05"
+            }
+          }
+        ],
+        "id": "HCHO-has-changed"
       },
       {
         "title": {
@@ -1457,6 +1767,161 @@
           }
         ],
         "id": "tVOC-has-changed"
+      },
+      {
+        "title": {
+          "en": "Wi-Fi status changed",
+          "nl": "Wi-Fi status is veranderd",
+          "da": "Wi-Fi status er ændret",
+          "de": "WLAN-Status hat sich geändert",
+          "es": "El estado Wi-Fi ha cambiado",
+          "fr": "Le statut Wi-Fi a changé",
+          "it": "Lo stato Wi-Fi è cambiato",
+          "no": "Wi-Fi-status har endret seg",
+          "sv": "Wi-Fi-status har ändrats",
+          "pl": "Status Wi-Fi się zmienił",
+          "ru": "Статус Wi-Fi изменился",
+          "ko": "Wi-Fi 상태가 변경되었습니다",
+          "ar": "تغيرت حالة Wi-Fi"
+        },
+        "titleFormatted": {
+          "en": "Wi-Fi status changed",
+          "nl": "Wi-Fi status is veranderd",
+          "da": "Wi-Fi status er ændret",
+          "de": "WLAN-Status hat sich geändert",
+          "es": "El estado Wi-Fi ha cambiado",
+          "fr": "Le statut Wi-Fi a changé",
+          "it": "Lo stato Wi-Fi è cambiato",
+          "no": "Wi-Fi-status har endret seg",
+          "sv": "Wi-Fi-status har ändrats",
+          "pl": "Status Wi-Fi się zmienił",
+          "ru": "Статус Wi-Fi изменился",
+          "ko": "Wi-Fi 상태가 변경되었습니다",
+          "ar": "تغيرت حالة Wi-Fi"
+        },
+        "hint": {
+          "en": "Triggers when the device connects or disconnects from Wi-Fi",
+          "nl": "Activeert wanneer het apparaat verbinding maakt met of verbreekt van Wi-Fi",
+          "da": "Udløses når enheden forbinder eller afbryder forbindelsen til Wi-Fi",
+          "de": "Wird ausgelöst, wenn das Gerät eine WLAN-Verbindung herstellt oder trennt",
+          "es": "Se activa cuando el dispositivo se conecta o desconecta del Wi-Fi",
+          "fr": "Se déclenche lorsque l'appareil se connecte ou se déconnecte du Wi-Fi",
+          "it": "Si attiva quando il dispositivo si connette o si disconnette dal Wi-Fi",
+          "no": "Utløses når enheten kobler til eller fra Wi-Fi",
+          "sv": "Utlöses när enheten ansluter eller kopplar från Wi-Fi",
+          "pl": "Wyzwala się gdy urządzenie łączy lub rozłącza się z Wi-Fi",
+          "ru": "Срабатывает при подключении или отключении устройства от Wi-Fi",
+          "ko": "장치가 Wi-Fi에 연결되거나 연결이 끊길 때 트리거됩니다",
+          "ar": "يُشغَّل عند اتصال الجهاز بشبكة Wi-Fi أو انقطاع الاتصال"
+        },
+        "platforms": [
+          "local"
+        ],
+        "tokens": [
+          {
+            "type": "string",
+            "name": "device-name",
+            "title": {
+              "en": "Device name",
+              "nl": "Apparaatnaam",
+              "da": "Enhedsnavn",
+              "de": "Gerätename",
+              "es": "Nombre del dispositivo",
+              "fr": "Nom de l'appareil",
+              "it": "Nome del dispositivo",
+              "no": "Enhetsnavn",
+              "sv": "Enhetsnamn",
+              "pl": "Nazwa urządzenia",
+              "ru": "Имя устройства",
+              "ko": "장치 이름",
+              "ar": "اسم الجهاز"
+            },
+            "example": {
+              "en": "BlueAir",
+              "nl": "BlueAir",
+              "da": "BlueAir",
+              "de": "BlueAir",
+              "es": "BlueAir",
+              "fr": "BlueAir",
+              "it": "BlueAir",
+              "no": "BlueAir",
+              "sv": "BlueAir",
+              "pl": "BlueAir",
+              "ru": "BlueAir",
+              "ko": "블루에어",
+              "ar": "BlueAir"
+            }
+          },
+          {
+            "type": "string",
+            "name": "device-uuid",
+            "title": {
+              "en": "Device UUID",
+              "nl": "Apparaat-UUID",
+              "da": "Enheds-UUID",
+              "de": "Geräte-UUID",
+              "es": "UUID del dispositivo",
+              "fr": "UUID de l'appareil",
+              "it": "UUID del dispositivo",
+              "no": "Enhets-UUID",
+              "sv": "Enhets-UUID",
+              "pl": "UUID urządzenia",
+              "ru": "UUID устройства",
+              "ko": "장치 UUID",
+              "ar": "معرّف UUID للجهاز"
+            },
+            "example": {
+              "en": "2504776FFDC0BAB2",
+              "nl": "2504776FFDC0BAB2",
+              "da": "2504776FFDC0BAB2",
+              "de": "2504776FFDC0BAB2",
+              "es": "2504776FFDC0BAB2",
+              "fr": "2504776FFDC0BAB2",
+              "it": "2504776FFDC0BAB2",
+              "no": "2504776FFDC0BAB2",
+              "sv": "2504776FFDC0BAB2",
+              "pl": "2504776FFDC0BAB2",
+              "ru": "2504776FFDC0BAB2",
+              "ko": "2504776FFDC0BAB2",
+              "ar": "2504776FFDC0BAB2"
+            }
+          },
+          {
+            "type": "boolean",
+            "name": "online",
+            "title": {
+              "en": "Online",
+              "nl": "Online",
+              "da": "Online",
+              "de": "Online",
+              "es": "En línea",
+              "fr": "En ligne",
+              "it": "Online",
+              "no": "Online",
+              "sv": "Online",
+              "pl": "Online",
+              "ru": "Онлайн",
+              "ko": "온라인",
+              "ar": "متصل"
+            },
+            "example": {
+              "en": "true",
+              "nl": "true",
+              "da": "true",
+              "de": "true",
+              "es": "true",
+              "fr": "true",
+              "it": "true",
+              "no": "true",
+              "sv": "true",
+              "pl": "true",
+              "ru": "true",
+              "ko": "true",
+              "ar": "true"
+            }
+          }
+        ],
+        "id": "wifi-status-changed"
       }
     ],
     "conditions": [
@@ -2857,6 +3322,206 @@
       },
       {
         "title": {
+          "en": "Set germ shield",
+          "nl": "Stel kiemschild in",
+          "da": "Indstil kimskjold",
+          "de": "Keimschutz einstellen",
+          "es": "Configurar escudo germicida",
+          "fr": "Configurer le bouclier germicide",
+          "it": "Imposta scudo germi",
+          "no": "Sett kimskjold",
+          "sv": "Ställ in germskydd",
+          "pl": "Ustaw tarczę przeciwbakteryjną",
+          "ru": "Установить защиту от микробов",
+          "ko": "세균 차단 설정",
+          "ar": "تفعيل درع الجراثيم"
+        },
+        "titleFormatted": {
+          "en": "Set the germ shield to [[germshield]]",
+          "nl": "Stel het kiemschild in op [[germshield]]",
+          "da": "Indstil kimskjoldet til [[germshield]]",
+          "de": "Keimschutz auf [[germshield]] einstellen",
+          "es": "Configurar el escudo germicida a [[germshield]]",
+          "fr": "Régler le bouclier germicide sur [[germshield]]",
+          "it": "Imposta lo scudo germi su [[germshield]]",
+          "no": "Sett kimskjoldet til [[germshield]]",
+          "sv": "Ställ in germskyddet till [[germshield]]",
+          "pl": "Ustaw tarczę przeciwbakteryjną na [[germshield]]",
+          "ru": "Установите защиту от микробов на [[germshield]]",
+          "ko": "세균 차단을 [[germshield]] 로 설정합니다",
+          "ar": "اضبط درع الجراثيم على [[germshield]]"
+        },
+        "platforms": [
+          "local"
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=healthprotect"
+          },
+          {
+            "type": "dropdown",
+            "name": "germshield",
+            "title": {
+              "en": "Germ shield",
+              "nl": "Kiemschild",
+              "da": "Kimskjold",
+              "de": "Keimschutz",
+              "es": "Escudo germicida",
+              "fr": "Bouclier germicide",
+              "it": "Scudo germi",
+              "no": "Kimskjold",
+              "sv": "Germskydd",
+              "pl": "Tarcza przeciwbakteryjna",
+              "ru": "Защита от микробов",
+              "ko": "세균 차단",
+              "ar": "درع الجراثيم"
+            },
+            "values": [
+              {
+                "id": "true",
+                "label": {
+                  "en": "On",
+                  "nl": "Aan",
+                  "da": "Til",
+                  "de": "Ein",
+                  "es": "Activado",
+                  "fr": "Activé",
+                  "it": "Acceso",
+                  "no": "På",
+                  "sv": "På",
+                  "pl": "Włączone",
+                  "ru": "Вкл",
+                  "ko": "켜짐",
+                  "ar": "تشغيل"
+                }
+              },
+              {
+                "id": "false",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit",
+                  "da": "Fra",
+                  "de": "Aus",
+                  "es": "Desactivado",
+                  "fr": "Désactivé",
+                  "it": "Spento",
+                  "no": "Av",
+                  "sv": "Av",
+                  "pl": "Wyłączone",
+                  "ru": "Выкл",
+                  "ko": "꺼짐",
+                  "ar": "إيقاف"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "set-germshield2"
+      },
+      {
+        "title": {
+          "en": "Set mood light",
+          "sv": "Ställ in stämningsljus",
+          "nl": "Stel sfeerverlichting in",
+          "da": "Indstil stemningslys",
+          "de": "Stimmungslicht einstellen",
+          "es": "Configurar luz de ambiente",
+          "fr": "Configurer la lumière d'ambiance",
+          "it": "Imposta luce d'atmosfera",
+          "no": "Sett stemningslys",
+          "pl": "Ustaw światło nastrojowe",
+          "ru": "Установить атмосферный свет",
+          "ko": "무드 조명 설정",
+          "ar": "تفعيل ضوء الأجواء"
+        },
+        "titleFormatted": {
+          "en": "Set the mood light to [[moodlight]]",
+          "sv": "Ställ in stämningsljuset till [[moodlight]]",
+          "nl": "Stel de sfeerverlichting in op [[moodlight]]",
+          "da": "Indstil stemningslyset til [[moodlight]]",
+          "de": "Stimmungslicht auf [[moodlight]] einstellen",
+          "es": "Configurar la luz de ambiente a [[moodlight]]",
+          "fr": "Régler la lumière d'ambiance sur [[moodlight]]",
+          "it": "Imposta la luce d'atmosfera su [[moodlight]]",
+          "no": "Sett stemningslyset til [[moodlight]]",
+          "pl": "Ustaw światło nastrojowe na [[moodlight]]",
+          "ru": "Установите атмосферный свет на [[moodlight]]",
+          "ko": "무드 조명을 [[moodlight]] 로 설정합니다",
+          "ar": "اضبط ضوء الأجواء على [[moodlight]]"
+        },
+        "platforms": [
+          "local"
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=healthprotect"
+          },
+          {
+            "type": "dropdown",
+            "name": "moodlight",
+            "title": {
+              "en": "Mood light",
+              "sv": "Stämningsljus",
+              "nl": "Sfeerverlichting",
+              "da": "Stemningslys",
+              "de": "Stimmungslicht",
+              "es": "Luz de ambiente",
+              "fr": "Lumière d'ambiance",
+              "it": "Luce d'atmosfera",
+              "no": "Stemningslys",
+              "pl": "Światło nastrojowe",
+              "ru": "Атмосферный свет",
+              "ko": "무드 조명",
+              "ar": "ضوء الأجواء"
+            },
+            "values": [
+              {
+                "id": "true",
+                "label": {
+                  "en": "On",
+                  "nl": "Aan",
+                  "da": "Til",
+                  "de": "Ein",
+                  "es": "Activado",
+                  "fr": "Activé",
+                  "it": "Acceso",
+                  "no": "På",
+                  "sv": "På",
+                  "pl": "Włączone",
+                  "ru": "Вкл",
+                  "ko": "켜짐",
+                  "ar": "تشغيل"
+                }
+              },
+              {
+                "id": "false",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit",
+                  "da": "Fra",
+                  "de": "Aus",
+                  "es": "Desactivado",
+                  "fr": "Désactivé",
+                  "it": "Spento",
+                  "no": "Av",
+                  "sv": "Av",
+                  "pl": "Wyłączone",
+                  "ru": "Выкл",
+                  "ko": "꺼짐",
+                  "ar": "إيقاف"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "set-moodlight2"
+      },
+      {
+        "title": {
           "en": "Set night mode",
           "nl": "Nachtmodus instellen",
           "da": "Indstil nattilstand",
@@ -3945,6 +4610,7 @@
         "automode",
         "wifi_status",
         "filter_status",
+        "measure_filter_life",
         "measure_humidity",
         "measure_pm1",
         "measure_pm25",
@@ -4564,11 +5230,16 @@
         "fanspeed",
         "brightness2",
         "child_lock",
+        "germ_shield",
+        "measure_hcho",
+        "mood_light",
         "nightmode",
         "standby",
         "automode",
         "wifi_status",
         "filter_status",
+        "measure_filter_life",
+        "measure_co2",
         "measure_humidity",
         "measure_pm1",
         "measure_pm25",
@@ -5169,6 +5840,627 @@
     },
     {
       "name": {
+        "en": "Humidifier",
+        "sv": "Luftfuktare",
+        "nl": "Luchtbevochtiger",
+        "da": "Luftfugter",
+        "de": "Luftbefeuchter",
+        "es": "Humidificador",
+        "fr": "Humidificateur",
+        "it": "Umidificatore",
+        "no": "Luftfukter",
+        "pl": "Nawilżacz",
+        "ru": "Увлажнитель",
+        "ko": "가습기",
+        "ar": "جهاز ترطيب الهواء"
+      },
+      "class": "humidifier",
+      "capabilities": [
+        "fanspeed",
+        "brightness2",
+        "child_lock",
+        "nightmode",
+        "standby",
+        "automode",
+        "wifi_status",
+        "filter_status",
+        "measure_filter_life",
+        "measure_humidity",
+        "measure_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/humidifier/assets/images/small.png",
+        "large": "/drivers/humidifier/assets/images/large.png",
+        "xlarge": "/drivers/humidifier/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "icon.svg",
+            "title": {
+              "en": "Login to your account",
+              "sv": "Logga in på ditt konto",
+              "nl": "Inloggen op uw account",
+              "da": "Log ind på din konto",
+              "de": "Melden Sie sich bei Ihrem Konto an",
+              "es": "Iniciar sesión en tu cuenta",
+              "fr": "Connectez-vous à votre compte",
+              "it": "Accedi al tuo account",
+              "no": "Logg inn på kontoen din",
+              "pl": "Zaloguj się na swoje konto",
+              "ru": "Войти в ваш аккаунт",
+              "ko": "계정에 로그인",
+              "ar": "تسجيل الدخول إلى حسابك"
+            },
+            "usernameLabel": {
+              "en": "E-mail address",
+              "sv": "E-postadress",
+              "nl": "E-mailadres",
+              "da": "E-mailadresse",
+              "de": "E-Mail-Adresse",
+              "es": "Dirección de correo electrónico",
+              "fr": "Adresse e-mail",
+              "it": "Indirizzo email",
+              "no": "E-postadresse",
+              "pl": "Adres e-mail",
+              "ru": "Адрес электронной почты",
+              "ko": "이메일 주소",
+              "ar": "عنوان البريد الإلكتروني"
+            },
+            "usernamePlaceholder": {
+              "en": "john@doe.com",
+              "sv": "namn@domain.se",
+              "nl": "naam@voorbeeld.com",
+              "da": "navn@domæne.dk",
+              "de": "name@domain.de",
+              "es": "nombre@dominio.es",
+              "fr": "nom@domaine.fr",
+              "it": "nome@dominio.it",
+              "no": "navn@domenet.no",
+              "pl": "imie@domena.pl",
+              "ru": "имя@домен.ру",
+              "ko": "이름@도메인.한국",
+              "ar": "john@doe.com"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "sv": "Lösenord",
+              "nl": "Wachtwoord",
+              "da": "Adgangskode",
+              "de": "Passwort",
+              "es": "Contraseña",
+              "fr": "Mot de passe",
+              "it": "Password",
+              "no": "Passord",
+              "pl": "Hasło",
+              "ru": "Пароль",
+              "ko": "비밀번호",
+              "ar": "كلمة المرور"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "sv": "Lösenord",
+              "nl": "Wachtwoord",
+              "da": "Adgangskode",
+              "de": "Passwort",
+              "es": "Contraseña",
+              "fr": "Mot de passe",
+              "it": "Password",
+              "no": "Passord",
+              "pl": "Hasło",
+              "ru": "Пароль",
+              "ko": "비밀번호",
+              "ar": "كلمة المرور"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "energy": {
+        "approximation": {
+          "usageOff": 0,
+          "usageOn": 25
+        }
+      },
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        }
+      },
+      "id": "humidifier",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Login details",
+            "sv": "Login detaljer",
+            "nl": "Inloggegevens",
+            "da": "Login detaljer",
+            "de": "Anmeldedaten",
+            "es": "Detalles de inicio de sesión",
+            "fr": "Détails de connexion",
+            "it": "Dettagli di accesso",
+            "no": "Innloggingsdetaljer",
+            "pl": "Szczegóły logowania",
+            "ru": "Детали входа",
+            "ko": "로그인 정보",
+            "ar": "تفاصيل تسجيل الدخول"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "E-mail",
+                "sv": "Epost",
+                "nl": "E-mail",
+                "da": "E-mail",
+                "de": "E-Mail",
+                "es": "Correo electrónico",
+                "fr": "E-mail",
+                "it": "E-mail",
+                "no": "E-post",
+                "pl": "E-mail",
+                "ru": "Электронная почта",
+                "ko": "이메일",
+                "ar": "البريد الإلكتروني"
+              },
+              "value": "JohnDoe@domain.com",
+              "hint": {
+                "en": "The email of the user.",
+                "sv": "Epostadressen för användaren.",
+                "nl": "De e-mail van de gebruiker.",
+                "da": "Brugerens e-mail.",
+                "de": "Die E-Mail des Benutzers.",
+                "es": "El correo electrónico del usuario.",
+                "fr": "L'email de l'utilisateur.",
+                "it": "L'email dell'utente.",
+                "no": "Brukerens e-post.",
+                "pl": "E-mail użytkownika.",
+                "ru": "Электронная почта пользователя.",
+                "ko": "사용자의 이메일.",
+                "ar": "البريد الإلكتروني للمستخدم."
+              }
+            },
+            {
+              "id": "password",
+              "type": "text",
+              "label": {
+                "en": "Password",
+                "sv": "Lösenord",
+                "nl": "Wachtwoord",
+                "da": "Kodeord",
+                "de": "Passwort",
+                "es": "Contraseña",
+                "fr": "Mot de passe",
+                "it": "Password",
+                "no": "Passord",
+                "pl": "Hasło",
+                "ru": "Пароль",
+                "ko": "비밀번호",
+                "ar": "كلمة المرور"
+              },
+              "value": "Secret",
+              "hint": {
+                "en": "The password of the user.",
+                "sv": "Lösenordet för användaren.",
+                "nl": "Het wachtwoord van de gebruiker.",
+                "da": "Brugerens kodeord.",
+                "de": "Das Passwort des Benutzers.",
+                "es": "La contraseña del usuario.",
+                "fr": "Le mot de passe de l'utilisateur.",
+                "it": "La password dell'utente.",
+                "no": "Brukerens passord.",
+                "pl": "Hasło użytkownika.",
+                "ru": "Пароль пользователя.",
+                "ko": "사용자의 비밀번호.",
+                "ar": "كلمة مرور المستخدم."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Device infomation",
+            "sv": "Enhetsdetaljer",
+            "nl": "Apparaatinformatie",
+            "da": "Enhedsoplysninger",
+            "de": "Geräteinformationen",
+            "es": "Información del dispositivo",
+            "fr": "Informations sur l'appareil",
+            "it": "Informazioni sul dispositivo",
+            "no": "Enhetsinformasjon",
+            "pl": "Informacje o urządzeniu",
+            "ru": "Информация об устройстве",
+            "ko": "장치 정보",
+            "ar": "معلومات الجهاز"
+          },
+          "children": [
+            {
+              "id": "uuid",
+              "type": "label",
+              "label": {
+                "en": "UUID",
+                "sv": "UUID",
+                "nl": "UUID",
+                "da": "UUID",
+                "de": "UUID",
+                "es": "UUID",
+                "fr": "UUID",
+                "it": "UUID",
+                "no": "UUID",
+                "pl": "UUID",
+                "ru": "UUID",
+                "ko": "UUID",
+                "ar": "UUID"
+              },
+              "value": "EE04776CEDC0BAB2",
+              "hint": {
+                "en": "The uniqe id of the device.",
+                "sv": "Unik identifierare för enheten.",
+                "nl": "De unieke id van het apparaat.",
+                "da": "Den unikke id for enheden.",
+                "de": "Die eindeutige ID des Geräts.",
+                "es": "El ID único del dispositivo.",
+                "fr": "L'ID unique de l'appareil.",
+                "it": "L'ID univoco del dispositivo.",
+                "no": "Den unike id'en til enheten.",
+                "pl": "Unikalny identyfikator urządzenia.",
+                "ru": "Уникальный ID устройства.",
+                "ko": "장치의 고유 ID.",
+                "ar": "المعرف الفريد للجهاز."
+              }
+            },
+            {
+              "id": "name",
+              "type": "label",
+              "label": {
+                "en": "Name",
+                "sv": "Namn",
+                "nl": "Naam",
+                "da": "Navn",
+                "de": "Name",
+                "es": "Nombre",
+                "fr": "Nom",
+                "it": "Nome",
+                "no": "Navn",
+                "pl": "Nazwa",
+                "ru": "Имя",
+                "ko": "이름",
+                "ar": "الاسم"
+              },
+              "value": "BlueAir DustMagnet",
+              "hint": {
+                "en": "Name of the device",
+                "sv": "Namn på enheten",
+                "nl": "Naam van het apparaat",
+                "da": "Navn på enheden",
+                "de": "Name des Geräts",
+                "es": "Nombre del dispositivo",
+                "fr": "Nom de l'appareil",
+                "it": "Nome del dispositivo",
+                "no": "Navnet på enheten",
+                "pl": "Nazwa urządzenia",
+                "ru": "Имя устройства",
+                "ko": "장치 이름",
+                "ar": "اسم الجهاز"
+              }
+            },
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model",
+                "sv": "Model",
+                "nl": "Model",
+                "da": "Model",
+                "de": "Modell",
+                "es": "Modelo",
+                "fr": "Modèle",
+                "it": "Modello",
+                "no": "Modell",
+                "pl": "Model",
+                "ru": "Модель",
+                "ko": "모델",
+                "ar": "نموذج"
+              },
+              "value": "1.0.9",
+              "hint": {
+                "en": "Model of the device",
+                "sv": "Model på enheten",
+                "nl": "Model van het apparaat",
+                "da": "Model af enheden",
+                "de": "Modell des Geräts",
+                "es": "Modelo del dispositivo",
+                "fr": "Modèle de l'appareil",
+                "it": "Modello del dispositivo",
+                "no": "Modell av enheten",
+                "pl": "Model urządzenia",
+                "ru": "Модель устройства",
+                "ko": "장치 모델",
+                "ar": "نموذج الجهاز"
+              }
+            },
+            {
+              "id": "mac",
+              "type": "label",
+              "label": {
+                "en": "MAC",
+                "sv": "MAC",
+                "nl": "MAC",
+                "da": "MAC",
+                "de": "MAC",
+                "es": "MAC",
+                "fr": "MAC",
+                "it": "MAC",
+                "no": "MAC",
+                "pl": "MAC",
+                "ru": "MAC",
+                "ko": "MAC",
+                "ar": "ماك"
+              },
+              "value": "34EAE728765C",
+              "hint": {
+                "en": "MAC address of the device",
+                "sv": "MAC address på enheten",
+                "nl": "MAC-adres van het apparaat",
+                "da": "MAC-adresse for enheden",
+                "de": "MAC-Adresse des Geräts",
+                "es": "Dirección MAC del dispositivo",
+                "fr": "Adresse MAC de l'appareil",
+                "it": "Indirizzo MAC del dispositivo",
+                "no": "MAC-adresse til enheten",
+                "pl": "Adres MAC urządzenia",
+                "ru": "MAC-адрес устройства",
+                "ko": "장치의 MAC 주소",
+                "ar": "عنوان MAC للجهاز"
+              }
+            },
+            {
+              "id": "mcuFirmware",
+              "type": "label",
+              "label": {
+                "en": "MCU Firmware",
+                "sv": "MCU Firmware",
+                "nl": "MCU Firmware",
+                "da": "MCU Firmware",
+                "de": "MCU Firmware",
+                "es": "Firmware de MCU",
+                "fr": "Firmware de MCU",
+                "it": "Firmware MCU",
+                "no": "MCU Firmware",
+                "pl": "Oprogramowanie MCU",
+                "ru": "Прошивка MCU",
+                "ko": "MCU 펌웨어",
+                "ar": "البرامج الثابتة لوحدة التحكم الدقيقة (MCU)"
+              },
+              "value": "1.0.35",
+              "hint": {
+                "en": "Version of the MCU Firmware",
+                "sv": "Vesion på MCU Firmware",
+                "nl": "Versie van de MCU-firmware",
+                "da": "Version af MCU Firmware",
+                "de": "Version der MCU Firmware",
+                "es": "Versión del firmware de MCU",
+                "fr": "Version du firmware MCU",
+                "it": "Versione del firmware MCU",
+                "no": "Versjon av MCU Firmware",
+                "pl": "Wersja oprogramowania MCU",
+                "ru": "Версия прошивки MCU",
+                "ko": "MCU 펌웨어 버전",
+                "ar": "إصدار البرنامج الثابت لوحدة التحكم الدقيقة (MCU)"
+              }
+            },
+            {
+              "id": "wlanDriver",
+              "type": "label",
+              "label": {
+                "en": "WLAN Driver",
+                "sv": "WLAN Driver",
+                "nl": "WLAN-Driver",
+                "da": "WLAN Driver",
+                "de": "WLAN-Treiber",
+                "es": "Controlador WLAN",
+                "fr": "Pilote WLAN",
+                "it": "Driver WLAN",
+                "no": "WLAN-driver",
+                "pl": "Sterownik WLAN",
+                "ru": "Драйвер WLAN",
+                "ko": "WLAN 드라이버",
+                "ar": "برنامج تشغيل WLAN"
+              },
+              "value": "V10",
+              "hint": {
+                "en": "Version of the WLAN Driver",
+                "sv": "Version av WLAN Driver",
+                "nl": "Versie van de WLAN-driver",
+                "da": "Version af WLAN Driver",
+                "de": "Version des WLAN-Treibers",
+                "es": "Versión del controlador WLAN",
+                "fr": "Version du pilote WLAN",
+                "it": "Versione del driver WLAN",
+                "no": "Versjon av WLAN-driver",
+                "pl": "Wersja sterownika WLAN",
+                "ru": "Версия драйвера WLAN",
+                "ko": "WLAN 드라이버 버전",
+                "ar": "إصدار برنامج تشغيل WLAN"
+              }
+            },
+            {
+              "id": "serial",
+              "type": "label",
+              "label": {
+                "en": "Serial",
+                "sv": "Serienummer",
+                "nl": "Serienummer",
+                "da": "Serienummer",
+                "de": "Seriennummer",
+                "es": "Número de serie",
+                "fr": "Numéro de série",
+                "it": "Seriale",
+                "no": "Serienummer",
+                "pl": "Numer seryjny",
+                "ru": "Серийный номер",
+                "ko": "일련번호",
+                "ar": "رقم تسلسلي"
+              },
+              "value": "102938765378827653",
+              "hint": {
+                "en": "The serial number of the device.",
+                "sv": "Serienummer på enheten.",
+                "nl": "Serienummer van het apparaat.",
+                "da": "Serienummer på enheden.",
+                "de": "Die Seriennummer des Geräts.",
+                "es": "El número de serie del dispositivo.",
+                "fr": "Le numéro de série de l'appareil.",
+                "it": "Il numero di serie del dispositivo.",
+                "no": "Serienummeret til enheten.",
+                "pl": "Numer seryjny urządzenia.",
+                "ru": "Серийный номер устройства.",
+                "ko": "장치의 일련번호.",
+                "ar": "الرقم التسلسلي للجهاز."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Advanced settings",
+            "sv": "Avancerade inställningar",
+            "nl": "Geavanceerde instellingen",
+            "da": "Avancerede indstillinger",
+            "de": "Erweiterte Einstellungen",
+            "es": "Configuración avanzada",
+            "fr": "Paramètres avancés",
+            "it": "Impostazioni avanzate",
+            "no": "Avanserte innstillinger",
+            "pl": "Zaawansowane ustawienia",
+            "ru": "Расширенные настройки",
+            "ko": "고급 설정",
+            "ar": "الإعدادات المتقدمة"
+          },
+          "children": [
+            {
+              "id": "update",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "sv": "Uppdatera",
+                "nl": "Update-interval",
+                "da": "Opdateringsinterval",
+                "de": "Update-Intervall",
+                "es": "Intervalo de actualización",
+                "fr": "Intervalle de mise à jour",
+                "it": "Intervallo di aggiornamento",
+                "no": "Oppdateringsintervall",
+                "pl": "Interwał aktualizacji",
+                "ru": "Интервал обновления",
+                "ko": "업데이트 간격",
+                "ar": "فترة التحديث"
+              },
+              "value": 60,
+              "min": 60,
+              "max": 300,
+              "units": {
+                "en": "Seconds",
+                "sv": "Sekunder",
+                "nl": "Seconden",
+                "da": "Sekunder",
+                "de": "Sekunden",
+                "es": "Segundos",
+                "fr": "Secondes",
+                "it": "Secondi",
+                "no": "Sekunder",
+                "pl": "Sekundy",
+                "ru": "Секунды",
+                "ko": "초",
+                "ar": "ثوانٍ"
+              }
+            },
+            {
+              "id": "temperatureUnit",
+              "type": "dropdown",
+              "value": "C",
+              "label": {
+                "en": "Temperature unit",
+                "sv": "Temperatur",
+                "nl": "Temperatuureenheid",
+                "da": "Temperaturenhed",
+                "de": "Temperatureinheit",
+                "es": "Unidad de temperatura",
+                "fr": "Unité de température",
+                "it": "Unità di temperatura",
+                "no": "Temperaturenhet",
+                "pl": "Jednostka temperatury",
+                "ru": "Единица измерения температуры",
+                "ko": "온도 단위",
+                "ar": "وحدة درجة الحرارة"
+              },
+              "values": [
+                {
+                  "id": "C",
+                  "label": {
+                    "en": "Celsius",
+                    "sv": "Celsius",
+                    "nl": "Celsius",
+                    "da": "Celsius",
+                    "de": "Celsius",
+                    "es": "Celsius",
+                    "fr": "Celsius",
+                    "it": "Celsius",
+                    "no": "Celsius",
+                    "pl": "Celsius",
+                    "ru": "Цельсий",
+                    "ko": "섭씨",
+                    "ar": "درجة مئوية"
+                  }
+                },
+                {
+                  "id": "F",
+                  "label": {
+                    "en": "Fahrenheit",
+                    "sv": "Fahrenheit",
+                    "nl": "Fahrenheit",
+                    "da": "Fahrenheit",
+                    "de": "Fahrenheit",
+                    "es": "Fahrenheit",
+                    "fr": "Fahrenheit",
+                    "it": "Fahrenheit",
+                    "no": "Fahrenheit",
+                    "pl": "Fahrenheit",
+                    "ru": "Фаренгейт",
+                    "ko": "화씨",
+                    "ar": "فهرنهايت"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
         "en": "Pure",
         "sv": "Pure",
         "nl": "Pure",
@@ -5193,6 +6485,7 @@
         "automode",
         "wifi_status",
         "filter_status",
+        "measure_filter_life",
         "measure_pm25"
       ],
       "platforms": [
@@ -6586,6 +7879,29 @@
       "uiComponent": "sensor",
       "icon": "/assets/images/air-filter.svg"
     },
+    "germ_shield": {
+      "type": "boolean",
+      "title": {
+        "en": "Germ shield",
+        "sv": "Germskydd",
+        "nl": "Kiemschild",
+        "da": "Kimskjold",
+        "de": "Keimschutz",
+        "es": "Escudo germicida",
+        "fr": "Bouclier germicide",
+        "it": "Scudo germi",
+        "no": "Kimskjold",
+        "pl": "Tarcza przeciwbakteryjna",
+        "ru": "Защита от микробов",
+        "ko": "세균 차단",
+        "ar": "درع الجراثيم"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle",
+      "uiQuickAction": false,
+      "icon": "/assets/images/germ-shield.svg"
+    },
     "last_retrieval_date": {
       "type": "string",
       "title": {
@@ -7074,6 +8390,174 @@
       "uiComponent": "sensor",
       "minCompatibility": "12.2.0"
     },
+    "measure_co2": {
+      "type": "number",
+      "title": {
+        "en": "CO2",
+        "nl": "CO2",
+        "da": "CO2",
+        "it": "CO2",
+        "ko": "CO2",
+        "pl": "CO2",
+        "ru": "CO2",
+        "sv": "CO2",
+        "es": "CO2",
+        "fr": "CO2",
+        "no": "CO2",
+        "de": "CO2",
+        "ar": "CO2"
+      },
+      "units": {
+        "en": "ppm",
+        "nl": "ppm",
+        "da": "ppm",
+        "it": "ppm",
+        "ko": "ppm",
+        "pl": "ppm",
+        "ru": "ppm",
+        "sv": "ppm",
+        "es": "ppm",
+        "fr": "ppm",
+        "no": "ppm",
+        "de": "ppm",
+        "ar": "ppm"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Carbon dioxide concentration in parts per million (ppm)",
+        "nl": "Koolstofdioxide concentratie in delen per miljoen (ppm)",
+        "da": "Kuldioxidkoncentration i dele per million (ppm)",
+        "it": "Concentrazione di anidride carbonica in parti per milione (ppm)",
+        "ko": "백만분율(ppm) 단위의 이산화탄소 농도",
+        "pl": "Stężenie dwutlenku węgla w częściach na milion (ppm)",
+        "ru": "Концентрация углекислого газа в частях на миллион (ppm)",
+        "sv": "Koldioxidkoncentration i delar per miljon (ppm)",
+        "es": "Concentración de dióxido de carbono en partes por millón (ppm)",
+        "fr": "Concentration de dioxyde de carbone en parties par million (ppm)",
+        "no": "Karbondioksidkonsentrasjon i deler per million (ppm)",
+        "de": "Kohlendioxidkonzentration in Teilen pro Million (ppm)",
+        "ar": "تركيز ثاني أكسيد الكربون بالأجزاء في المليون (ppm)"
+      },
+      "chartType": "spline",
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "minCompatibility": "12.2.0"
+    },
+    "measure_filter_life": {
+      "type": "number",
+      "title": {
+        "en": "Filter life remaining",
+        "nl": "Resterende filterlevensduur",
+        "da": "Tilbageværende filterlevetid",
+        "it": "Vita residua del filtro",
+        "ko": "필터 잔여 수명",
+        "pl": "Pozostała żywotność filtra",
+        "ru": "Оставшийся ресурс фильтра",
+        "sv": "Återstående filterlivslängd",
+        "es": "Vida útil restante del filtro",
+        "fr": "Durée de vie restante du filtre",
+        "no": "Gjenværende filterlevetid",
+        "de": "Verbleibende Filterlebensdauer",
+        "ar": "العمر المتبقي للفلتر"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%",
+        "da": "%",
+        "it": "%",
+        "ko": "%",
+        "pl": "%",
+        "ru": "%",
+        "sv": "%",
+        "es": "%",
+        "fr": "%",
+        "no": "%",
+        "de": "%",
+        "ar": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Percentage of filter life remaining (100% = new, 0% = replace now)",
+        "nl": "Percentage resterende filterlevensduur (100% = nieuw, 0% = nu vervangen)",
+        "da": "Procentdel af tilbageværende filterlevetid (100% = ny, 0% = udskift nu)",
+        "it": "Percentuale di vita residua del filtro (100% = nuovo, 0% = sostituire ora)",
+        "ko": "필터 잔여 수명 비율 (100% = 새것, 0% = 지금 교체)",
+        "pl": "Procent pozostałej żywotności filtra (100% = nowy, 0% = wymień teraz)",
+        "ru": "Процент оставшегося ресурса фильтра (100% = новый, 0% = замените сейчас)",
+        "sv": "Procent kvarvarande filterlivslängd (100% = ny, 0% = byt nu)",
+        "es": "Porcentaje de vida útil restante del filtro (100% = nuevo, 0% = sustituir ahora)",
+        "fr": "Pourcentage de durée de vie restante du filtre (100% = neuf, 0% = remplacer maintenant)",
+        "no": "Prosentandel av gjenværende filterlevetid (100% = ny, 0% = bytt nå)",
+        "de": "Verbleibende Filterlebensdauer in Prozent (100% = neu, 0% = jetzt ersetzen)",
+        "ar": "نسبة العمر المتبقي للفلتر (100% = جديد، 0% = استبدل الآن)"
+      },
+      "chartType": "spline",
+      "min": 0,
+      "max": 100,
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/images/air-filter.svg",
+      "minCompatibility": "12.2.0"
+    },
+    "measure_hcho": {
+      "type": "number",
+      "title": {
+        "en": "Formaldehyde (HCHO)",
+        "sv": "Formaldehyd (HCHO)",
+        "nl": "Formaldehyde (HCHO)",
+        "da": "Formaldehyd (HCHO)",
+        "de": "Formaldehyd (HCHO)",
+        "es": "Formaldehído (HCHO)",
+        "fr": "Formaldéhyde (HCHO)",
+        "it": "Formaldeide (HCHO)",
+        "no": "Formaldehyd (HCHO)",
+        "pl": "Formaldehyd (HCHO)",
+        "ru": "Формальдегид (HCHO)",
+        "ko": "포름알데히드 (HCHO)",
+        "ar": "الفورمالديهايد (HCHO)"
+      },
+      "units": {
+        "en": "μg/m³",
+        "sv": "μg/m³",
+        "nl": "μg/m³",
+        "da": "μg/m³",
+        "de": "μg/m³",
+        "es": "μg/m³",
+        "fr": "μg/m³",
+        "it": "μg/m³",
+        "no": "μg/m³",
+        "pl": "μg/m³",
+        "ru": "мкг/м³",
+        "ko": "μg/m³",
+        "ar": "μg/m³"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Formaldehyde concentration in micrograms per cubic metre (μg/m³)",
+        "sv": "Formaldehydkoncentration i mikrogram per kubikmeter (μg/m³)",
+        "nl": "Formaldehydeconcentratie in microgram per kubieke meter (μg/m³)",
+        "da": "Formaldehydkoncentration i mikrogram per kubikmeter (μg/m³)",
+        "de": "Formaldehydkonzentration in Mikrogramm pro Kubikmeter (μg/m³)",
+        "es": "Concentración de formaldehído en microgramos por metro cúbico (μg/m³)",
+        "fr": "Concentration de formaldéhyde en microgrammes par mètre cube (μg/m³)",
+        "it": "Concentrazione di formaldeide in microgrammi per metro cubo (μg/m³)",
+        "no": "Formaldehydkonsentrasjon i mikrogram per kubikkmeter (μg/m³)",
+        "pl": "Stężenie formaldehydu w mikrogramach na metr sześcienny (μg/m³)",
+        "ru": "Концентрация формальдегида в микрограммах на кубический метр (мкг/м³)",
+        "ko": "세제곱미터당 마이크로그램(μg/m³) 단위의 포름알데히드 농도",
+        "ar": "تركيز الفورمالديهايد بالميكروغرام لكل متر مكعب (μg/m³)"
+      },
+      "chartType": "spline",
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "minCompatibility": "12.2.0"
+    },
     "measure_humidity": {
       "type": "number",
       "title": {
@@ -7439,6 +8923,29 @@
       "setable": false,
       "uiComponent": "sensor",
       "minCompatibility": "12.2.0"
+    },
+    "mood_light": {
+      "type": "boolean",
+      "title": {
+        "en": "Mood light",
+        "sv": "Stämningsljus",
+        "nl": "Sfeerverlichting",
+        "da": "Stemningslys",
+        "de": "Stimmungslicht",
+        "es": "Luz de ambiente",
+        "fr": "Lumière d'ambiance",
+        "it": "Luce d'atmosfera",
+        "no": "Stemningslys",
+        "pl": "Światło nastrojowe",
+        "ru": "Атмосферный свет",
+        "ko": "무드 조명",
+        "ar": "ضوء الأجواء"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle",
+      "uiQuickAction": false,
+      "icon": "/assets/images/lightbulb.svg"
     },
     "nightmode": {
       "type": "boolean",
