@@ -157,5 +157,8 @@
   },
   "3.2.17": {
     "en": "add diagnostics settings page with verbose logging toggle and log viewer"
+  },
+  "3.2.18": {
+    "en": "ast_retrieval_date capability was being added then immediately deleted on every Classic device init — a broken migration block. Removed the block; the"
   }
 }
