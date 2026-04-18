@@ -163,7 +163,7 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   async onAdded(): Promise<void> {
-    this.log('BlueAirPureDevice has been added');
+    this.logger.info('BlueAirPureDevice has been added');
   }
 
   async onSettings({
@@ -175,16 +175,16 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
     newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log('BlueAirPureDevice settings were changed');
-    this.log('Changed keys:', changedKeys);
+    this.logger.info('BlueAirPureDevice settings were changed');
+    this.logger.info('Changed keys:', changedKeys);
   }
 
   async onRenamed(name: string): Promise<void> {
-    this.log('BlueAirPureDevice was renamed to:', name);
+    this.logger.info('BlueAirPureDevice was renamed to:', name);
   }
 
   async onDeleted(): Promise<void> {
-    this.log('BlueAirPureDevice has been deleted');
+    this.logger.info('BlueAirPureDevice has been deleted');
     await super.onDeleted();
   }
 }

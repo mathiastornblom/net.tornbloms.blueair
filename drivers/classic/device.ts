@@ -28,7 +28,7 @@ class BlueAirClassicDevice extends Device {
   async onInit(): Promise<void> {
     this.logger = new DiagnosticLogger(
       'BlueAirClassicDevice',
-      (...args: unknown[]) => this.log(...(args as any[])),
+      (...args: unknown[]) => this.logger.info(...(args as any[])),
       (...args: unknown[]) => this.error(...(args as any[]))
     );
 
@@ -68,10 +68,10 @@ class BlueAirClassicDevice extends Device {
       this.registerCapabilityListener('fan_speed', async (value) => {
         const result = this.filterSettings(DeviceAttributes, 'fan_speed');
         if (value === 'auto') {
-          this.log('Changed fan speed: Auto');
+          this.logger.info('Changed fan speed: Auto');
           await client.setFanAuto(data.uuid, 'auto', 'auto', userId); // Set fan to auto mode
         } else {
-          this.log('Changed fan speed:', value);
+          this.logger.info('Changed fan speed:', value);
           await client.setFanSpeed(
             data.uuid,
             value,
@@ -85,7 +85,7 @@ class BlueAirClassicDevice extends Device {
       // Register a listener for changes to the brightness capability
       this.registerCapabilityListener('brightness', async (value) => {
         const result = this.filterSettings(DeviceAttributes, 'brightness');
-        this.log('Changed brightness:', value);
+        this.logger.info('Changed brightness:', value);
         await client.setBrightness(
           data.uuid,
           String(value),
@@ -98,7 +98,7 @@ class BlueAirClassicDevice extends Device {
       this.registerCapabilityListener('child_lock', async (value) => {
         const result = this.filterSettings(DeviceAttributes, 'child_lock');
         if (value) {
-          this.log('Changed child lock:', value);
+          this.logger.info('Changed child lock:', value);
           await client.setChildLock(
             data.uuid,
             '1',
@@ -106,7 +106,7 @@ class BlueAirClassicDevice extends Device {
             userId
           ); // Enable child lock
         } else {
-          this.log('Changed child lock:', value);
+          this.logger.info('Changed child lock:', value);
           await client.setChildLock(
             data.uuid,
             '0',
@@ -188,7 +188,7 @@ class BlueAirClassicDevice extends Device {
       // Start an interval to periodically fetch and update device attributes
       this.intervalId1 = setInterval(async () => {
         try {
-          this.log('setInternal: ', settings.update * 1000);
+          this.logger.info('setInternal: ', settings.update * 1000);
           const DeviceAttributes = await client.getDeviceAttributes(data.uuid);
           const DeviceInfo = await client.getDeviceInfo(data.uuid);
 
@@ -294,7 +294,7 @@ class BlueAirClassicDevice extends Device {
             roomLocation: DeviceInfo.roomLocation,
           });
         } catch (error) {
-          this.log('Error in interval 2:', error); // Log any errors encountered
+          this.logger.info('Error in interval 2:', error); // Log any errors encountered
         }
       }, 60000); // This interval runs every minute
 
@@ -350,7 +350,7 @@ class BlueAirClassicDevice extends Device {
    * This method logs when the device is successfully added.
    */
   async onAdded(): Promise<void> {
-    this.log('BlueAirClassicDevice has been added');
+    this.logger.info('BlueAirClassicDevice has been added');
   }
 
   /**
@@ -376,7 +376,7 @@ class BlueAirClassicDevice extends Device {
     };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log('BlueAirClassicDevice settings were changed'); // Log when settings are changed
+    this.logger.info('BlueAirClassicDevice settings were changed'); // Log when settings are changed
   }
 
   /**
@@ -386,7 +386,7 @@ class BlueAirClassicDevice extends Device {
    * @param name - The new name for the device
    */
   async onRenamed(name: string): Promise<void> {
-    this.log('BlueAirClassicDevice was renamed'); // Log when the device is renamed
+    this.logger.info('BlueAirClassicDevice was renamed'); // Log when the device is renamed
   }
 
   /**
@@ -394,19 +394,19 @@ class BlueAirClassicDevice extends Device {
    * This method ensures that any active intervals are cleared to prevent continued operations.
    */
   async onDeleted(): Promise<void> {
-    this.log('BlueAirClassicDevice has been deleted');
+    this.logger.info('BlueAirClassicDevice has been deleted');
 
     // Clear the first interval if it's active
     if (this.intervalId1) {
       clearInterval(this.intervalId1);
-      this.log('Interval 1 cleared'); // Log clearing of the first interval
+      this.logger.info('Interval 1 cleared'); // Log clearing of the first interval
       this.intervalId1 = null; // Reset the interval ID
     }
 
     // Clear the second interval if it's active
     if (this.intervalId2) {
       clearInterval(this.intervalId2);
-      this.log('Interval 2 cleared'); // Log clearing of the second interval
+      this.logger.info('Interval 2 cleared'); // Log clearing of the second interval
       this.intervalId2 = null; // Reset the interval ID
     }
 
@@ -482,7 +482,7 @@ class BlueAirClassicDevice extends Device {
    */
   filterSettings(settings: Setting[], name: string): Setting | null {
     if (!Array.isArray(settings)) {
-      this.log('Settings is not an array', settings); // Log if settings are not an array
+      this.logger.info('Settings is not an array', settings); // Log if settings are not an array
       return null;
     }
     const setting: Setting | undefined = settings.find(

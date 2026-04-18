@@ -164,7 +164,7 @@ class BlueAirHumidifierDevice extends BlueAirAwsBaseDevice {
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   async onAdded(): Promise<void> {
-    this.log('BlueAirHumidifierDevice has been added');
+    this.logger.info('BlueAirHumidifierDevice has been added');
   }
 
   async onSettings({
@@ -176,16 +176,16 @@ class BlueAirHumidifierDevice extends BlueAirAwsBaseDevice {
     newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log('BlueAirHumidifierDevice settings were changed');
-    this.log('Changed keys:', changedKeys);
+    this.logger.info('BlueAirHumidifierDevice settings were changed');
+    this.logger.info('Changed keys:', changedKeys);
   }
 
   async onRenamed(name: string): Promise<void> {
-    this.log('BlueAirHumidifierDevice was renamed to:', name);
+    this.logger.info('BlueAirHumidifierDevice was renamed to:', name);
   }
 
   async onDeleted(): Promise<void> {
-    this.log('BlueAirHumidifierDevice has been deleted');
+    this.logger.info('BlueAirHumidifierDevice has been deleted');
     await super.onDeleted();
   }
 }

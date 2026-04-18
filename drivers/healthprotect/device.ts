@@ -21,7 +21,7 @@ class BlueAirHealthProtectDevice extends BlueAirAwsFullDevice {
     'wifi_status',
   ];
   async onAdded(): Promise<void> {
-    this.log('BlueAirHealthProtectDevice has been added');
+    this.logger.info('BlueAirHealthProtectDevice has been added');
   }
 
   async onSettings({
@@ -33,16 +33,16 @@ class BlueAirHealthProtectDevice extends BlueAirAwsFullDevice {
     newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log('BlueAirHealthProtectDevice settings were changed');
-    this.log('Changed keys:', changedKeys);
+    this.logger.info('BlueAirHealthProtectDevice settings were changed');
+    this.logger.info('Changed keys:', changedKeys);
   }
 
   async onRenamed(name: string): Promise<void> {
-    this.log('BlueAirHealthProtectDevice was renamed to:', name);
+    this.logger.info('BlueAirHealthProtectDevice was renamed to:', name);
   }
 
   async onDeleted(): Promise<void> {
-    this.log('BlueAirHealthProtectDevice has been deleted');
+    this.logger.info('BlueAirHealthProtectDevice has been deleted');
     await super.onDeleted();
   }
 }
