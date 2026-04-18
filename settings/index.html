@@ -315,19 +315,13 @@ function onHomeyReady(Homey) {
 
   // ── Refresh ──
   function refresh() {
-    btnRefresh.textContent = '…';
-    btnRefresh.disabled = true;
-
     Homey.api('GET', '/logs', null, function(err, data) {
-      btnRefresh.textContent = 'Refresh';
-      btnRefresh.disabled = false;
-
       if (err) {
-        statusTxt.textContent = 'Error: ' + err.message;
+        statusTxt.textContent = 'API error: ' + (err.message || String(err));
         return;
       }
 
-      renderEntries(data);
+      renderEntries(Array.isArray(data) ? data : []);
       statusTxt.textContent = 'Updated ' + new Date().toLocaleTimeString();
     });
   }
@@ -336,7 +330,7 @@ function onHomeyReady(Homey) {
   btnClear.addEventListener('click', function() {
     Homey.api('DELETE', '/logs', null, function(err) {
       if (err) {
-        statusTxt.textContent = 'Error: ' + err.message;
+        statusTxt.textContent = 'API error: ' + (err.message || String(err));
         return;
       }
       renderEntries([]);
@@ -346,8 +340,9 @@ function onHomeyReady(Homey) {
 
   btnRefresh.addEventListener('click', refresh);
 
-  // Auto-load on open
+  // Auto-load on open, then refresh every 10 s
   refresh();
+  setInterval(refresh, 10000);
 }
 </script>
 </body>
