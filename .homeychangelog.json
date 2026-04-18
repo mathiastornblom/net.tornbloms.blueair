@@ -163,5 +163,8 @@
   },
   "3.2.19": {
     "en": "Improved logs and additional corrections"
+  },
+  "3.2.20": {
+    "en": "replace all this.log() with this.logger.info() in all device classes"
   }
 }
