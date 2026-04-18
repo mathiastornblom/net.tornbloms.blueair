@@ -28,13 +28,18 @@ class BlueAirClassicDevice extends Device {
   async onInit(): Promise<void> {
     this.logger = new DiagnosticLogger(
       'BlueAirClassicDevice',
-      (...args: unknown[]) => this.logger.info(...(args as any[])),
+      (...args: unknown[]) => this.log(...(args as any[])),
       (...args: unknown[]) => this.error(...(args as any[]))
     );
 
     const settings = this.getSettings();
     const data = this.getData(); // Retrieve device-specific data (e.g., UUID)
     const userId = this.getStoreValue('userId'); // Retrieve user ID from Homey's storage
+
+    // Remove old typo capability (was 'last_retrival_date', now 'last_retrieval_date')
+    if (this.hasCapability('last_retrival_date')) {
+      await this.removeCapability('last_retrival_date');
+    }
 
     // Add capabilities if they are not already present
     const capabilities = [
