@@ -1,5 +1,6 @@
-import { Device } from 'homey'; // Import the base Device class from the Homey SDK
-import { ApiClient } from 'blueair-client'; // Import the ApiClient from the blueair-client library
+import { Device } from 'homey';
+import { ApiClient } from 'blueair-client';
+import { DiagnosticLogger } from '../../lib/diagnostics';
 
 /**
  * Represents a setting object for the BlueAir device.
@@ -15,19 +16,23 @@ interface Setting {
  * It manages the interactions between the Homey platform and the BlueAir device.
  */
 class BlueAirClassicDevice extends Device {
-  // Property to store the saved fan speed setting
   private _savedfanspeed: Setting | null | undefined;
-
-  // Define interval ID properties to store interval identifiers
-  private intervalId1: ReturnType<typeof setInterval> | null = null; // For the first setInterval
-  private intervalId2: ReturnType<typeof setInterval> | null = null; // For the second setInterval
+  private intervalId1: ReturnType<typeof setInterval> | null = null;
+  private intervalId2: ReturnType<typeof setInterval> | null = null;
+  private logger!: DiagnosticLogger;
 
   /**
    * onInit is called when the device is initialized.
    * This function sets up the device by registering capability listeners and starting data-fetching intervals.
    */
   async onInit(): Promise<void> {
-    const settings = this.getSettings(); // Retrieve device settings from Homey
+    this.logger = new DiagnosticLogger(
+      'BlueAirClassicDevice',
+      (...args: unknown[]) => this.log(...(args as any[])),
+      (...args: unknown[]) => this.error(...(args as any[]))
+    );
+
+    const settings = this.getSettings();
     const data = this.getData(); // Retrieve device-specific data (e.g., UUID)
     const userId = this.getStoreValue('userId'); // Retrieve user ID from Homey's storage
 
@@ -258,17 +263,14 @@ class BlueAirClassicDevice extends Device {
                 'device-uuid': settings.uuid,
                 'fan speed': fanSpeedValue,
               });
-              this._savedfanspeed = resultFanSpeed; // Update the saved fan speed
-            } else {
-              this.log(
-                'Fan speed value is undefined or invalid, cannot trigger flow card.'
-              );
+              this.logger.info(`fan-speed-has-changed → ${fanSpeedValue}`);
+              this._savedfanspeed = resultFanSpeed;
             }
           }
         } catch (error) {
-          this.log('Error in interval 1:', error); // Log any errors encountered
+          this.logger.error('Poll failed:', error);
         }
-      }, settings.update * 1000); // Interval frequency is determined by the update setting
+      }, settings.update * 1000);
 
       // Start another interval to check for changes in filter status
       this.intervalId2 = setInterval(async () => {
@@ -296,57 +298,50 @@ class BlueAirClassicDevice extends Device {
         }
       }, 60000); // This interval runs every minute
 
-      // Register action card listeners for controlling fan speed
       const fancard = this.homey.flow.getActionCard('set-fan-speed');
       fancard.registerRunListener(async (value) => {
-        this.log('Want to change the fan speed with value: ', value.fanspeed);
-        if (value.speed === 'auto') {
-          this.log('Changed fan speed to:', value.fanspeed);
-          await client.setFanAuto(data.uuid, 'auto', 'auto', userId);
-        } else {
-          this.log('Changed fan speed:', value.fanspeed);
-          await client.setFanSpeed(
-            data.uuid,
-            value.fanspeed,
-            value.fanspeed,
-            userId
-          );
-          await client.setFanAuto(data.uuid, 'manual', 'manual', userId);
+        this.logger.info(`action:set-fan-speed → value=${value.fanspeed}`);
+        try {
+          if (value.speed === 'auto') {
+            await client.setFanAuto(data.uuid, 'auto', 'auto', userId);
+          } else {
+            await client.setFanSpeed(data.uuid, value.fanspeed, value.fanspeed, userId);
+            await client.setFanAuto(data.uuid, 'manual', 'manual', userId);
+          }
+          this.logger.debug('action:set-fan-speed ok');
+        } catch (err) {
+          this.logger.error('action:set-fan-speed failed:', err);
+          throw err;
         }
       });
 
-      // Register action card listeners for controlling brightness
       const brightnesscard = this.homey.flow.getActionCard('set-brightness');
       brightnesscard.registerRunListener(async (value) => {
-        this.log(
-          'Want to change the brightness with value: ',
-          value.brightness
-        );
-        await client.setBrightness(
-          data.uuid,
-          value.brightness,
-          value.brightness,
-          userId
-        );
-        this.log('Changed brightness to:', value.brightness);
+        this.logger.info(`action:set-brightness → value=${value.brightness}`);
+        try {
+          await client.setBrightness(data.uuid, value.brightness, value.brightness, userId);
+          this.logger.debug('action:set-brightness ok');
+        } catch (err) {
+          this.logger.error('action:set-brightness failed:', err);
+          throw err;
+        }
       });
 
-      // Register action card listeners for controlling child lock
       const childlockcard = this.homey.flow.getActionCard('set-childlock');
       childlockcard.registerRunListener(async (value) => {
-        this.log('Want to change the child lock with value: ', value.childlock);
-        await client.setChildLock(
-          data.uuid,
-          value.brightness,
-          value.brightness,
-          userId
-        );
-        this.log('Changed child lock:', value.childlock);
+        this.logger.info(`action:set-childlock → value=${value.childlock}`);
+        try {
+          await client.setChildLock(data.uuid, value.childlock, value.childlock, userId);
+          this.logger.debug('action:set-childlock ok');
+        } catch (err) {
+          this.logger.error('action:set-childlock failed:', err);
+          throw err;
+        }
       });
 
-      this.log('BlueAirClassicDevice has been initialized'); // Log device initialization
+      this.logger.info(`initialized (poll every ${settings.update}s)`);
     } catch (e) {
-      this.log('Error during initialization:', e); // Log any initialization errors
+      this.logger.error('Initialization failed:', e);
     }
   }
 
