@@ -332,7 +332,7 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       conditionScorePm10ToString(this.getCapabilityValue('measure_pm10')) === args.argument_main
     );
 
-    this.homey.flow.getConditionCard('score_tVOC').registerRunListener(async (args) =>
+    this.homey.flow.getConditionCard('score_tvoc').registerRunListener(async (args) =>
       conditionScoretVOCToString(this.getCapabilityValue('measure_tvoc')) === args.argument_main
     );
   }
