@@ -343,6 +343,56 @@ abstract class BlueAirAwsBaseDevice extends Device {
       throw err;
     }
   }
+
+  public async performTurnOn(): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:turn-on → "${this.getName()}"`);
+    try {
+      // standby=false in the API = device is ON (not in standby)
+      await this.client.setStandby(this.getData().uuid, false);
+      // capability standby=true = device is ON
+      this.setCapabilityValue('standby', true).catch(this.error);
+      this.logger.debug('action:turn-on ok');
+    } catch (err) {
+      this.logger.error('action:turn-on failed:', err);
+      throw err;
+    }
+  }
+
+  public async performTurnOff(): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:turn-off → "${this.getName()}"`);
+    try {
+      // standby=true in the API = device is IN standby (off)
+      await this.client.setStandby(this.getData().uuid, true);
+      // capability standby=false = device is OFF
+      this.setCapabilityValue('standby', false).catch(this.error);
+      this.logger.debug('action:turn-off ok');
+    } catch (err) {
+      this.logger.error('action:turn-off failed:', err);
+      throw err;
+    }
+  }
+
+  public async performSetAutoMode(): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    this.logger.info(`action:set-auto-mode → "${this.getName()}"`);
+    try {
+      const isOn = this.getCapabilityValue('standby') as boolean;
+      if (!isOn) {
+        // Device is in standby — wake it first before enabling auto mode
+        this.logger.info('action:set-auto-mode — device is off, waking up first');
+        await this.client.setStandby(this.getData().uuid, false);
+        this.setCapabilityValue('standby', true).catch(this.error);
+      }
+      await this.client.setFanAuto(this.getData().uuid, true);
+      this.setCapabilityValue('automode', true).catch(this.error);
+      this.logger.debug('action:set-auto-mode ok');
+    } catch (err) {
+      this.logger.error('action:set-auto-mode failed:', err);
+      throw err;
+    }
+  }
 }
 
 export default BlueAirAwsBaseDevice;

@@ -154,6 +154,18 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
       await (args.device as BlueAirPureDevice).performSetChildLock(args.childlock === 'true');
     });
 
+    this.homey.flow.getActionCard('turn-on2').registerRunListener(async (args) => {
+      await (args.device as BlueAirPureDevice).performTurnOn();
+    });
+
+    this.homey.flow.getActionCard('turn-off2').registerRunListener(async (args) => {
+      await (args.device as BlueAirPureDevice).performTurnOff();
+    });
+
+    this.homey.flow.getActionCard('set-auto-mode2').registerRunListener(async (args) => {
+      await (args.device as BlueAirPureDevice).performSetAutoMode();
+    });
+
     // Condition card
     this.homey.flow.getConditionCard('score_pm25').registerRunListener(async (args) =>
       conditionScorePm25ToString(this.getCapabilityValue('measure_pm25')) === args.argument_main

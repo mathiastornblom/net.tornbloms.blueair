@@ -295,6 +295,18 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       await (args.device as BlueAirAwsBaseDevice).performSetChildLock(args.childlock === 'true');
     });
 
+    this.homey.flow.getActionCard('turn-on2').registerRunListener(async (args) => {
+      await (args.device as BlueAirAwsBaseDevice).performTurnOn();
+    });
+
+    this.homey.flow.getActionCard('turn-off2').registerRunListener(async (args) => {
+      await (args.device as BlueAirAwsBaseDevice).performTurnOff();
+    });
+
+    this.homey.flow.getActionCard('set-auto-mode2').registerRunListener(async (args) => {
+      await (args.device as BlueAirAwsBaseDevice).performSetAutoMode();
+    });
+
     if (this.hasCapability('germ_shield')) {
       this.registerCapabilityListener('germ_shield', async (value) => {
         await this.safeSetCommand('germ_shield', () =>
