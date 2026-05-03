@@ -159,6 +159,18 @@ class BlueAirHumidifierDevice extends BlueAirAwsBaseDevice {
     this.homey.flow.getActionCard('set-childlock2').registerRunListener(async (args) => {
       await (args.device as BlueAirHumidifierDevice).performSetChildLock(args.childlock === 'true');
     });
+
+    this.homey.flow.getActionCard('turn-on2').registerRunListener(async (args) => {
+      await (args.device as BlueAirHumidifierDevice).performTurnOn();
+    });
+
+    this.homey.flow.getActionCard('turn-off2').registerRunListener(async (args) => {
+      await (args.device as BlueAirHumidifierDevice).performTurnOff();
+    });
+
+    this.homey.flow.getActionCard('set-auto-mode2').registerRunListener(async (args) => {
+      await (args.device as BlueAirHumidifierDevice).performSetAutoMode();
+    });
   }
 
   // ── Lifecycle ─────────────────────────────────────────────────────────────

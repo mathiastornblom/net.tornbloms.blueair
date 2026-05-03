@@ -1,0 +1,57 @@
+{
+  "title": {
+    "en": "Enable Auto mode",
+    "nl": "Automatische modus inschakelen",
+    "da": "Aktiver automatisk tilstand",
+    "de": "Automatik-Modus aktivieren",
+    "es": "Activar modo automático",
+    "fr": "Activer le mode automatique",
+    "it": "Abilita modalità automatica",
+    "no": "Aktiver automatisk modus",
+    "sv": "Aktivera automatiskt läge",
+    "pl": "Włącz tryb automatyczny",
+    "ru": "Включить автоматический режим",
+    "ko": "자동 모드 활성화",
+    "ar": "تفعيل الوضع التلقائي"
+  },
+  "titleFormatted": {
+    "en": "Enable Auto mode on [[device]]",
+    "nl": "Schakel automatische modus in op [[device]]",
+    "da": "Aktiver automatisk tilstand på [[device]]",
+    "de": "Automatik-Modus aktivieren auf [[device]]",
+    "es": "Activar modo automático en [[device]]",
+    "fr": "Activer le mode automatique sur [[device]]",
+    "it": "Abilita modalità automatica su [[device]]",
+    "no": "Aktiver automatisk modus på [[device]]",
+    "sv": "Aktivera automatiskt läge på [[device]]",
+    "pl": "Włącz tryb automatyczny na [[device]]",
+    "ru": "Включить автоматический режим на [[device]]",
+    "ko": "[[device]]에서 자동 모드 활성화",
+    "ar": "تفعيل الوضع التلقائي على [[device]]"
+  },
+  "hint": {
+    "en": "Switch to Auto mode. If the device is off, it will be turned on first.",
+    "nl": "Schakel over naar automatische modus. Als het apparaat uit is, wordt het eerst ingeschakeld.",
+    "da": "Skift til automatisk tilstand. Hvis enheden er slukket, tændes den først.",
+    "de": "In den Automatik-Modus wechseln. Ist das Gerät ausgeschaltet, wird es zuerst eingeschaltet.",
+    "es": "Cambiar al modo automático. Si el dispositivo está apagado, se encenderá primero.",
+    "fr": "Passer en mode automatique. Si l'appareil est éteint, il sera d'abord allumé.",
+    "it": "Passa alla modalità automatica. Se il dispositivo è spento, verrà prima acceso.",
+    "no": "Bytt til automatisk modus. Hvis enheten er av, slås den på først.",
+    "sv": "Växla till automatiskt läge. Om enheten är av slås den på först.",
+    "pl": "Przełącz w tryb automatyczny. Jeśli urządzenie jest wyłączone, zostanie najpierw włączone.",
+    "ru": "Переключиться в автоматический режим. Если устройство выключено, оно сначала включится.",
+    "ko": "자동 모드로 전환합니다. 기기가 꺼져 있으면 먼저 켜집니다.",
+    "ar": "التبديل إلى الوضع التلقائي. إذا كان الجهاز مُغلقاً، سيتم تشغيله أولاً."
+  },
+  "platforms": [
+    "local"
+  ],
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect|pure|humidifier"
+    }
+  ]
+}

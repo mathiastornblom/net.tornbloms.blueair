@@ -29,6 +29,21 @@
     "ko": "[[standby]] 대기 모드로 설정",
     "ar": "اضبط وضع الاستعداد على [[standby]]"
   },
+  "hint": {
+    "en": "Note: 'On' wakes the device (running), 'Off' puts it into standby (stopped). Use 'Turn on' / 'Turn off' cards for clearer wording.",
+    "nl": "Let op: 'Aan' wekt het apparaat (actief), 'Uit' zet het in stand-by (gestopt). Gebruik 'Inschakelen' / 'Uitschakelen' voor duidelijkere bewoording.",
+    "da": "Bemærk: 'Til' vågner enheden (kørende), 'Fra' sætter den i standby (stoppet). Brug 'Tænd' / 'Sluk' for klarere ordlyd.",
+    "de": "Hinweis: 'Ein' weckt das Gerät (aktiv), 'Aus' versetzt es in Standby (gestoppt). Verwende 'Einschalten' / 'Ausschalten' für klarere Formulierungen.",
+    "es": "Nota: 'Encendido' despierta el dispositivo (en marcha), 'Apagado' lo pone en espera (detenido). Usa 'Encender' / 'Apagar' para una redacción más clara.",
+    "fr": "Remarque : 'Activé' réveille l'appareil (en marche), 'Désactivé' le met en veille (arrêté). Utilisez 'Allumer' / 'Éteindre' pour une formulation plus claire.",
+    "it": "Nota: 'Acceso' risveglia il dispositivo (in funzione), 'Spento' lo mette in standby (fermato). Usa 'Accendi' / 'Spegni' per una formulazione più chiara.",
+    "no": "Merk: 'På' vekker enheten (kjørende), 'Av' setter den i standby (stoppet). Bruk 'Slå på' / 'Slå av' for klarere ordlyd.",
+    "sv": "Obs: 'På' väcker enheten (aktiv), 'Av' sätter den i standby (stoppad). Använd 'Slå på' / 'Slå av' för tydligare formulering.",
+    "pl": "Uwaga: 'Włącz' wybudza urządzenie (działa), 'Wyłącz' przełącza je w stan czuwania (zatrzymane). Użyj kart 'Włącz' / 'Wyłącz' dla wyraźniejszego opisu.",
+    "ru": "Примечание: 'Вкл' выводит устройство из режима ожидания (работает), 'Выкл' переводит его в режим ожидания (остановлено). Используйте карточки 'Включить' / 'Выключить' для более понятных формулировок.",
+    "ko": "'켜짐'은 기기를 깨웁니다(동작 중), '꺼짐'은 대기 모드로 전환합니다(정지). 더 명확한 표현을 위해 '켜기' / '끄기' 카드를 사용하세요.",
+    "ar": "ملاحظة: 'تشغيل' يوقظ الجهاز (يعمل)، 'إيقاف' يضعه في وضع الاستعداد (متوقف). استخدم بطاقتي 'تشغيل' / 'إيقاف التشغيل' للحصول على صياغة أوضح."
+  },
   "platforms": [
     "local"
   ],
@@ -36,7 +51,7 @@
     {
       "name": "device",
       "type": "device",
-      "filter": "driver_id=dustmagnet|healthprotect|pure"
+      "filter": "driver_id=dustmagnet|healthprotect|pure|humidifier"
     },
     {
       "type": "dropdown",

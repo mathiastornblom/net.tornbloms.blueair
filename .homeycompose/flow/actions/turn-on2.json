@@ -1,0 +1,57 @@
+{
+  "title": {
+    "en": "Turn on",
+    "nl": "Inschakelen",
+    "da": "Tænd",
+    "de": "Einschalten",
+    "es": "Encender",
+    "fr": "Allumer",
+    "it": "Accendi",
+    "no": "Slå på",
+    "sv": "Slå på",
+    "pl": "Włącz",
+    "ru": "Включить",
+    "ko": "켜기",
+    "ar": "تشغيل"
+  },
+  "titleFormatted": {
+    "en": "Turn on [[device]]",
+    "nl": "Schakel [[device]] in",
+    "da": "Tænd [[device]]",
+    "de": "[[device]] einschalten",
+    "es": "Encender [[device]]",
+    "fr": "Allumer [[device]]",
+    "it": "Accendi [[device]]",
+    "no": "Slå på [[device]]",
+    "sv": "Slå på [[device]]",
+    "pl": "Włącz [[device]]",
+    "ru": "Включить [[device]]",
+    "ko": "[[device]] 켜기",
+    "ar": "تشغيل [[device]]"
+  },
+  "hint": {
+    "en": "Wake the device from standby.",
+    "nl": "Wek het apparaat uit stand-by.",
+    "da": "Vågn enheden fra standby.",
+    "de": "Gerät aus dem Standby aufwecken.",
+    "es": "Despertar el dispositivo del modo de espera.",
+    "fr": "Réveiller l'appareil du mode veille.",
+    "it": "Risveglia il dispositivo dalla standby.",
+    "no": "Vekk enheten fra standby.",
+    "sv": "Väck enheten från standby.",
+    "pl": "Wybudź urządzenie ze stanu czuwania.",
+    "ru": "Вывести устройство из режима ожидания.",
+    "ko": "기기를 대기 모드에서 깨웁니다.",
+    "ar": "إيقاظ الجهاز من وضع الاستعداد."
+  },
+  "platforms": [
+    "local"
+  ],
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect|pure|humidifier"
+    }
+  ]
+}
