@@ -166,5 +166,8 @@
   },
   "3.2.20": {
     "en": "replace all this.log() with this.logger.info() in all device classes"
+  },
+  "3.2.22": {
+    "en": "Updated preview images for widgets and changed controls"
   }
 }
