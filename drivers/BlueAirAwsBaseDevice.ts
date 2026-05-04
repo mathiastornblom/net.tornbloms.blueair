@@ -204,7 +204,8 @@ abstract class BlueAirAwsBaseDevice extends Device {
       msg.includes('unauthorized') ||
       msg.includes('gigya') ||
       msg.includes('token') ||
-      msg.includes('invalid')
+      msg.includes('invalid') ||
+      msg.includes('authentication')
     ) {
       if (!this.client) return;
       this.logger.info('auth/session error — attempting re-authentication...');
