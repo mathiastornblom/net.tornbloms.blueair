@@ -169,5 +169,8 @@
   },
   "3.2.22": {
     "en": "Updated preview images for widgets and changed controls"
+  },
+  "3.2.23": {
+    "en": "PR11 and PR12 is merged into this build"
   }
 }
