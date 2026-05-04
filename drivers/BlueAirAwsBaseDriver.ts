@@ -19,7 +19,12 @@ abstract class BlueAirAwsBaseDriver extends Driver {
         const client = new BlueAirAwsClient(username, password);
         await client.initialize();
         return client;
-      })();
+      })().catch((err) => {
+        // Remove the rejected promise so the next call retries fresh
+        // instead of returning a permanently-cached rejection.
+        this._clientPromises.delete(username);
+        throw err;
+      });
       this._clientPromises.set(username, promise);
     }
     return this._clientPromises.get(username)!;

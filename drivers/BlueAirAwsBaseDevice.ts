@@ -138,7 +138,8 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
       this.logger.info(`initialized (poll every ${pollMs / 1000}s)`);
     } catch (e) {
-      // Device cannot start at all — report to Sentry so it's visible
+      // Clear the cached client so the next init attempt creates a fresh one
+      (this.driver as BlueAirAwsBaseDriver).clearClient(settings.username as string);
       this.logger.critical('Initialization failed', e, { deviceId: data.uuid });
       this.setUnavailable('Initialization failed').catch(this.error);
     }
