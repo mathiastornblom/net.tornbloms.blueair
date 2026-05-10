@@ -116,6 +116,7 @@ abstract class BlueAirAwsBaseDriver extends Driver {
       ]);
 
       for (const deviceInfo of deviceInfoArray) {
+        this.log(`[pair] device model="${deviceInfo.model}" name="${deviceInfo.name}" — filter="${this.deviceModelFilter}"`);
         if (deviceInfo.model.toLowerCase().includes(this.deviceModelFilter)) {
           compatibleDevices.push({
             name: deviceInfo.name,

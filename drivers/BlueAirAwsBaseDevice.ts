@@ -187,14 +187,8 @@ abstract class BlueAirAwsBaseDevice extends Device {
     this.consecutiveFailures++;
     this.logger.warn(`poll failed (${this.consecutiveFailures}/${MAX_CONSECUTIVE_FAILURES}):`, error);
 
-    if (this.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-      this.logger.error(`device unreachable after ${MAX_CONSECUTIVE_FAILURES} consecutive failures — clearing cached client`);
-      (this.driver as BlueAirAwsBaseDriver).clearClient(settings.username as string);
-      this.client = null;
-      this.setUnavailable('Device unreachable — API error').catch(this.error);
-    }
-
-    // Attempt re-authentication on session / auth / rate-limit errors
+    // Attempt re-authentication on session / auth / rate-limit errors before
+    // potentially clearing the client, so we still have a reference to call initialize().
     const msg = String(error).toLowerCase();
     if (
       msg.includes('session') ||
@@ -208,14 +202,22 @@ abstract class BlueAirAwsBaseDevice extends Device {
       msg.includes('invalid') ||
       msg.includes('authentication')
     ) {
-      if (!this.client) return;
-      this.logger.info('auth/session error — attempting re-authentication...');
-      try {
-        await this.client.initialize();
-        this.logger.info('re-authentication successful');
-      } catch (authError) {
-        this.logger.error('re-authentication failed:', authError);
+      if (this.client) {
+        this.logger.info('auth/session error — attempting re-authentication...');
+        try {
+          await this.client.initialize();
+          this.logger.info('re-authentication successful');
+        } catch (authError) {
+          this.logger.error('re-authentication failed:', authError);
+        }
       }
+    }
+
+    if (this.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+      this.logger.error(`device unreachable after ${MAX_CONSECUTIVE_FAILURES} consecutive failures — clearing cached client`);
+      (this.driver as BlueAirAwsBaseDriver).clearClient(settings.username as string);
+      this.client = null;
+      this.setUnavailable('Device unreachable — API error').catch(this.error);
     }
   }
 
