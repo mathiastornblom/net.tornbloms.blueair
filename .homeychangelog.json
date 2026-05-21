@@ -172,5 +172,11 @@
   },
   "3.2.23": {
     "en": "PR11 and PR12 is merged into this build"
+  },
+  "3.2.24": {
+    "en": "fix: prevent permanent unavailable state after repeated auth failures"
+  },
+  "3.2.25": {
+    "en": "Fix DustMagnet pairing failure for SKUs that report as 'healthprotect' via the API; fix Pure driver crash ('Out Of Bounds') caused by missing serial field in device settings schema; silence Sentry network timeout errors that polluted Homey logs."
   }
 }
