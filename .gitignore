@@ -2,3 +2,5 @@
 /node_modules/
 /.homeybuild/
 .DS_Store
+# Claude Code worktrees — never push these
+.claude/worktrees/
