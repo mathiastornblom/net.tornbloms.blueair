@@ -3,7 +3,7 @@ import { BlueAirAwsClient } from 'blueairaws-client';
 import { Region } from 'blueairaws-client/dist/Consts';
 
 abstract class BlueAirAwsBaseDriver extends Driver {
-  protected abstract deviceModelFilter: string;
+  protected abstract deviceModelFilters: string[];
 
   // Shared client per credential set — avoids parallel Gigya logins at startup
   private _clientPromises: Map<string, Promise<BlueAirAwsClient>> = new Map();
@@ -116,8 +116,9 @@ abstract class BlueAirAwsBaseDriver extends Driver {
       ]);
 
       for (const deviceInfo of deviceInfoArray) {
-        this.log(`[pair] device model="${deviceInfo.model}" name="${deviceInfo.name}" — filter="${this.deviceModelFilter}"`);
-        if (deviceInfo.model.toLowerCase().includes(this.deviceModelFilter)) {
+        this.log(`[pair] device model="${deviceInfo.model}" name="${deviceInfo.name}" — filters="${this.deviceModelFilters.join('|')}"`);
+        const modelLower = deviceInfo.model.toLowerCase();
+        if (this.deviceModelFilters.some((f) => modelLower.includes(f))) {
           compatibleDevices.push({
             name: deviceInfo.name,
             data: {

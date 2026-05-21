@@ -5,7 +5,7 @@ import { Region } from 'blueairaws-client/dist/Consts';
 const HUMIDIFIER_MODELS = ['h35i', 'h76i', 't10i', 't20i'];
 
 class BlueAirHumidifierDriver extends BlueAirAwsBaseDriver {
-  protected deviceModelFilter = 'humidifier';
+  protected deviceModelFilters = ['humidifier'];
 
   protected async filterCompatibleDevices(
     devicesList: any[],
