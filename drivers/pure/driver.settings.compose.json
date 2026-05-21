@@ -283,6 +283,41 @@
         }
       },
       {
+        "id": "serial",
+        "type": "label",
+        "label": {
+          "en": "Serial",
+          "sv": "Serienummer",
+          "nl": "Serienummer",
+          "da": "Serienummer",
+          "de": "Seriennummer",
+          "es": "Número de serie",
+          "fr": "Numéro de série",
+          "it": "Numero di serie",
+          "no": "Serienummer",
+          "pl": "Numer seryjny",
+          "ru": "Серийный номер",
+          "ko": "일련 번호",
+          "ar": "الرقم التسلسلي"
+        },
+        "value": "102938765378827653",
+        "hint": {
+          "en": "The serial number of the device.",
+          "sv": "Serienummer på enheten.",
+          "nl": "Serienummer van het apparaat.",
+          "da": "Enhedens serienummer.",
+          "de": "Die Seriennummer des Geräts.",
+          "es": "El número de serie del dispositivo.",
+          "fr": "Le numéro de série de l'appareil.",
+          "it": "Il numero di serie del dispositivo.",
+          "no": "Enhetens serienummer.",
+          "pl": "Numer seryjny urządzenia.",
+          "ru": "Серийный номер устройства.",
+          "ko": "장치의 일련 번호입니다.",
+          "ar": "الرقم التسلسلي للجهاز."
+        }
+      },
+      {
         "id": "firmware",
         "type": "label",
         "label": {

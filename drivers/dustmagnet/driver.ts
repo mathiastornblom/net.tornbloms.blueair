@@ -1,7 +1,8 @@
 import BlueAirAwsBaseDriver from '../BlueAirAwsBaseDriver';
 
 class BlueAirDustMagnetDriver extends BlueAirAwsBaseDriver {
-  protected deviceModelFilter = 'dustmagnet';
+  // Some DustMagnet SKUs report their model as 'healthprotect' via the API
+  protected deviceModelFilters = ['dustmagnet', 'healthprotect'];
 
   /**
    * onInit is called when the driver is initialized.

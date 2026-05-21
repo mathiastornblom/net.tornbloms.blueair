@@ -14,7 +14,10 @@ export function initSentryLog(log: InstanceType<typeof Log>): void {
 }
 
 function reportToSentry(err: Error, context?: Record<string, unknown>): void {
-  _homeyLog?.captureException(err, context);
+  if (!_homeyLog) return;
+  Promise.resolve(_homeyLog.captureException(err, context)).catch(() => {
+    // Sentry is best-effort; network timeouts are silently ignored
+  });
 }
 
 // ── In-memory log buffer ──────────────────────────────────────────────────────

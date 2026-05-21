@@ -1,7 +1,7 @@
 import BlueAirAwsBaseDriver from '../BlueAirAwsBaseDriver';
 
 class BlueAirHealthProtectDriver extends BlueAirAwsBaseDriver {
-  protected deviceModelFilter = 'healthprotect';
+  protected deviceModelFilters = ['healthprotect'];
 
   /**
    * onInit is called when the driver is initialized.
