@@ -158,18 +158,25 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   // ── Helpers ───────────────────────────────────────────────────────────────
 
-  /** Persists device metadata (firmware, MAC, etc.) into Homey settings. */
+  /** Persists device metadata (firmware, MAC, etc.) into Homey settings.
+   *  Wrapped in try/catch so a schema validation error (e.g. a stored setting
+   *  value that is outside the schema's min/max) never propagates as a poll
+   *  failure and never causes the device to be marked unavailable. */
   private syncDeviceInfo(attrs: BlueAirDeviceStatus[]): void {
     if (!attrs[0]) return;
-    this.setSettings({
-      uuid: attrs[0].id,
-      name: attrs[0].name,
-      model: attrs[0].model,
-      mac: attrs[0].mac,
-      serial: attrs[0].serial,
-      mcuFirmware: attrs[0].mcu,
-      wlanDriver: attrs[0].wifi,
-    });
+    try {
+      this.setSettings({
+        uuid: attrs[0].id,
+        name: attrs[0].name,
+        model: attrs[0].model,
+        mac: attrs[0].mac,
+        serial: attrs[0].serial,
+        mcuFirmware: attrs[0].mcu,
+        wlanDriver: attrs[0].wifi,
+      });
+    } catch (err) {
+      this.logger.warn('syncDeviceInfo: setSettings failed (schema mismatch or out-of-bounds stored value):', err);
+    }
   }
 
   private onPollSuccess(): void {

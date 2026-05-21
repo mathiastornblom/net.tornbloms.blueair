@@ -178,5 +178,8 @@
   },
   "3.2.25": {
     "en": "Fix DustMagnet pairing failure for SKUs that report as 'healthprotect' via the API; fix Pure driver crash ('Out Of Bounds') caused by missing serial field in device settings schema; silence Sentry network timeout errors that polluted Homey logs."
+  },
+  "3.2.26": {
+    "en": "Fix persistent 'Out Of Bounds: update' crash on Pure and other AWS devices; caused by Homey re-validating all stored settings on every poll — removing schema min/max from the update interval field (minimum is still enforced in code) and adding a defensive catch so a settings write failure can never make a device unavailable."
   }
 }

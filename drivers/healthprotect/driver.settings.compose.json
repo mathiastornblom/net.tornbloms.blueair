@@ -391,8 +391,6 @@
           "ar": "فترة التحديث"
         },
         "value": 60,
-        "min": 60,
-        "max": 300,
         "units": {
           "en": "Seconds",
           "sv": "Sekunder",
