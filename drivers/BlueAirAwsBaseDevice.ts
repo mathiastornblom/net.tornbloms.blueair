@@ -140,8 +140,9 @@ abstract class BlueAirAwsBaseDevice extends Device {
     } catch (e) {
       // Clear the cached client so the next init attempt creates a fresh one
       (this.driver as BlueAirAwsBaseDriver).clearClient(settings.username as string);
+      const errMsg = e instanceof Error ? e.message : String(e);
       this.logger.critical('Initialization failed', e, { deviceId: data.uuid });
-      this.setUnavailable('Initialization failed').catch(this.error);
+      this.setUnavailable(`Initialization failed: ${errMsg}`).catch(this.error);
     }
   }
 

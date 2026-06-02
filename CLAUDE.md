@@ -142,7 +142,7 @@ All 13 locales must be present in every capability title and flow card title/hin
 ## Known quirks
 
 - `last_retrival_date` (typo) — legacy capability removed on Classic init via `removeCapability`.
-- `score_tvoc` condition card — JSON file uses `score_tvoc` but code registers `score_tVOC`. Keep consistent.
+- `score_tvoc` condition card — both the JSON filename and `getConditionCard()` call use `score_tvoc` (all lowercase). The macOS case-insensitive filesystem previously masked a rename to `score_tVOC.json`; keep the filename lowercase.
 - Classic driver uses `this.getStoreValue('userId')` for all API calls.
 - Classic polling interval: `settings.update * 1000` ms (set by user in device settings), no enforced minimum.
 - AWS minimum poll: `MIN_POLL_INTERVAL_MS = 60_000`.
