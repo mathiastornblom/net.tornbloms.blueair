@@ -1,20 +1,16 @@
 on:
   workflow_dispatch:
 
-jobs:  
+jobs:
   main:
     name: Publish Homey App
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      # Ensure Node.js and npm are set up (optional)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # Ensure compatibility
-
-      # Optional: Validate Homey App before publishing
+      # Note: no Node setup needed here — both actions below run their own
+      # npm ci / build inside their own container (see Dockerfile/entrypoint.sh
+      # at athombv/github-action-homey-app-{validate,publish}).
       - name: Validate Homey App
         uses: athombv/github-action-homey-app-validate@master
         with:

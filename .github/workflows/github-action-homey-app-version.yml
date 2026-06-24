@@ -15,21 +15,18 @@ on:
         description: Changelog
         required: true
 
-jobs:  
+permissions:
+  contents: write
+
+jobs:
   main:
     name: Update App Version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16' # ensure compatibility
-
-      - name: Install dependencies
-        run: npm install
-
+      # Note: no Node setup needed — this action only edits app.json /
+      # .homeycompose and pushes a commit+tag, it doesn't build the app.
       - name: Update App Version
         uses: athombv/github-action-homey-app-version@master
         id: update_app_version

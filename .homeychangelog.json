@@ -183,6 +183,6 @@
     "en": "Fix persistent 'Out Of Bounds: update' crash on Pure and other AWS devices; caused by Homey re-validating all stored settings on every poll — removing schema min/max from the update interval field (minimum is still enforced in code) and adding a defensive catch so a settings write failure can never make a device unavailable."
   },
   "3.2.27": {
-    "en": "Fix 'Initialization failed' on all HealthProtect and DustMagnet devices; caused by a case-mismatch in the tVOC condition card ID (score_tVOC vs score_tvoc) that triggered Homey's case-sensitive flow card lookup to throw on every device init."
+    "en": "Fixed a bug that caused HealthProtect and DustMagnet devices to fail to initialize."
   }
 }
