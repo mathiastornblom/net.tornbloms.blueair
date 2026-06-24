@@ -8,9 +8,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Note: no Node setup needed here — both actions below run their own
-      # npm ci / build inside their own container (see Dockerfile/entrypoint.sh
-      # at athombv/github-action-homey-app-{validate,publish}).
+      # Needed for the Validate step below: this app uses TypeScript, and
+      # github-action-homey-app-validate runs `npx tsc` against whatever
+      # node_modules is already on disk — it does not install anything itself.
+      # (github-action-homey-app-publish, in contrast, does run its own
+      # npm ci before publishing, so no setup is needed for that step.)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Validate Homey App
         uses: athombv/github-action-homey-app-validate@master
         with:
@@ -20,7 +30,7 @@ jobs:
         uses: athombv/github-action-homey-app-publish@master
         id: publish
         with:
-          personal_access_token: ${{ secrets.HOMEY_PAT }} 
+          personal_access_token: ${{ secrets.HOMEY_PAT }}
 
       - name: Output Management URL
         run: |
