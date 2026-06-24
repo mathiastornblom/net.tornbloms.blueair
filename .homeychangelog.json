@@ -184,5 +184,8 @@
   },
   "3.2.27": {
     "en": "Fixed a bug that caused HealthProtect and DustMagnet devices to fail to initialize."
+  },
+  "3.2.28": {
+    "en": "Streamlined our build pipeline (no user-facing changes)."
   }
 }
