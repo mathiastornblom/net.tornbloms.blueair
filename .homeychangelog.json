@@ -187,5 +187,8 @@
   },
   "3.2.28": {
     "en": "Streamlined our build pipeline (no user-facing changes)."
+  },
+  "3.2.29": {
+    "en": "Fixed the tVOC measurement capability not loading on some builds due to a filename case mismatch."
   }
 }
