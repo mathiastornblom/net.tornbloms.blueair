@@ -48,6 +48,9 @@ abstract class BlueAirAwsBaseDriver extends Driver {
   async onPair(session: any): Promise<void> {
     let username = '';
     let password = '';
+    // Reused between the 'login' and 'list_devices' steps so pairing only
+    // performs one Gigya login + homehost lookup instead of two.
+    let client: BlueAirAwsClient | null = null;
 
     session.setHandler(
       'login',
@@ -56,10 +59,11 @@ abstract class BlueAirAwsBaseDriver extends Driver {
         password = data.password;
 
         try {
-          const client = new BlueAirAwsClient(username, password);
+          client = new BlueAirAwsClient(username, password);
           return await client.initialize();
         } catch (e) {
           this.log(e);
+          client = null;
           return false;
         }
       }
@@ -67,28 +71,35 @@ abstract class BlueAirAwsBaseDriver extends Driver {
 
     session.setHandler('list_devices', async () => {
       try {
-        const client = new BlueAirAwsClient(username, password);
-
-        if (await client.initialize()) {
-          const devicesList = await client.getDevices();
-
-          if (!Array.isArray(devicesList)) {
-            throw new Error('devicesList is not an array');
+        if (!client) {
+          client = new BlueAirAwsClient(username, password);
+          if (!(await client.initialize())) {
+            client = null;
           }
-
-          const compatibleDevices = await this.filterCompatibleDevices(
-            devicesList,
-            client,
-            username,
-            password
-          );
-
-          return compatibleDevices;
         }
-        return null;
+
+        if (!client) {
+          throw new Error('Unable to log in to BlueAir. Please check your credentials and try again.');
+        }
+
+        const devicesList = await client.getDevices();
+
+        if (!Array.isArray(devicesList)) {
+          throw new Error('devicesList is not an array');
+        }
+
+        const compatibleDevices = await this.filterCompatibleDevices(
+          devicesList,
+          client,
+          username,
+          password
+        );
+
+        return compatibleDevices;
       } catch (error) {
         this.log('Error listing devices:', error);
-        return { error: 'Failed to list devices' };
+        const message = error instanceof Error ? error.message : String(error);
+        throw new Error(`Failed to list devices: ${message}`);
       }
     });
   }
