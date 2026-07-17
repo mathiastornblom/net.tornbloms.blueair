@@ -190,5 +190,8 @@
   },
   "3.2.29": {
     "en": "Fixed the tVOC measurement capability not loading on some builds due to a filename case mismatch."
+  },
+  "3.2.30": {
+    "en": "Fixed a pairing failure ('Not able to add Pure' and similar) caused by pairing logging in twice; also improved error messages shown when pairing fails."
   }
 }
