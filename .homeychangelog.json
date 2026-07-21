@@ -196,5 +196,8 @@
   },
   "3.2.31": {
     "en": "Setting fan speed or night mode now automatically wakes the device from standby, matching the existing behavior of the auto mode action card."
+  },
+  "3.2.32": {
+    "en": "Fixed flow trigger and condition cards (PM2.5, PM1, PM10, tVOC, CO2, HCHO, humidity, temperature, filter, wifi, fan speed) to properly target a specific device instead of applying globally across all your BlueAir devices."
   }
 }

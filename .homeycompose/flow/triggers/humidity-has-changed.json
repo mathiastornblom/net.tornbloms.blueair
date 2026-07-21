@@ -31,6 +31,13 @@
     "ar": "لقد تغيرت الرطوبة",
     "se": "Fuktigheten har ändrats"
   },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect|humidifier"
+    }
+  ],
   "hint": {
     "en": "The humidity has been changed",
     "da": "Luftfugtigheden er blevet ændret",

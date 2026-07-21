@@ -169,69 +169,69 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
     const uuid = String(settings.uuid ?? 'Unknown UUID');
 
     if (this.savedFanspeed?.value !== current.fanspeed?.value) {
-      this.homey.flow.getTriggerCard('fan-speed-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(current.fanspeed?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('fan-speed-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(current.fanspeed?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger fan-speed-has-changed', e));
     }
 
     if (this.savedHumidity?.value !== current.humidity?.value) {
-      this.homey.flow.getTriggerCard('humidity-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'humidity new': Number(current.humidity?.value ?? 0), 'humidity old': Number(this.savedHumidity?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('humidity-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'humidity new': Number(current.humidity?.value ?? 0), 'humidity old': Number(this.savedHumidity?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger humidity-has-changed', e));
     }
 
     if (this.savedTemperature?.value !== current.temperature?.value) {
-      this.homey.flow.getTriggerCard('temperature-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'temperature new': Number(current.temperature?.value ?? 0), 'temperature old': Number(this.savedTemperature?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('temperature-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'temperature new': Number(current.temperature?.value ?? 0), 'temperature old': Number(this.savedTemperature?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger temperature-has-changed', e));
     }
 
     if (this.savedPM1?.value !== current.pm1?.value) {
-      this.homey.flow.getTriggerCard('PM1-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'PM1 new': Number(current.pm1?.value ?? 0), 'PM1 old': Number(this.savedPM1?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('PM1-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM1 new': Number(current.pm1?.value ?? 0), 'PM1 old': Number(this.savedPM1?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger PM1-has-changed', e));
     }
 
     if (this.savedPM25?.value !== current.pm25?.value) {
-      this.homey.flow.getTriggerCard('PM25-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(current.pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('PM25-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(current.pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger PM25-has-changed', e));
     }
 
     if (this.savedPM10?.value !== current.pm10?.value) {
-      this.homey.flow.getTriggerCard('PM10-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'PM10 new': Number(current.pm10?.value ?? 0), 'PM10 old': Number(this.savedPM10?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('PM10-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM10 new': Number(current.pm10?.value ?? 0), 'PM10 old': Number(this.savedPM10?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger PM10-has-changed', e));
     }
 
     if (this.savedtVOC?.value !== current.tvoc?.value) {
-      this.homey.flow.getTriggerCard('tVOC-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'tVOC new': Number(current.tvoc?.value ?? 0), 'tVOC old': Number(this.savedtVOC?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('tVOC-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'tVOC new': Number(current.tvoc?.value ?? 0), 'tVOC old': Number(this.savedtVOC?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger tVOC-has-changed', e));
     }
 
     const isOnline = current.online?.value === 'true';
     if (this.savedWifiStatus !== null && this.savedWifiStatus !== isOnline) {
-      this.homey.flow.getTriggerCard('wifi-status-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
+      this.homey.flow.getDeviceTriggerCard('wifi-status-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
         .catch((e) => this.error('Failed to trigger wifi-status-changed', e));
     }
 
     if (this.hasCapability('measure_co2') && this.savedCo2?.value !== current.co2?.value) {
-      this.homey.flow.getTriggerCard('CO2-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'co2': Number(current.co2?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('CO2-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'co2': Number(current.co2?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger CO2-has-changed', e));
     }
 
     if (this.hasCapability('measure_hcho') && this.savedHcho?.value !== current.hcho?.value) {
-      this.homey.flow.getTriggerCard('HCHO-has-changed')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'hcho': Number(current.hcho?.value ?? 0) })
+      this.homey.flow.getDeviceTriggerCard('HCHO-has-changed')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'hcho': Number(current.hcho?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger HCHO-has-changed', e));
     }
 
     if (this.savedFilterStatus !== current.filterLife) {
-      this.homey.flow.getTriggerCard('filter-needs-change')
-        .trigger({ 'device-name': name, 'device-uuid': uuid, 'device-response': String(current.filterLife ?? 'Unknown') })
+      this.homey.flow.getDeviceTriggerCard('filter-needs-change')
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'device-response': String(current.filterLife ?? 'Unknown') })
         .catch((e) => this.error('Failed to trigger filter-needs-change', e));
     }
   }
@@ -331,21 +331,22 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
       });
     }
 
-    // Condition cards
+    // Condition cards — use args.device so the correct device is always evaluated,
+    // regardless of which device instance last called setupListeners.
     this.homey.flow.getConditionCard('score_pm25').registerRunListener(async (args) =>
-      conditionScorePm25ToString(this.getCapabilityValue('measure_pm25')) === args.argument_main
+      conditionScorePm25ToString((args.device as BlueAirAwsBaseDevice).getCapabilityValue('measure_pm25')) === args.argument_main
     );
 
     this.homey.flow.getConditionCard('score_pm1').registerRunListener(async (args) =>
-      conditionScorePm1ToString(this.getCapabilityValue('measure_pm1')) === args.argument_main
+      conditionScorePm1ToString((args.device as BlueAirAwsBaseDevice).getCapabilityValue('measure_pm1')) === args.argument_main
     );
 
     this.homey.flow.getConditionCard('score_pm10').registerRunListener(async (args) =>
-      conditionScorePm10ToString(this.getCapabilityValue('measure_pm10')) === args.argument_main
+      conditionScorePm10ToString((args.device as BlueAirAwsBaseDevice).getCapabilityValue('measure_pm10')) === args.argument_main
     );
 
     this.homey.flow.getConditionCard('score_tvoc').registerRunListener(async (args) =>
-      conditionScoretVOCToString(this.getCapabilityValue('measure_tvoc')) === args.argument_main
+      conditionScoretVOCToString((args.device as BlueAirAwsBaseDevice).getCapabilityValue('measure_tvoc')) === args.argument_main
     );
   }
 }

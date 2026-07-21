@@ -29,6 +29,13 @@
     "ko": "포름알데히드 (HCHO)가 변경되었습니다",
     "ar": "تم تغيير الفورمالديهايد (HCHO)"
   },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect"
+    }
+  ],
   "hint": {
     "en": "Formaldehyde (HCHO) level has changed",
     "sv": "Formaldehydnivån (HCHO) har ändrats",

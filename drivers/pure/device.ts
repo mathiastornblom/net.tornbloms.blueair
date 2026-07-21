@@ -65,27 +65,27 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
       const uuid = String(settings.uuid ?? 'Unknown UUID');
 
       if (this.savedFanspeed?.value !== fanspeed?.value) {
-        this.homey.flow.getTriggerCard('fan-speed-has-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(fanspeed?.value ?? 0) })
+        this.homey.flow.getDeviceTriggerCard('fan-speed-has-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(fanspeed?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger fan-speed-has-changed', e));
       }
 
       if (this.savedPM25?.value !== pm25?.value) {
-        this.homey.flow.getTriggerCard('PM25-has-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
+        this.homey.flow.getDeviceTriggerCard('PM25-has-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger PM25-has-changed', e));
       }
 
       if (this.savedFilterStatus !== filterLife) {
-        this.homey.flow.getTriggerCard('filter-needs-change')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'device-response': String(filterLife ?? 'Unknown') })
+        this.homey.flow.getDeviceTriggerCard('filter-needs-change')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'device-response': String(filterLife ?? 'Unknown') })
           .catch((e) => this.error('Failed to trigger filter-needs-change', e));
       }
 
       const isOnline = online?.value === 'true';
       if (this.savedWifiStatus !== null && this.savedWifiStatus !== isOnline) {
-        this.homey.flow.getTriggerCard('wifi-status-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
+        this.homey.flow.getDeviceTriggerCard('wifi-status-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
           .catch((e) => this.error('Failed to trigger wifi-status-changed', e));
       }
     }
@@ -166,9 +166,10 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
       await (args.device as BlueAirPureDevice).performSetAutoMode();
     });
 
-    // Condition card
+    // Condition card — use args.device so the correct device is always evaluated,
+    // regardless of which device instance last called setupListeners.
     this.homey.flow.getConditionCard('score_pm25').registerRunListener(async (args) =>
-      conditionScorePm25ToString(this.getCapabilityValue('measure_pm25')) === args.argument_main
+      conditionScorePm25ToString((args.device as BlueAirPureDevice).getCapabilityValue('measure_pm25')) === args.argument_main
     );
   }
 

@@ -29,6 +29,13 @@
     "ko": "tVOC가 변경되었습니다",
     "ar": "تم تغيير tVOC"
   },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect"
+    }
+  ],
   "hint": {
     "en": "tVOC has been changed",
     "nl": "tVOC is veranderd",

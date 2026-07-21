@@ -67,33 +67,33 @@ class BlueAirHumidifierDevice extends BlueAirAwsBaseDevice {
       const uuid = String(settings.uuid ?? 'Unknown UUID');
 
       if (this.savedFanspeed?.value !== fanspeed?.value) {
-        this.homey.flow.getTriggerCard('fan-speed-has-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(fanspeed?.value ?? 0) })
+        this.homey.flow.getDeviceTriggerCard('fan-speed-has-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'fan speed': Number(fanspeed?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger fan-speed-has-changed', e));
       }
 
       if (this.savedHumidity?.value !== humidity?.value) {
-        this.homey.flow.getTriggerCard('humidity-has-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'humidity new': Number(humidity?.value ?? 0), 'humidity old': Number(this.savedHumidity?.value ?? 0) })
+        this.homey.flow.getDeviceTriggerCard('humidity-has-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'humidity new': Number(humidity?.value ?? 0), 'humidity old': Number(this.savedHumidity?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger humidity-has-changed', e));
       }
 
       if (this.savedTemperature?.value !== temperature?.value) {
-        this.homey.flow.getTriggerCard('temperature-has-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'temperature new': Number(temperature?.value ?? 0), 'temperature old': Number(this.savedTemperature?.value ?? 0) })
+        this.homey.flow.getDeviceTriggerCard('temperature-has-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'temperature new': Number(temperature?.value ?? 0), 'temperature old': Number(this.savedTemperature?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger temperature-has-changed', e));
       }
 
       if (this.savedFilterStatus !== filterLife) {
-        this.homey.flow.getTriggerCard('filter-needs-change')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'device-response': String(filterLife ?? 'Unknown') })
+        this.homey.flow.getDeviceTriggerCard('filter-needs-change')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'device-response': String(filterLife ?? 'Unknown') })
           .catch((e) => this.error('Failed to trigger filter-needs-change', e));
       }
 
       const isOnline = online?.value === 'true';
       if (this.savedWifiStatus !== null && this.savedWifiStatus !== isOnline) {
-        this.homey.flow.getTriggerCard('wifi-status-changed')
-          .trigger({ 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
+        this.homey.flow.getDeviceTriggerCard('wifi-status-changed')
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'online': isOnline })
           .catch((e) => this.error('Failed to trigger wifi-status-changed', e));
       }
     }

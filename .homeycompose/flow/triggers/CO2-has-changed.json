@@ -29,6 +29,13 @@
     "ko": "CO2가 변경되었습니다",
     "ar": "تم تغيير CO2"
   },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect"
+    }
+  ],
   "hint": {
     "en": "CO2 level has changed",
     "nl": "CO2-niveau is veranderd",
