@@ -31,6 +31,13 @@
     "ar": "تم تغيير سرعة المروحة",
     "se": "Fläktens fart har ändrats"
   },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=classic|dustmagnet|healthprotect|humidifier|pure"
+    }
+  ],
   "hint": {
     "en": "The fan speed has been changed",
     "nl": "De ventilatorsnelheid is gewijzigd",

@@ -29,6 +29,13 @@
     "ko": "Wi-Fi 상태가 변경되었습니다",
     "ar": "تغيرت حالة Wi-Fi"
   },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=dustmagnet|healthprotect|humidifier|pure"
+    }
+  ],
   "hint": {
     "en": "Triggers when the device connects or disconnects from Wi-Fi",
     "nl": "Activeert wanneer het apparaat verbinding maakt met of verbreekt van Wi-Fi",

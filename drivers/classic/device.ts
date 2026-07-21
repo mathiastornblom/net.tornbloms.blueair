@@ -254,7 +254,7 @@ class BlueAirClassicDevice extends Device {
           if (
             this._savedfanspeed?.currentValue !== resultFanSpeed?.currentValue
           ) {
-            const cardTriggerFilter = this.homey.flow.getTriggerCard(
+            const cardTriggerFilter = this.homey.flow.getDeviceTriggerCard(
               'fan-speed-has-changed'
             );
 
@@ -263,7 +263,7 @@ class BlueAirClassicDevice extends Device {
               ? String(resultFanSpeed.currentValue)
               : '';
             if (fanSpeedValue) {
-              cardTriggerFilter.trigger({
+              cardTriggerFilter.trigger(this, {
                 'device-name': settings.name,
                 'device-uuid': settings.uuid,
                 'fan speed': fanSpeedValue,
