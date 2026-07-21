@@ -193,5 +193,8 @@
   },
   "3.2.30": {
     "en": "Fixed a pairing failure ('Not able to add Pure' and similar) caused by pairing logging in twice; also improved error messages shown when pairing fails."
+  },
+  "3.2.31": {
+    "en": "Setting fan speed or night mode now automatically wakes the device from standby, matching the existing behavior of the auto mode action card."
   }
 }
