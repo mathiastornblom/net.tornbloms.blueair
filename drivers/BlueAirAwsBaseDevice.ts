@@ -250,10 +250,26 @@ abstract class BlueAirAwsBaseDevice extends Device {
 
   // ── Public action methods (called from flow action card listeners) ──────────
 
+  /**
+   * Wakes the device from standby if it's currently off. Mode-change actions
+   * (fan speed, night mode, auto mode) call this first since the API silently
+   * ignores those commands while the device is in standby.
+   */
+  private async wakeIfStandby(): Promise<void> {
+    if (!this.client) throw new Error('Client not initialized');
+    const isOn = this.getCapabilityValue('standby') as boolean;
+    if (!isOn) {
+      this.logger.info(`"${this.getName()}" is off — waking up before mode change`);
+      await this.client.setStandby(this.getData().uuid, false);
+      this.setCapabilityValue('standby', true).catch(this.error);
+    }
+  }
+
   public async performSetFanSpeed(value: number): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
     this.logger.info(`action:set-fan-speed → "${this.getName()}" value=${value}`);
     try {
+      await this.wakeIfStandby();
       await this.client.setFanSpeed(this.getData().uuid, value);
       this.setCapabilityValue('fanspeed', value).catch(this.error);
       this.logger.debug('action:set-fan-speed ok');
@@ -293,6 +309,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     if (!this.client) throw new Error('Client not initialized');
     this.logger.info(`action:set-nightmode → "${this.getName()}" value=${value}`);
     try {
+      await this.wakeIfStandby();
       await this.client.setNightMode(this.getData().uuid, value);
       this.setCapabilityValue('nightmode', value).catch(this.error);
       this.logger.debug('action:set-nightmode ok');
@@ -390,13 +407,7 @@ abstract class BlueAirAwsBaseDevice extends Device {
     if (!this.client) throw new Error('Client not initialized');
     this.logger.info(`action:set-auto-mode → "${this.getName()}"`);
     try {
-      const isOn = this.getCapabilityValue('standby') as boolean;
-      if (!isOn) {
-        // Device is in standby — wake it first before enabling auto mode
-        this.logger.info('action:set-auto-mode — device is off, waking up first');
-        await this.client.setStandby(this.getData().uuid, false);
-        this.setCapabilityValue('standby', true).catch(this.error);
-      }
+      await this.wakeIfStandby();
       await this.client.setFanAuto(this.getData().uuid, true);
       this.setCapabilityValue('automode', true).catch(this.error);
       this.logger.debug('action:set-auto-mode ok');
