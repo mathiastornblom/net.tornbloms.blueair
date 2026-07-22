@@ -131,7 +131,7 @@
       }
     },
     {
-      "type": "string",
+      "type": "number",
       "name": "fan speed",
       "title": {
         "en": "Fan speed",

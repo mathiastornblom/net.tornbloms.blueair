@@ -124,7 +124,7 @@
       }
     },
     {
-      "type": "string",
+      "type": "number",
       "name": "tvoc",
       "title": {
         "en": "tVOC",

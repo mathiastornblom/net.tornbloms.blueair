@@ -74,13 +74,13 @@ class BlueAirHumidifierDevice extends BlueAirAwsBaseDevice {
 
       if (this.savedHumidity?.value !== humidity?.value) {
         this.homey.flow.getDeviceTriggerCard('humidity-has-changed')
-          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'humidity new': Number(humidity?.value ?? 0), 'humidity old': Number(this.savedHumidity?.value ?? 0) })
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'humidity': Number(humidity?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger humidity-has-changed', e));
       }
 
       if (this.savedTemperature?.value !== temperature?.value) {
         this.homey.flow.getDeviceTriggerCard('temperature-has-changed')
-          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'temperature new': Number(temperature?.value ?? 0), 'temperature old': Number(this.savedTemperature?.value ?? 0) })
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'temperature': Number(temperature?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger temperature-has-changed', e));
       }
 

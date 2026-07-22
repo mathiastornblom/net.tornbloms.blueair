@@ -176,37 +176,37 @@ abstract class BlueAirAwsFullDevice extends BlueAirAwsBaseDevice {
 
     if (this.savedHumidity?.value !== current.humidity?.value) {
       this.homey.flow.getDeviceTriggerCard('humidity-has-changed')
-        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'humidity new': Number(current.humidity?.value ?? 0), 'humidity old': Number(this.savedHumidity?.value ?? 0) })
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'humidity': Number(current.humidity?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger humidity-has-changed', e));
     }
 
     if (this.savedTemperature?.value !== current.temperature?.value) {
       this.homey.flow.getDeviceTriggerCard('temperature-has-changed')
-        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'temperature new': Number(current.temperature?.value ?? 0), 'temperature old': Number(this.savedTemperature?.value ?? 0) })
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'temperature': Number(current.temperature?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger temperature-has-changed', e));
     }
 
     if (this.savedPM1?.value !== current.pm1?.value) {
       this.homey.flow.getDeviceTriggerCard('PM1-has-changed')
-        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM1 new': Number(current.pm1?.value ?? 0), 'PM1 old': Number(this.savedPM1?.value ?? 0) })
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'pm1': Number(current.pm1?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger PM1-has-changed', e));
     }
 
     if (this.savedPM25?.value !== current.pm25?.value) {
       this.homey.flow.getDeviceTriggerCard('PM25-has-changed')
-        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(current.pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'pm25': Number(current.pm25?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger PM25-has-changed', e));
     }
 
     if (this.savedPM10?.value !== current.pm10?.value) {
       this.homey.flow.getDeviceTriggerCard('PM10-has-changed')
-        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM10 new': Number(current.pm10?.value ?? 0), 'PM10 old': Number(this.savedPM10?.value ?? 0) })
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'pm10': Number(current.pm10?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger PM10-has-changed', e));
     }
 
     if (this.savedtVOC?.value !== current.tvoc?.value) {
       this.homey.flow.getDeviceTriggerCard('tVOC-has-changed')
-        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'tVOC new': Number(current.tvoc?.value ?? 0), 'tVOC old': Number(this.savedtVOC?.value ?? 0) })
+        .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'tvoc': Number(current.tvoc?.value ?? 0) })
         .catch((e) => this.error('Failed to trigger tVOC-has-changed', e));
     }
 
