@@ -72,7 +72,7 @@ class BlueAirPureDevice extends BlueAirAwsBaseDevice {
 
       if (this.savedPM25?.value !== pm25?.value) {
         this.homey.flow.getDeviceTriggerCard('PM25-has-changed')
-          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'PM25 new': Number(pm25?.value ?? 0), 'PM25 old': Number(this.savedPM25?.value ?? 0) })
+          .trigger(this, { 'device-name': name, 'device-uuid': uuid, 'pm25': Number(pm25?.value ?? 0) })
           .catch((e) => this.error('Failed to trigger PM25-has-changed', e));
       }
 

@@ -131,7 +131,7 @@
       }
     },
     {
-      "type": "string",
+      "type": "number",
       "name": "pm1",
       "title": {
         "en": "PM 1",

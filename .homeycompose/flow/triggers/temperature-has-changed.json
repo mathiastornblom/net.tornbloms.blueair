@@ -131,7 +131,7 @@
       }
     },
     {
-      "type": "string",
+      "type": "number",
       "name": "temperature",
       "title": {
         "en": "Temperature",

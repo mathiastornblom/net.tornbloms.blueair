@@ -131,7 +131,7 @@
       }
     },
     {
-      "type": "string",
+      "type": "number",
       "name": "humidity",
       "title": {
         "en": "Humidity",

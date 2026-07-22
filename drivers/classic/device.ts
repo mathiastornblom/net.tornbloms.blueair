@@ -266,7 +266,7 @@ class BlueAirClassicDevice extends Device {
               cardTriggerFilter.trigger(this, {
                 'device-name': settings.name,
                 'device-uuid': settings.uuid,
-                'fan speed': fanSpeedValue,
+                'fan speed': Number(fanSpeedValue),
               });
               this.logger.info(`fan-speed-has-changed → ${fanSpeedValue}`);
               this._savedfanspeed = resultFanSpeed;

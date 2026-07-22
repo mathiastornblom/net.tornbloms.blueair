@@ -131,7 +131,7 @@
       }
     },
     {
-      "type": "string",
+      "type": "number",
       "name": "pm25",
       "title": {
         "en": "PM 2.5",
