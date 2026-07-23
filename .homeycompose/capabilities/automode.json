@@ -18,6 +18,5 @@
   "getable": true,
   "setable": true,
   "uiComponent": "toggle",
-  "uiQuickAction": true,
   "icon": "/assets/images/automatic.svg"
 }
