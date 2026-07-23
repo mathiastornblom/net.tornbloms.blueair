@@ -18,5 +18,6 @@
   "getable": true,
   "setable": true,
   "uiComponent": "toggle",
+  "uiQuickAction": true,
   "icon": "/assets/images/standby.svg"
 }
