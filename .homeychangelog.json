@@ -205,5 +205,8 @@
   },
   "3.2.34": {
     "en": "Fixed the device tile highlighting based on auto mode instead of actual power (standby) state, so the tile now correctly shows on/off status regardless of whether auto mode is enabled."
+  },
+  "3.2.35": {
+    "en": "Updated underlying BlueAir client libraries to patch several security vulnerabilities (SSRF, prototype pollution, CRLF injection) in shared dependencies."
   }
 }
