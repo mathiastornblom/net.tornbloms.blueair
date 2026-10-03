@@ -217,5 +217,8 @@
   },
   "3.3.1": {
     "en": "Sensor readings (PM2.5 etc.) are now fetched from Blueair's telemetry when the device reports none directly — fixes missing PM2.5 on Blue Pure 311i Max. Added pairing support for the DreamWell (H38i) humidifier. Fixed tVOC never updating on HealthProtect/DustMagnet. Humidity/temperature no longer show a fake 0 when not reported."
+  },
+  "3.3.2": {
+    "en": "Pairing now shows the real reason a login fails (e.g. a wrong password) instead of a generic 'invalid credentials' message, so it's no longer mistaken for an unsupported device model."
   }
 }
