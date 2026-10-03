@@ -60,11 +60,13 @@ abstract class BlueAirAwsBaseDriver extends Driver {
 
         try {
           client = new BlueAirAwsClient(username, password);
-          return await client.initialize();
+          await client.initialize();
+          return true;
         } catch (e) {
-          this.log(e);
+          this.log('Login failed:', e);
           client = null;
-          return false;
+          const message = e instanceof Error ? e.message : String(e);
+          throw new Error(message);
         }
       }
     );
@@ -73,13 +75,7 @@ abstract class BlueAirAwsBaseDriver extends Driver {
       try {
         if (!client) {
           client = new BlueAirAwsClient(username, password);
-          if (!(await client.initialize())) {
-            client = null;
-          }
-        }
-
-        if (!client) {
-          throw new Error('Unable to log in to BlueAir. Please check your credentials and try again.');
+          await client.initialize();
         }
 
         const devicesList = await client.getDevices();
