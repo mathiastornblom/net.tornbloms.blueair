@@ -220,5 +220,8 @@
   },
   "3.3.2": {
     "en": "Pairing now shows the real reason a login fails (e.g. a wrong password) instead of a generic 'invalid credentials' message, so it's no longer mistaken for an unsupported device model."
+  },
+  "3.3.3": {
+    "en": "Login now works for accounts registered in a different BlueAir region than the one first detected (for example some UK and European accounts that failed with \"Invalid LoginID\"). Login details and access tokens are no longer written to the app log."
   }
 }
