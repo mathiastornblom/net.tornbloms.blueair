@@ -29,7 +29,6 @@ Write the new version back into `.homeycompose/app.json`.
 Stage all changed source files. Do NOT stage:
 - `node_modules/`
 - `.homeybuild/`
-- `*.png` files in `widgets/` named `*2.png` (those are duplicates)
 
 Craft a commit message:
 ```
